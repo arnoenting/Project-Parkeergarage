@@ -1,7 +1,7 @@
 package Parkeersimulator;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
+//import java.util.concurrent.TimeUnit;
 
 public class Simulator {
 
@@ -41,14 +41,6 @@ public class Simulator {
     public void run() {
         for (int i = 0; i < 10000; i++) {
             tick();
-            
-            /* TIJD VERSLOMEN EN VERSNELLEN KAN MET DE VOLGENDE CODE
-            try {
-            	TimeUnit.MILLISECONDS.sleep(1); //HIER KUNNEN WE AANGEVEN HOEVEEL MILLISECONDEN ER TUSSEN EEN STAP ZITTEN
-            } catch (InterruptedException e) {
-            	e.printStackTrace();
-            }
-            */
         }
     }
 
