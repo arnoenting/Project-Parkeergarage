@@ -14,4 +14,8 @@ public class SimulatorController {
 	public void run() {
 		model.run();
 	}
+	
+	public void testButtonFunctie() {
+		System.out.println("Hallo wereld.");
+	}
 }
