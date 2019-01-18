@@ -2,14 +2,17 @@ package Parkeersimulator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.UnsupportedEncodingException;
 
 public class SimulatorView extends JFrame {
     private CarParkView carParkView;
+    private SimulatorController controller;
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
     private int numberOfOpenSpots;
     private Car[][][] cars;
+    private JButton testButton;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
@@ -18,14 +21,24 @@ public class SimulatorView extends JFrame {
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
+        testButton = new JButton("Dit is een testknop.");
+        testButton.addActionListener(e -> {
+			controller.testButtonFunctie();
+		});
+        
         carParkView = new CarParkView();
 
         Container contentPane = getContentPane();
         contentPane.add(carParkView, BorderLayout.CENTER);
+        contentPane.add(testButton, BorderLayout.SOUTH);
         pack();
         setVisible(true);
 
         updateView();
+    }
+    
+    public void addController(SimulatorController controller) {
+    	this.controller = controller;
     }
 
     public void updateView() {
