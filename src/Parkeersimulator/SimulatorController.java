@@ -4,7 +4,6 @@ import javax.swing.*;
 
 public class SimulatorController {
 	Simulator model;
-	JButton testButton;
 	
 	public SimulatorController(Simulator model) {
 		this.model = model;

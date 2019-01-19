@@ -1,9 +1,10 @@
 package Parkeersimulator;
 
 import java.util.Random;
+import java.awt.*;
 
 public class ReservationCar extends Car {
-	private static final Color COLOR=Color.green;
+	private static final Color COLOR = Color.green;
 	
     public ReservationCar() {
     	Random random = new Random();
