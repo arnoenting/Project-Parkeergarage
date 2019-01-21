@@ -5,8 +5,11 @@ import java.util.Random;
 
 public class Simulator {
 
-	private static final String AD_HOC = "1";
-	private static final String PASS = "2";
+	//Auto types voor arriving cars
+	private static final String FREEPARK = "1";
+	private static final String ABO = "2";
+	private static final String HAND = "3";
+	private static final String RESV = "4";
 	
 	
 	private CarQueue entranceCarQueue;
@@ -21,10 +24,17 @@ public class Simulator {
 
     private int tickPause = 100;
 
-    int weekDayArrivals= 100; // average number of arriving cars per hour
-    int weekendArrivals = 200; // average number of arriving cars per hour
+    int weekDayArrivals= 85; // average number of arriving cars per hour - handicap & resv
+    int weekendArrivals = 170; // average number of arriving cars per hour - idem
+    
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
     int weekendPassArrivals = 5; // average number of arriving cars per hour
+    
+    int weekDayHandArrivals = 5;
+    int weekendHandArrivals = 10;
+    
+    int weekDayResvArrivals = 10;
+    int weekendResvArrivals = 20;
 
     int enterSpeed = 3; // number of cars that can enter per minute
     int paymentSpeed = 7; // number of cars that can pay per minute
@@ -94,9 +104,11 @@ public class Simulator {
     
     private void carsArriving(){
     	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals);
-        addArrivingCars(numberOfCars, AD_HOC);    	
+        addArrivingCars(numberOfCars, FREEPARK);    	
     	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
-        addArrivingCars(numberOfCars, PASS);    	
+        addArrivingCars(numberOfCars, ABO); 
+        numberOfCars=getNumberOfCars(weekDayHandArrivals, weekendHandArrivals);
+        addArrivingCars(numberOfCars, HAND);
     }
 
     private void carsEntering(CarQueue queue){
@@ -164,16 +176,26 @@ public class Simulator {
     private void addArrivingCars(int numberOfCars, String type){
         // Add the cars to the back of the queue.
     	switch(type) {
-    	case AD_HOC: 
+    	case FREEPARK: 
             for (int i = 0; i < numberOfCars; i++) {
             	entranceCarQueue.addCar(new AdHocCar());
             }
             break;
-    	case PASS:
+    	case ABO:
             for (int i = 0; i < numberOfCars; i++) {
             	entrancePassQueue.addCar(new ParkingPassCar());
             }
-            break;	            
+            break;
+    	case HAND:
+    		for (int i = 0; i < numberOfCars; i++) {
+            	entrancePassQueue.addCar(new HandicapCar());
+            }
+    		break;
+    	case RESV:
+    		for (int i = 0; i < numberOfCars; i++) {
+            	entrancePassQueue.addCar(new HandicapCar());
+            }
+    		break;
     	}
     }
     
