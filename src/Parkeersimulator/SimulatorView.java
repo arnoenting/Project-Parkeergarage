@@ -212,9 +212,19 @@ public class SimulatorView extends JFrame {
                 carParkImage = createImage(size.width, size.height);
             }
             Graphics graphics = carParkImage.getGraphics();
+            
             for(int floor = 0; floor < getNumberOfFloors(); floor++) {
                 for(int row = 0; row < getNumberOfRows(); row++) {
                     for(int place = 0; place < getNumberOfPlaces(); place++) {
+                    	
+                    	if(floor == 0 && row < 3) {
+                    		if(place < 5) {
+	                    		Location location = new Location(floor, row, place);
+	                    		Car car = new HandicapCar();
+	                    		Color color = car == null ? Color.lightGray : car.getColor();
+	                    		drawPlace(graphics, location, color);
+                    		}
+                    	}
                         Location location = new Location(floor, row, place);
                         Car car = getCarAt(location);
                         Color color = car == null ? Color.white : car.getColor();
