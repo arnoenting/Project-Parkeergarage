@@ -25,12 +25,30 @@ public class SimulatorView extends JFrame {
         testButton.addActionListener(e -> {
 			controller.testButtonFunctie();
 		});
+        testButton.setBounds(10,5,70,20);
         
         carParkView = new CarParkView();
-
+        
+        // Define the panel to hold the buttons
+        JPanel simulatorPannel = new JPanel();
+        simulatorPannel.setPreferredSize(new Dimension(300, 300));
+        simulatorPannel.setBackground(Color.green);
+        simulatorPannel.add(carParkView);
+        
+        // Define the panel to hold the buttons
+        JPanel buttonPannel = new JPanel();
+        buttonPannel.setSize(200,200);
+        buttonPannel.setBackground(Color.yellow);
+        buttonPannel.add(testButton);
+        
+        
+        
         Container contentPane = getContentPane();
-        contentPane.add(carParkView, BorderLayout.CENTER);
-        contentPane.add(testButton, BorderLayout.SOUTH);
+        contentPane.setBackground(Color.blue);
+        contentPane.setLayout(new BoxLayout(contentPane,BoxLayout.Y_AXIS));
+        contentPane.setPreferredSize(new Dimension(820,700));
+        contentPane.add(simulatorPannel);
+        contentPane.add(buttonPannel);
         pack();
         setVisible(true);
 

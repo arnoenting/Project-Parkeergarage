@@ -1,6 +1,7 @@
 package Parkeersimulator;
 
 import java.util.Random;
+import java.awt.*;
 
 public class HandicapPlace extends Car {
 	private static final Color COLOR=Color.yellow;
