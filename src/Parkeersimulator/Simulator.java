@@ -193,7 +193,7 @@ public class Simulator {
     		break;
     	case RESV:
     		for (int i = 0; i < numberOfCars; i++) {
-            	entrancePassQueue.addCar(new HandicapCar());
+            	entrancePassQueue.addCar(new ReservationCar());
             }
     		break;
     	}

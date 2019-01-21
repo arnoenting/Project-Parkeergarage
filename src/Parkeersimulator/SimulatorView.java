@@ -217,18 +217,24 @@ public class SimulatorView extends JFrame {
                 for(int row = 0; row < getNumberOfRows(); row++) {
                     for(int place = 0; place < getNumberOfPlaces(); place++) {
                     	
-                    	if(floor == 0 && row < 3) {
-                    		if(place < 5) {
+                    	if(floor == 0 && row < 2) {
+                    		if(place < 4) {
 	                    		Location location = new Location(floor, row, place);
-	                    		Car car = new HandicapCar();
-	                    		Color color = car == null ? Color.lightGray : car.getColor();
+	                    		Car car = getCarAt(location);
+	                    		Color color = car == null ? Color.black : car.getColor();
 	                    		drawPlace(graphics, location, color);
+                    		} else {
+                    			Location location = new Location(floor, row, place);
+	                    		Car car = getCarAt(location);
+	                    		Color color = car == null ? Color.magenta : car.getColor();
+	                    		drawPlace(graphics, location, color);	
                     		}
+                    	} else { 
+                    		Location location = new Location(floor, row, place);
+                    		Car car = getCarAt(location);
+                    		Color color = car == null ? Color.white : car.getColor();
+                    		drawPlace(graphics, location, color);
                     	}
-                        Location location = new Location(floor, row, place);
-                        Car car = getCarAt(location);
-                        Color color = car == null ? Color.white : car.getColor();
-                        drawPlace(graphics, location, color);
                     }
                 }
             }
