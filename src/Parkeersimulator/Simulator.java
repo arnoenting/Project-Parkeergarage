@@ -30,7 +30,7 @@ public class Simulator {
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
     int weekendPassArrivals = 5; // average number of arriving cars per hour
     
-    int weekDayHandArrivals = 5;
+    int weekDayHandArrivals = 500;
     int weekendHandArrivals = 10;
     
     int weekDayResvArrivals = 10;
@@ -118,6 +118,22 @@ public class Simulator {
     			simulatorView.getNumberOfOpenSpots()>0 && 
     			i<enterSpeed) {
             Car car = queue.removeCar();
+            System.out.println(car.getClass().getName());
+            switch (car.getClass().getName())
+            {
+	            case "Parkeersimulator.ParkingPassCar":
+	            	System.out.println("Dit is een parkingPassCar");
+	            	break;
+	            case "Parkeersimulator.ReservationCar":
+	            	System.out.println("Dit is een ReservationCar");
+	            	break;
+	            case "Parkeersimulator.HandicapCar":
+	            	System.out.println("Dit is een HandicapCar");
+	            	break;
+	            case "Parkeersimulator.AdHocCar":
+	            	System.out.println("Dit is een AdHocCar");
+	            	break;
+            }
             Location freeLocation = simulatorView.getFirstFreeLocation();
             simulatorView.setCarAt(freeLocation, car);
             i++;

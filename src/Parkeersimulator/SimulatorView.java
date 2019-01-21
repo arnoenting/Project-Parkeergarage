@@ -127,6 +127,21 @@ public class SimulatorView extends JFrame {
         }
         return null;
     }
+    
+    public Location getFirstFreeLocationSpecified(int floorStart, int floorEnd, int rowStart, int rowEnd, int placeStart, int placeEnd)
+    {
+    	for (int floor = floorStart; floor < floorEnd; floor++) {
+            for (int row = rowStart; row < rowEnd; row++) {
+                for (int place = placeStart; place < placeEnd; place++) {
+                	Location location = new Location(floor, row, place);
+                	if (getCarAt(location) == null) {
+                		return location;
+                	}
+                }
+            }
+    	}
+    	return null;
+    }
 
     public Car getFirstLeavingCar() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
@@ -212,14 +227,12 @@ public class SimulatorView extends JFrame {
                 carParkImage = createImage(size.width, size.height);
             }
             Graphics graphics = carParkImage.getGraphics();
-            
-            for(int floor = 0; floor < getNumberOfFloors(); floor++) {
-                for(int row = 0; row < getNumberOfRows(); row++) {
-                    for(int place = 0; place < getNumberOfPlaces(); place++) {
-                    	
-                    	if(floor == 0 && row < 2) {
-                    		if(place < 4) {
-	                    		Location location = new Location(floor, row, place);
+            		for(int floor = 0; floor < getNumberOfFloors(); floor++){
+            			for(int row = 0; row < getNumberOfRows(); row++){
+            				for(int place = 0; place < getNumberOfPlaces(); place++){
+            				if (floor == 0 && row < 2) {
+            					if (place < 4) {
+            					Location location = getFirstFreeLocation();
 	                    		Car car = getCarAt(location);
 	                    		Color color = car == null ? Color.black : car.getColor();
 	                    		drawPlace(graphics, location, color);
