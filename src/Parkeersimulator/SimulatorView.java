@@ -159,19 +159,15 @@ public class SimulatorView extends JFrame {
     	switch (car.getClass().getName())
         {
             case "Parkeersimulator.ParkingPassCar":
-            	System.out.println("Dit is een parkingPassCar");
             	freeLocation = getFirstFreeLocationSpecified(0, 0, 0, 1, 5, 29, 0);
             	break;
             case "Parkeersimulator.ReservationCar":
-            	System.out.println("Dit is een ReservationCar");
             	freeLocation = getFirstFreeLocationSpecified(0, getNumberOfFloors()-1, 2, getNumberOfRows()-1, 0, getNumberOfPlaces()-1, 0);
             	break;
             case "Parkeersimulator.HandicapCar":
-            	System.out.println("Dit is een HandicapCar");
             	freeLocation = getFirstFreeLocationSpecified(0, 0, 0, 1, 0, 4,0);
             	break;
             case "Parkeersimulator.AdHocCar":
-            	System.out.println("Dit is een AdHocCar");
             	freeLocation = getFirstFreeLocationSpecified(0, getNumberOfFloors()-1, 2, getNumberOfRows()-1, 0, getNumberOfPlaces()-1, 0);
             	break;
         }
@@ -181,34 +177,22 @@ public class SimulatorView extends JFrame {
     
     public Location getFirstFreeLocationSpecified(int floorStart, int floorEnd, int rowStart, int rowEnd, int placeStart, int placeEnd, int SpecificFloor)
     {
-    	for (int floor = floorStart; floor <= floorEnd; floor++) 
-    	{
-    		if (SpecificFloor == floor || SpecificFloor < 0)
-    		{
-	            for (int row = rowStart; row <= rowEnd; row++) 
-	            {
-	                for (int place = placeStart; place <= placeEnd; place++) 
-	                {
-	                	
+    	for (int floor = floorStart; floor <= floorEnd; floor++) {
+    		if (SpecificFloor == floor || SpecificFloor < 0){
+	            for (int row = rowStart; row <= rowEnd; row++) {
+	                for (int place = placeStart; place <= placeEnd; place++) {
 	                	Location location = new Location(floor, row, place);
-	                	if (getCarAt(location) == null) 
-	                	{
-	                		
+	                	if (getCarAt(location) == null) {	
 	                		return location;
 	                	}
 	                }
 	            }
     		}
-            else
-            {
-            	for (int row = 0; row < getNumberOfRows(); row++) 
-	            {
-	                for (int place = 0; place < getNumberOfPlaces(); place++) 
-	                {
-	                	
+            else{
+            	for (int row = 0; row < getNumberOfRows(); row++){
+	                for (int place = 0; place < getNumberOfPlaces(); place++){
 	                	Location location = new Location(floor, row, place);
-	                	if (getCarAt(location) == null) 
-	                	{
+	                	if (getCarAt(location) == null) {
 	                		return location;
 	                	}
 	                }
