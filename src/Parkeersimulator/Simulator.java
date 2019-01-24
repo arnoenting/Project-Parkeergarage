@@ -1,5 +1,6 @@
 package Parkeersimulator;
 
+import java.util.*;
 import java.util.Random;
 //import java.util.concurrent.TimeUnit;
 
@@ -20,6 +21,8 @@ public class Simulator {
     private int day = 0;
     private int hour = 0;
     private int minute = 0;
+    
+    private String[] daysOfTheWeek = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
 
     private int tickPause = 100;
 
@@ -39,7 +42,7 @@ public class Simulator {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
     
-    boolean isRunning = false;
+    private boolean isRunning = false;
 
     public Simulator(SimulatorView simulatorView) {
         entranceCarQueue = new CarQueue();
@@ -51,13 +54,13 @@ public class Simulator {
 
     public void run() {
     	if(!isRunning) {
-    		tickPause = 100;
+    		isRunning = true;
+    		if(tickPause > 99999999)tickPause = 100;
     		
 			for(int i = 0; i < 10000; i++) {
 				tick();
 			}
     	}
-    	isRunning = true;
     }
     
     public void pause() {
@@ -92,7 +95,10 @@ public class Simulator {
         while (day > 6) {
             day -= 7;
         }
-
+    }
+    
+    public String getDay() {
+    	return daysOfTheWeek[day + 1];
     }
 
     private void handleEntrance(){

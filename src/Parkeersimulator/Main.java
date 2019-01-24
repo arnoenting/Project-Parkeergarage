@@ -13,7 +13,5 @@ public class Main {
 		
 		//Voeg de controller toe aan de view
 		view.addController(controller);
-		
-		//controller.run();
 	}
 }
