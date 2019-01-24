@@ -98,7 +98,7 @@ public class Simulator {
     }
     
     public String getDay() {
-    	return daysOfTheWeek[day + 1];
+    	return daysOfTheWeek[day];
     }
 
     private void handleEntrance(){

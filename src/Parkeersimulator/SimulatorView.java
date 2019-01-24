@@ -5,13 +5,13 @@ import java.awt.*;
 import java.io.UnsupportedEncodingException;
 
 public class SimulatorView extends JFrame {
+	private SimulatorController controller;
     private CarParkView carParkView;
     private JPanel buttonPanel;
     private JPanel simulatorPanel;
     private JPanel graphPanel;
     private JPanel infoPanel;
     
-    private SimulatorController controller;
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
@@ -21,6 +21,7 @@ public class SimulatorView extends JFrame {
     //Buttons hier
     private JButton startButton;
     private JButton pauseButton;
+    private JButton getDay;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
@@ -54,6 +55,12 @@ public class SimulatorView extends JFrame {
         	thread.start();
         });
         
+        getDay = new JButton("getDayTest");
+        getDay.addActionListener(e -> {
+        	controller.getDay();
+        });
+        getDay.setBounds(10,5,70,20);
+        
         carParkView = new CarParkView();
         buttonPanel = new JPanel();
         graphPanel = new JPanel();
@@ -74,6 +81,7 @@ public class SimulatorView extends JFrame {
         buttonPanel.setBackground(Color.LIGHT_GRAY);
         buttonPanel.add(startButton);
         buttonPanel.add(pauseButton);
+        buttonPanel.add(getDay);
         
         // Panel for the Graphs
         

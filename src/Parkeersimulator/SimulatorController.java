@@ -14,4 +14,8 @@ public class SimulatorController {
 	public void pauseSimulation() {
 		model.pause();
 	}
+	
+	public void getDay() {
+		System.out.println("Deze dag is een" + model.getDay());
+	}
 }
