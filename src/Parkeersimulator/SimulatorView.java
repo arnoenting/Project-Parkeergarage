@@ -45,7 +45,7 @@ public class SimulatorView extends JFrame {
         	};
         	
         	Thread thread = new Thread(runnable);
-        	
+        	 
         	thread.start();
         });
         

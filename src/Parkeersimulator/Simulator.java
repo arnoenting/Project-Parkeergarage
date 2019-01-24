@@ -50,8 +50,9 @@ public class Simulator {
     }
 
     public void run() {
-    	if(tickPause > 100) tickPause = 100;
     	if(!isRunning) {
+    		tickPause = 100;
+    		
 			for(int i = 0; i < 10000; i++) {
 				tick();
 			}
