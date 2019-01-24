@@ -70,8 +70,8 @@ public class SimulatorView extends JFrame {
         contentPane.setBackground(Color.blue);
         contentPane.setLayout(new BoxLayout(contentPane,BoxLayout.Y_AXIS));
         contentPane.setPreferredSize(new Dimension(820,700));
-        contentPane.add(simulatorPannel);
-        contentPane.add(buttonPannel);
+        contentPane.add(simulatorPanel);
+        contentPane.add(buttonPanel);
         pack();
         setVisible(true);
 
