@@ -52,17 +52,17 @@ public class SimulatorView extends JFrame {
         carParkView = new CarParkView();
         
         // Define the panel to hold the buttons
-        JPanel simulatorPannel = new JPanel();
-        simulatorPannel.setPreferredSize(new Dimension(300, 300));
-        simulatorPannel.setBackground(Color.green);
-        simulatorPannel.add(carParkView);
+        JPanel simulatorPanel = new JPanel();
+        simulatorPanel.setPreferredSize(new Dimension(300, 300));
+        simulatorPanel.setBackground(Color.green);
+        simulatorPanel.add(carParkView);
         
         // Define the panel to hold the buttons
-        JPanel buttonPannel = new JPanel();
-        buttonPannel.setSize(200,200);
-        buttonPannel.setBackground(Color.yellow);
-        buttonPannel.add(startButton);
-        buttonPannel.add(pauseButton);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setSize(200,200);
+        buttonPanel.setBackground(Color.yellow);
+        buttonPanel.add(startButton);
+        buttonPanel.add(pauseButton);
         
         
         
