@@ -29,7 +29,7 @@ public class Simulator {
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
     int weekendPassArrivals = 5; // average number of arriving cars per hour
     
-    int weekDayHandArrivals = 5;
+    int weekDayHandArrivals = 25;
     int weekendHandArrivals = 10;
     
     int weekDayResvArrivals = 50;
@@ -136,10 +136,6 @@ public class Simulator {
             if (freeLocation != null)
             {
 	            simulatorView.setCarAt(freeLocation, car);
-            }
-            else
-            {
-            	System.out.println("fdfdggf");
             }
         }
     }
