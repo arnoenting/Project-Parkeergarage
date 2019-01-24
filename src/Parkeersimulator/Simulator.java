@@ -11,7 +11,6 @@ public class Simulator {
 	private static final String HAND = "3";
 	private static final String RESV = "4";
 	
-	
 	private CarQueue entranceCarQueue;
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
@@ -39,6 +38,8 @@ public class Simulator {
     int enterSpeed = 3; // number of cars that can enter per minute
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
+    
+    boolean isRunning = false;
 
     public Simulator(SimulatorView simulatorView) {
         entranceCarQueue = new CarQueue();
@@ -49,9 +50,18 @@ public class Simulator {
     }
 
     public void run() {
-        for (int i = 0; i < 10000; i++) {
-            tick();
-        }
+    	if(tickPause > 100) tickPause = 100;
+    	if(!isRunning) {
+			for(int i = 0; i < 10000; i++) {
+				tick();
+			}
+    	}
+    	isRunning = true;
+    }
+    
+    public void pause() {
+    	tickPause = 999999999;
+    	isRunning = false;
     }
 
     private void tick() {

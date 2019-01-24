@@ -1,7 +1,5 @@
 package Parkeersimulator;
 
-import javax.swing.*;
-
 public class SimulatorController {
 	Simulator model;
 	
@@ -9,12 +7,11 @@ public class SimulatorController {
 		this.model = model;
 	}
 	
-	//Methode tick() van (Simulator)model is wat de view update. 
-	public void run() {
+	public void startSimulation() {
 		model.run();
 	}
 	
-	public void testButtonFunctie() {
-		System.out.println("Hallo wereld.");
+	public void pauseSimulation() {
+		model.pause();
 	}
 }

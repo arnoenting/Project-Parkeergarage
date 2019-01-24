@@ -12,7 +12,10 @@ public class SimulatorView extends JFrame {
     private int numberOfPlaces;
     private int numberOfOpenSpots;
     private Car[][][] cars;
-    private JButton testButton;
+    
+    //Buttons hier
+    private JButton startButton;
+    private JButton pauseButton;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
@@ -21,11 +24,30 @@ public class SimulatorView extends JFrame {
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
-        testButton = new JButton("Dit is een testknop.");
-        testButton.addActionListener(e -> {
-			controller.testButtonFunctie();
+        startButton = new JButton("Start");
+        startButton.addActionListener(e -> {
+        	//Thread runnable aanmaken
+        	Runnable runnable = () -> {
+				controller.startSimulation();
+        	};
+        	
+        	//Thread aanmaken met de juiste functie
+        	Thread thread = new Thread(runnable);
+        	
+        	thread.start();
 		});
-        testButton.setBounds(10,5,70,20);
+        startButton.setBounds(10,5,70,20);
+        
+        pauseButton = new JButton("Pause");
+        pauseButton.addActionListener(e -> {
+        	Runnable runnable = () -> {
+        		controller.pauseSimulation();
+        	};
+        	
+        	Thread thread = new Thread(runnable);
+        	
+        	thread.start();
+        });
         
         carParkView = new CarParkView();
         
@@ -39,7 +61,8 @@ public class SimulatorView extends JFrame {
         JPanel buttonPannel = new JPanel();
         buttonPannel.setSize(200,200);
         buttonPannel.setBackground(Color.yellow);
-        buttonPannel.add(testButton);
+        buttonPannel.add(startButton);
+        buttonPannel.add(pauseButton);
         
         
         
