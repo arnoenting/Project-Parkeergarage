@@ -14,4 +14,12 @@ public class SimulatorController {
 	public void pauseSimulation() {
 		model.pause();
 	}
+	
+	public void speedUpSimulation() {
+		model.adjustSpeed(-25);
+	}
+
+	public void slowDownSimulation() {
+		model.adjustSpeed(25);
+	}
 }
