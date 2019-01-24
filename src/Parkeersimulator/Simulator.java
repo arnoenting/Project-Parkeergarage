@@ -225,5 +225,9 @@ public class Simulator {
     	simulatorView.removeCarAt(car.getLocation());
         exitCarQueue.addCar(car);
     }
+    
+    public void adjustSpeed(int adjustment) {
+    	tickPause += adjustment;
+    }
 
 }

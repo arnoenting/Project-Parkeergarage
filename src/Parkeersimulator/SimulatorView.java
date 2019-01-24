@@ -21,6 +21,8 @@ public class SimulatorView extends JFrame {
     //Buttons hier
     private JButton startButton;
     private JButton pauseButton;
+    private JButton fasterButton;
+    private JButton slowerButton;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
@@ -54,6 +56,30 @@ public class SimulatorView extends JFrame {
         	thread.start();
         });
         
+        fasterButton = new JButton("Faster");
+        fasterButton.addActionListener(e -> {
+        	Runnable runnable = () -> {
+        		controller.speedUpSimulation();
+        	};
+        	
+        	Thread thread = new Thread(runnable);
+        	 
+        	thread.start();
+        });
+        
+        slowerButton = new JButton("Slower");
+        slowerButton.addActionListener(e -> {
+        	Runnable runnable = () -> {
+        		controller.slowDownSimulation();
+        	};
+        	
+        	Thread thread = new Thread(runnable);
+        	 
+        	thread.start();
+        });
+        
+        
+        
         carParkView = new CarParkView();
         buttonPanel = new JPanel();
         graphPanel = new JPanel();
@@ -74,6 +100,8 @@ public class SimulatorView extends JFrame {
         buttonPanel.setBackground(Color.LIGHT_GRAY);
         buttonPanel.add(startButton);
         buttonPanel.add(pauseButton);
+        buttonPanel.add(fasterButton);
+        buttonPanel.add(slowerButton);
         
         // Panel for the Graphs
         
