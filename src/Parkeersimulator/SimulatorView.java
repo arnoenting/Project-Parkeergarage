@@ -1,6 +1,8 @@
 package Parkeersimulator;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+
 import java.awt.*;
 import java.io.UnsupportedEncodingException;
 
@@ -74,16 +76,34 @@ public class SimulatorView extends JFrame {
         buttonPanel.setBackground(Color.LIGHT_GRAY);
         buttonPanel.add(startButton);
         buttonPanel.add(pauseButton);
-        
+        buttonPanel.setBorder(new LineBorder(Color.black));
         // Panel for the Graphs
         
         graphPanel.setSize(200,200);
         graphPanel.setBackground(Color.LIGHT_GRAY);
+        graphPanel.setBorder(new LineBorder(Color.black));
+        JPanel graph1 = new JPanel() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
+			public void paintComponent(Graphics g) {
+                int X=100;
+                int Y=100;
+                int d=200;
+                g.drawOval(X, Y, d, d);
+            }
+        };
+        graphPanel.add(graph1);
         // Panel for the info about the parking garage
         
         infoPanel.setSize(200,200);
-        infoPanel.setBackground(Color.black);
+        infoPanel.setBackground(Color.LIGHT_GRAY);
+        infoPanel.setBorder(new LineBorder(Color.black));
+        JLabel infoTitle = new JLabel("Hier komt alle informatie");
+        infoPanel.add(infoTitle);
+        
         
         
         Container contentPane = getContentPane();
