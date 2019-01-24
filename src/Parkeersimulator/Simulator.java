@@ -29,11 +29,11 @@ public class Simulator {
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
     int weekendPassArrivals = 5; // average number of arriving cars per hour
     
-    int weekDayHandArrivals = 500;
+    int weekDayHandArrivals = 5;
     int weekendHandArrivals = 10;
     
-    int weekDayResvArrivals = 10;
-    int weekendResvArrivals = 20;
+    int weekDayResvArrivals = 50;
+    int weekendResvArrivals = 150;
 
     int enterSpeed = 3; // number of cars that can enter per minute
     int paymentSpeed = 7; // number of cars that can pay per minute
@@ -119,6 +119,8 @@ public class Simulator {
         addArrivingCars(numberOfCars, ABO); 
         numberOfCars=getNumberOfCars(weekDayHandArrivals, weekendHandArrivals);
         addArrivingCars(numberOfCars, HAND);
+        numberOfCars=getNumberOfCars(weekDayResvArrivals, weekendResvArrivals);
+        addArrivingCars(numberOfCars, RESV);
     }
 
     private void carsEntering(CarQueue queue){
@@ -128,25 +130,16 @@ public class Simulator {
     			simulatorView.getNumberOfOpenSpots()>0 && 
     			i<enterSpeed) {
             Car car = queue.removeCar();
-            System.out.println(car.getClass().getName());
-            switch (car.getClass().getName())
+            Location freeLocation = simulatorView.getFirstFreeLocationCarType(car);
+            
+            if (freeLocation != null)
             {
-	            case "Parkeersimulator.ParkingPassCar":
-	            	System.out.println("Dit is een parkingPassCar");
-	            	break;
-	            case "Parkeersimulator.ReservationCar":
-	            	System.out.println("Dit is een ReservationCar");
-	            	break;
-	            case "Parkeersimulator.HandicapCar":
-	            	System.out.println("Dit is een HandicapCar");
-	            	break;
-	            case "Parkeersimulator.AdHocCar":
-	            	System.out.println("Dit is een AdHocCar");
-	            	break;
+	            simulatorView.setCarAt(freeLocation, car);
             }
-            Location freeLocation = simulatorView.getFirstFreeLocation();
-            simulatorView.setCarAt(freeLocation, car);
-            i++;
+            else
+            {
+            	System.out.println("fdfdggf");
+            }
         }
     }
     
