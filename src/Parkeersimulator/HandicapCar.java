@@ -4,7 +4,7 @@ import java.util.Random;
 import java.awt.*;
 
 public class HandicapCar extends Car {
-	private static final Color COLOR=Color.yellow;
+	private static final Color COLOR=Color.decode("#EFD843");
 	
     public HandicapCar() {
     	Random random = new Random();
