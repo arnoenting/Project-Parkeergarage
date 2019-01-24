@@ -6,6 +6,11 @@ import java.io.UnsupportedEncodingException;
 
 public class SimulatorView extends JFrame {
     private CarParkView carParkView;
+    private JPanel buttonPanel;
+    private JPanel simulatorPanel;
+    private JPanel graphPanel;
+    private JPanel infoPanel;
+    
     private SimulatorController controller;
     private int numberOfFloors;
     private int numberOfRows;
@@ -50,28 +55,43 @@ public class SimulatorView extends JFrame {
         });
         
         carParkView = new CarParkView();
+        buttonPanel = new JPanel();
+        graphPanel = new JPanel();
+        simulatorPanel = new JPanel();
+        infoPanel = new JPanel();
         
-        // Define the panel to hold the buttons
-        JPanel simulatorPanel = new JPanel();
-        simulatorPanel.setPreferredSize(new Dimension(300, 300));
+        // Define the panel to hold the button
+        simulatorPanel.setPreferredSize(new Dimension(400, 300));
         simulatorPanel.setBackground(Color.green);
+        simulatorPanel.setLayout(new BoxLayout(simulatorPanel,BoxLayout.Y_AXIS));
         simulatorPanel.add(carParkView);
+        simulatorPanel.add(infoPanel);
+        simulatorPanel.add(buttonPanel);
         
         // Define the panel to hold the buttons
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setSize(200,200);
-        buttonPanel.setBackground(Color.yellow);
+        
+        buttonPanel.setSize(400,200);
+        buttonPanel.setBackground(Color.LIGHT_GRAY);
         buttonPanel.add(startButton);
         buttonPanel.add(pauseButton);
         
+        // Panel for the Graphs
+        
+        graphPanel.setSize(200,200);
+        graphPanel.setBackground(Color.LIGHT_GRAY);
+
+        // Panel for the info about the parking garage
+        
+        infoPanel.setSize(200,200);
+        infoPanel.setBackground(Color.black);
         
         
         Container contentPane = getContentPane();
         contentPane.setBackground(Color.blue);
-        contentPane.setLayout(new BoxLayout(contentPane,BoxLayout.Y_AXIS));
-        contentPane.setPreferredSize(new Dimension(820,700));
+        contentPane.setLayout(new BoxLayout(contentPane,BoxLayout.X_AXIS));
+        contentPane.setPreferredSize(new Dimension(1280,800));
         contentPane.add(simulatorPanel);
-        contentPane.add(buttonPanel);
+        contentPane.add(graphPanel);
         pack();
         setVisible(true);
 
@@ -257,7 +277,7 @@ public class SimulatorView extends JFrame {
          * Overridden. Tell the GUI manager how big we would like to be.
          */
         public Dimension getPreferredSize() {
-            return new Dimension(850, 420);
+            return new Dimension(880, 250);
         }
     
         /**
