@@ -24,6 +24,11 @@ public class SimulatorView extends JFrame {
 
     private JButton fasterButton;
     private JButton slowerButton;
+    
+    private JLabel time;
+    private int minute;
+    private int hour;
+    private int day;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
@@ -79,6 +84,10 @@ public class SimulatorView extends JFrame {
         	thread.start();
         });
         
+        // Textlabels
+        time = new JLabel("The time is: 00:00");
+        
+        
         
         carParkView = new CarParkView();
         buttonPanel = new JPanel();
@@ -97,7 +106,7 @@ public class SimulatorView extends JFrame {
         // Define the panel to hold the buttons
         
         buttonPanel.setSize(400,200);
-        buttonPanel.setBackground(Color.LIGHT_GRAY);
+        buttonPanel.setBackground(Color.green);
         buttonPanel.add(startButton);
         buttonPanel.add(pauseButton);
 
@@ -107,12 +116,13 @@ public class SimulatorView extends JFrame {
         // Panel for the Graphs
         
         graphPanel.setSize(200,200);
-        graphPanel.setBackground(Color.LIGHT_GRAY);
+        graphPanel.setBackground(Color.blue);
 
         // Panel for the info about the parking garage
         
         infoPanel.setSize(200,200);
-        infoPanel.setBackground(Color.black);
+        infoPanel.setBackground(Color.orange);
+        infoPanel.add(time);
         
         
         Container contentPane = getContentPane();
@@ -133,6 +143,16 @@ public class SimulatorView extends JFrame {
 
     public void updateView() {
         carParkView.updateView();
+    }
+    
+    public void updateTime() {
+    	time.setText("The time is: " + displayTime(hour) + ":" + displayTime(minute));
+    }
+    
+    public void setTime(int minute, int hour, int day) {
+    	this.minute = minute;
+    	this.hour = hour;
+    	this.day = day;
     }
     
 	public int getNumberOfFloors() {
@@ -290,6 +310,21 @@ public class SimulatorView extends JFrame {
         return true;
     }
     
+    /**
+     * Methode om een int als "tijd string" te returnen (met altijd twee characters)
+     */
+    private String displayTime(int timeValue) {
+    	String time = "";
+    	
+    	if(timeValue < 10) {
+    		time += "0" + timeValue;
+    	} else {
+    		time += timeValue;
+    	}
+    	
+    	return time;
+    }
+    
     private class CarParkView extends JPanel {
         
         private Dimension size;
@@ -300,6 +335,7 @@ public class SimulatorView extends JFrame {
          */
         public CarParkView() {
             size = new Dimension(0, 0);
+            this.setBackground(Color.darkGray);
         }
     
         /**

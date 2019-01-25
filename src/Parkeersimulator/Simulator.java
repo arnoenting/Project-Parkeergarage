@@ -43,6 +43,8 @@ public class Simulator {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
     
+    double moneyEarned = 0.00;
+    
     private boolean isRunning = false;
 
     public Simulator(SimulatorView simulatorView) {
@@ -86,6 +88,7 @@ public class Simulator {
     private void advanceTime(){
         // Advance the time by one minute.
         minute++;
+        simulatorView.setTime(minute, hour, day);
         while (minute > 59) {
             minute -= 60;
             hour++;
@@ -97,7 +100,7 @@ public class Simulator {
         while (day > 6) {
             day -= 7;
         }
-        System.out.println(minute +":"+hour+":"+getDay());
+        
     }
     
     public String getDay() {
@@ -120,6 +123,8 @@ public class Simulator {
     	simulatorView.tick();
         // Update the car park view.
         simulatorView.updateView();	
+        // Update the time.
+        simulatorView.updateTime();
     }
     
     private void carsArriving(){
@@ -169,7 +174,14 @@ public class Simulator {
     	int i=0;
     	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
-            // TODO Handle payment.
+
+            //Handling payment through checking what kind of car it is and checking the time they stayed
+            if(car.getHasToPay() && !(car instanceof ParkingPassCar)) {
+            	car.setIsPaying(true);
+            	car.setHasToPay(true);
+            	moneyEarned += 2.5;
+            }
+            
             carLeavesSpot(car);
             i++;
     	}
