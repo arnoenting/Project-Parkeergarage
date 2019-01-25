@@ -25,6 +25,7 @@ public class Simulator {
     private String[] daysOfTheWeek = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
 
     private int tickPause = 100;
+    private int previousTickPause;
 
     int weekDayArrivals= 85; // average number of arriving cars per hour - handicap & resv
     int weekendArrivals = 170; // average number of arriving cars per hour - idem
@@ -55,15 +56,16 @@ public class Simulator {
     public void run() {
     	if(!isRunning) {
     		isRunning = true;
-    		if(tickPause > 99999999)tickPause = 100;
+    		if(tickPause > 99999999)tickPause = previousTickPause;
     		
-			for(int i = 0; i < 10000; i++) {
+			for(int i = 0; i < 999999999; i++) {
 				tick();
 			}
     	}
     }
     
     public void pause() {
+    	previousTickPause = tickPause;
     	tickPause = 999999999;
     	isRunning = false;
     }
@@ -95,6 +97,7 @@ public class Simulator {
         while (day > 6) {
             day -= 7;
         }
+        System.out.println(minute +":"+hour+":"+getDay());
     }
     
     public String getDay() {
@@ -227,7 +230,8 @@ public class Simulator {
     }
     
     public void adjustSpeed(int adjustment) {
-    	tickPause += adjustment;
+    	if(tickPause + adjustment > 0)tickPause += adjustment;
+    	System.out.println("The speed is now: " + tickPause);
     }
 
 }

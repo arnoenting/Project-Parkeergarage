@@ -21,12 +21,9 @@ public class SimulatorView extends JFrame {
     //Buttons hier
     private JButton startButton;
     private JButton pauseButton;
-<<<<<<< HEAD
-    private JButton getDay;
-=======
+
     private JButton fasterButton;
     private JButton slowerButton;
->>>>>>> 9749fa5d61ed955b5d8dd4240bc372f0313cdfff
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
@@ -60,13 +57,6 @@ public class SimulatorView extends JFrame {
         	thread.start();
         });
         
-<<<<<<< HEAD
-        getDay = new JButton("getDayTest");
-        getDay.addActionListener(e -> {
-        	controller.getDay();
-        });
-        getDay.setBounds(10,5,70,20);
-=======
         fasterButton = new JButton("Faster");
         fasterButton.addActionListener(e -> {
         	Runnable runnable = () -> {
@@ -90,8 +80,6 @@ public class SimulatorView extends JFrame {
         });
         
         
->>>>>>> 9749fa5d61ed955b5d8dd4240bc372f0313cdfff
-        
         carParkView = new CarParkView();
         buttonPanel = new JPanel();
         graphPanel = new JPanel();
@@ -112,12 +100,9 @@ public class SimulatorView extends JFrame {
         buttonPanel.setBackground(Color.LIGHT_GRAY);
         buttonPanel.add(startButton);
         buttonPanel.add(pauseButton);
-<<<<<<< HEAD
-        buttonPanel.add(getDay);
-=======
+
         buttonPanel.add(fasterButton);
         buttonPanel.add(slowerButton);
->>>>>>> 9749fa5d61ed955b5d8dd4240bc372f0313cdfff
         
         // Panel for the Graphs
         
