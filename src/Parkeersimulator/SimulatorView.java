@@ -87,9 +87,10 @@ public class SimulatorView extends JFrame {
         // Textlabels
         time = new JLabel("The time is: 00:00");
         
+        // De kleur van het "simulator" gedeelte
+        this.setBackground(Color.darkGray);
         
-        
-        carParkView = new CarParkView();
+        carParkView = new CarParkView();    
         buttonPanel = new JPanel();
         graphPanel = new JPanel();
         simulatorPanel = new JPanel();
@@ -334,8 +335,7 @@ public class SimulatorView extends JFrame {
          * Constructor for objects of class CarPark
          */
         public CarParkView() {
-            size = new Dimension(0, 0);
-            this.setBackground(Color.darkGray);
+            size = new Dimension(0, 0); 
         }
     
         /**
