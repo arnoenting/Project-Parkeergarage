@@ -1,6 +1,8 @@
 package Parkeersimulator;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+
 import java.awt.*;
 import java.io.UnsupportedEncodingException;
 
@@ -90,6 +92,11 @@ public class SimulatorView extends JFrame {
         // De kleur van het "simulator" gedeelte
         this.setBackground(Color.decode("#404040"));
         
+        // Border van de graphPanel
+        Border borderGraphPanel = BorderFactory.createMatteBorder(0, 2, 0, 0, Color.decode("#5f5f5f"));
+        
+        Border borderInfoPanel = BorderFactory.createMatteBorder(6, 6, 6, 4, Color.decode("#5f5f5f")); 
+        
         carParkView = new CarParkView();    
         buttonPanel = new JPanel();
         graphPanel = new JPanel();
@@ -98,14 +105,13 @@ public class SimulatorView extends JFrame {
         
         // Define the panel to hold the button
         simulatorPanel.setPreferredSize(new Dimension(400, 300));
-        simulatorPanel.setBackground(Color.green);
+        simulatorPanel.setBackground(Color.decode("#4b4b4b"));
         simulatorPanel.setLayout(new BoxLayout(simulatorPanel,BoxLayout.Y_AXIS));
         simulatorPanel.add(carParkView);
         simulatorPanel.add(infoPanel);
         simulatorPanel.add(buttonPanel);
         
         // Define the panel to hold the buttons
-        
         buttonPanel.setSize(400,200);
         buttonPanel.setBackground(Color.decode("#4b4b4b"));
         buttonPanel.add(startButton);
@@ -115,14 +121,14 @@ public class SimulatorView extends JFrame {
         buttonPanel.add(slowerButton);
         
         // Panel for the Graphs
-        
         graphPanel.setSize(200,200);
         graphPanel.setBackground(Color.decode("#4b4b4b"));
+        graphPanel.setBorder(borderGraphPanel);
 
         // Panel for the info about the parking garage
-        
         infoPanel.setSize(200,200);
         infoPanel.setBackground(Color.white);
+        infoPanel.setBorder(borderInfoPanel);
         infoPanel.add(time);
         
         
