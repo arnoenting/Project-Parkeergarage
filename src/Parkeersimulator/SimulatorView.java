@@ -88,7 +88,7 @@ public class SimulatorView extends JFrame {
         time = new JLabel("The time is: 00:00");
         
         // De kleur van het "simulator" gedeelte
-        this.setBackground(Color.darkGray);
+        this.setBackground(Color.decode("#404040"));
         
         carParkView = new CarParkView();    
         buttonPanel = new JPanel();
@@ -107,7 +107,7 @@ public class SimulatorView extends JFrame {
         // Define the panel to hold the buttons
         
         buttonPanel.setSize(400,200);
-        buttonPanel.setBackground(Color.green);
+        buttonPanel.setBackground(Color.decode("#4b4b4b"));
         buttonPanel.add(startButton);
         buttonPanel.add(pauseButton);
 
@@ -117,12 +117,12 @@ public class SimulatorView extends JFrame {
         // Panel for the Graphs
         
         graphPanel.setSize(200,200);
-        graphPanel.setBackground(Color.blue);
+        graphPanel.setBackground(Color.decode("#4b4b4b"));
 
         // Panel for the info about the parking garage
         
         infoPanel.setSize(200,200);
-        infoPanel.setBackground(Color.orange);
+        infoPanel.setBackground(Color.white);
         infoPanel.add(time);
         
         
