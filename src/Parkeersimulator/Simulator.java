@@ -175,11 +175,21 @@ public class Simulator {
     	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
 
-            //Handling payment through checking what kind of car it is and checking the time they stayed
+            //Handling payment through checking what kind of car it is and checking the time they stayed TODO quality check
             if(car.getHasToPay() && !(car instanceof ParkingPassCar)) {
+            	
+            	/* Test code om te laten zien wat voor auto betaald
+            	if(car instanceof HandicapCar) System.out.println("Dit is een handicap auto");
+            	if(car instanceof ReservationCar) System.out.println("Dit is een reservatie auto");
+            	if(car instanceof AdHocCar) System.out.println("Dit is een vrije parkeer auto");
+            	if(car instanceof ParkingPassCar) System.out.println("Dit is een abonnement auto");
+            	*/
+            	
             	car.setIsPaying(true);
             	car.setHasToPay(true);
             	moneyEarned += 2.5;
+            	
+            	//System.out.println(moneyEarned);
             }
             
             carLeavesSpot(car);
@@ -187,7 +197,7 @@ public class Simulator {
     	}
     }
     
-    private void carsLeaving(){
+    private void carsLeaving() {
         // Let cars leave.
     	int i=0;
     	while (exitCarQueue.carsInQueue()>0 && i < exitSpeed){
