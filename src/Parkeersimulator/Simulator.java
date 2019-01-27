@@ -244,7 +244,9 @@ public class Simulator {
     		break;
     	case "Parkeersimulator.ReservationCar":
     		for (int i = 0; i < numberOfCars; i++) {
-            	entranceCarQueue.addCar(new ReservationCar());
+    			Car reservationCar = new ReservationCar();
+    			moneyEarned += (((reservationCar.getMinutesLeft() / 60) * 2.50) + 5);
+            	entranceCarQueue.addCar(reservationCar);
             }
     		break;
     	}
