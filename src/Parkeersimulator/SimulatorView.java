@@ -99,7 +99,7 @@ public class SimulatorView extends JFrame {
         // Textlabels
         timeLabel = new JLabel("The time is: 00:00 on a: ");
         moneyLabel = new JLabel("Total money earned thus far: ");
-        carEnteringLabel = new JLabel("Total cars entering: ");
+        carEnteringLabel = new JLabel("Total cars in queue: ");
         
         
         // De kleur van het "carPark" gedeelte
@@ -176,9 +176,9 @@ public class SimulatorView extends JFrame {
     	timeLabel.setText("The time is: " + displayTime(hour) + ":" + displayTime(minute) + " on a: " + day);
     }
     
-    /*public void updateCarsEntering (int // een int) {
-    	carEnteringLabel.setText("The total cars arrived: " + // een exitCarsLeaving);
-    }*/
+    public void updateCarsEntering (int spotsTaken) {
+    	carEnteringLabel.setText("Total cars in queue: " + spotsTaken);
+    }
     
 	public int getNumberOfFloors() {
         return numberOfFloors;
