@@ -5,13 +5,6 @@ import java.util.Random;
 //import java.util.concurrent.TimeUnit;
 
 public class Simulator {
-
-	//Auto types voor arriving cars
-	private static final String FREEPARK = "1";
-	private static final String ABO = "2";
-	private static final String HAND = "3";
-	private static final String RESV = "4";
-	
 	private CarQueue entranceCarQueue;
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
@@ -130,18 +123,18 @@ public class Simulator {
         // Update the car park view.
         simulatorView.updateView();	
         // Update the time.
-        simulatorView.updateTime(minute, hour, day);
+        simulatorView.updateTime(minute, hour, getDay());
     }
     
     private void carsArriving(){
     	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals);
-        addArrivingCars(numberOfCars, FREEPARK);    	
+        addArrivingCars(numberOfCars, new AdHocCar());    	
     	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
-        addArrivingCars(numberOfCars, ABO); 
+        addArrivingCars(numberOfCars, new ParkingPassCar()); 
         numberOfCars=getNumberOfCars(weekDayHandArrivals, weekendHandArrivals);
-        addArrivingCars(numberOfCars, HAND);
+        addArrivingCars(numberOfCars, new HandicapCar());
         numberOfCars=getNumberOfCars(weekDayResvArrivals, weekendResvArrivals);
-        addArrivingCars(numberOfCars, RESV);
+        addArrivingCars(numberOfCars, new ReservationCar());
     }
 
     private void carsEntering(CarQueue queue){
@@ -231,27 +224,27 @@ public class Simulator {
         return (int)Math.round(numberOfCarsPerHour / 60);	
     }
     
-    private void addArrivingCars(int numberOfCars, String type){
+    private void addArrivingCars(int numberOfCars, Car car){
         // Add the cars to the back of the queue.
-    	switch(type) {
-    	case FREEPARK: 
+    	switch(car.getClass().getName()) {
+    	case "Parkeersimulator.AdHocCar": 
             for (int i = 0; i < numberOfCars; i++) {
             	entranceCarQueue.addCar(new AdHocCar());
             }
             break;
-    	case ABO:
+    	case "Parkeersimulator.ParkingPassCar":
             for (int i = 0; i < numberOfCars; i++) {
-            	entrancePassQueue.addCar(new ParkingPassCar());
+            	entranceCarQueue.addCar(new ParkingPassCar());
             }
             break;
-    	case HAND:
+    	case "Parkeersimulator.HandicapCar":
     		for (int i = 0; i < numberOfCars; i++) {
-            	entrancePassQueue.addCar(new HandicapCar());
+            	entranceCarQueue.addCar(new HandicapCar());
             }
     		break;
-    	case RESV:
+    	case "Parkeersimulator.ReservationCar":
     		for (int i = 0; i < numberOfCars; i++) {
-            	entrancePassQueue.addCar(new ReservationCar());
+            	entranceCarQueue.addCar(new ReservationCar());
             }
     		break;
     	}
