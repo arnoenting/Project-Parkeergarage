@@ -28,9 +28,6 @@ public class SimulatorView extends JFrame {
     private JButton slowerButton;
     
     private JLabel time;
-    private int minute;
-    private int hour;
-    private int day;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
