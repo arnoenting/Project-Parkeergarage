@@ -1,5 +1,5 @@
 package Parkeersimulator;
 
-public class Ciclegraph {
+public class  Ciclegraph extends JPanel{
 
 }
