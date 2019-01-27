@@ -25,4 +25,8 @@ public class SimulatorController {
 	public void slowDownSimulation() {
 		model.adjustSpeed(25);
 	}
+	
+	public void skipTimeSimulation() {
+		model.skipTime(1);
+	}
 }

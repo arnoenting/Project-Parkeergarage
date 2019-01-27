@@ -133,6 +133,13 @@ public class Simulator {
         simulatorView.updateTime(minute, hour, getDay());
     }
     
+    public void skipTime(int amount){
+    	for( int i = 0; i < amount; i++ ) {
+    		tick();
+    	}
+    }
+    
+    
     private int countCars() {
     	int totalSpots = simulatorView.getNumberOfFloors() * simulatorView.getNumberOfPlaces() * simulatorView.getNumberOfRows();
     	int totalSpotsTaken = totalSpots - simulatorView.getNumberOfOpenSpots();
