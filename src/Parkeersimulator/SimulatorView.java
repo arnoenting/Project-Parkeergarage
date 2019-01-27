@@ -26,7 +26,7 @@ public class SimulatorView extends JFrame {
 
     private JButton fasterButton;
     private JButton slowerButton;
-    
+
     private JLabel timeLabel;
     private int minute;
     private int hour;
@@ -41,6 +41,12 @@ public class SimulatorView extends JFrame {
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
+        try { 
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       
         startButton = new JButton("Start");
         startButton.addActionListener(e -> {
         	//Thread runnable aanmaken
@@ -92,7 +98,7 @@ public class SimulatorView extends JFrame {
         timeLabel = new JLabel("The time is: 00:00");
         moneyLabel = new JLabel("Total money earned thus far: ");
         
-        // De kleur van het "simulator" gedeelte
+        // De kleur van het "carPark" gedeelte
         this.setBackground(Color.decode("#404040"));
         
         // Border van de graphPanel
@@ -156,18 +162,13 @@ public class SimulatorView extends JFrame {
         carParkView.updateView();
     }
     
-    public void updateTime() {
-    	timeLabel.setText("The time is: " + displayTime(hour) + ":" + displayTime(minute));
-    }
-    
+
     public void updateMoney(double moneyEarned) {
     	moneyLabel.setText("Total € earned: " + moneyEarned);
     }
-    
-    public void setTime(int minute, int hour, int day) {
-    	this.minute = minute;
-    	this.hour = hour;
-    	this.day = day;
+
+    public void updateTime(int minute, int hour, int day) {
+    	timeLabel.setText("The time is: " + displayTime(hour) + ":" + displayTime(minute));
     }
     
 	public int getNumberOfFloors() {
