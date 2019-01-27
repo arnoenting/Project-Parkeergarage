@@ -75,6 +75,7 @@ public class Simulator {
     private void tick() {
     	advanceTime();
     	handleExit();
+    	handleMoney();
     	updateViews();
     	// Pause.
         try {
@@ -106,7 +107,11 @@ public class Simulator {
     public String getDay() {
     	return daysOfTheWeek[day];
     }
-
+    
+    private void handleMoney() {
+    	simulatorView.updateMoney(moneyEarned);
+    }
+    
     private void handleEntrance(){
     	carsArriving();
     	carsEntering(entrancePassQueue);
@@ -170,32 +175,37 @@ public class Simulator {
     }
 
     private void carsPaying(){
-        // Let cars pay.
-    	int i=0;
-    	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
-            Car car = paymentCarQueue.removeCar();
-
-            //Handling payment through checking what kind of car it is and checking the time they stayed TODO quality check
-            if(car.getHasToPay() && !(car instanceof ParkingPassCar)) {
-            	
-            	/* Test code om te laten zien wat voor auto betaald
-            	if(car instanceof HandicapCar) System.out.println("Dit is een handicap auto");
-            	if(car instanceof ReservationCar) System.out.println("Dit is een reservatie auto");
-            	if(car instanceof AdHocCar) System.out.println("Dit is een vrije parkeer auto");
-            	if(car instanceof ParkingPassCar) System.out.println("Dit is een abonnement auto");
-            	*/
-            	
-            	car.setIsPaying(true);
-            	car.setHasToPay(true);
-            	moneyEarned += 2.5;
-            	
-            	//System.out.println(moneyEarned);
+    // Let cars pay.
+	int i=0;
+	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
+        Car car = paymentCarQueue.removeCar();
+        //Handling payment through checking what kind of car it is and checking the time they stayed TODO quality check
+        	
+        	//Test code om te laten zien wat voor auto betaald
+        	switch (car.getClass().getName())
+            {
+                case "Parkeersimulator.ParkingPassCar":
+                	break;
+                case "Parkeersimulator.ReservationCar":
+                	break;
+                case "Parkeersimulator.HandicapCar":
+                	car.setIsPaying(true);
+                	car.setHasToPay(true);
+                	moneyEarned += 4;
+                	break;
+                case "Parkeersimulator.AdHocCar":
+                	car.setIsPaying(true);
+                	car.setHasToPay(true);
+                	moneyEarned += 2.5;
+                	break;
             }
-            
-            carLeavesSpot(car);
+        	carLeavesSpot(car);
             i++;
-    	}
-    }
+        	//System.out.println(moneyEarned);
+        }
+        
+        
+	}
     
     private void carsLeaving() {
         // Let cars leave.

@@ -27,10 +27,12 @@ public class SimulatorView extends JFrame {
     private JButton fasterButton;
     private JButton slowerButton;
     
-    private JLabel time;
+    private JLabel timeLabel;
     private int minute;
     private int hour;
     private int day;
+    
+    private JLabel moneyLabel;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
@@ -87,7 +89,8 @@ public class SimulatorView extends JFrame {
         });
         
         // Textlabels
-        time = new JLabel("The time is: 00:00");
+        timeLabel = new JLabel("The time is: 00:00");
+        moneyLabel = new JLabel("Total money earned thus far: ");
         
         // De kleur van het "simulator" gedeelte
         this.setBackground(Color.decode("#404040"));
@@ -129,7 +132,8 @@ public class SimulatorView extends JFrame {
         infoPanel.setSize(200,200);
         infoPanel.setBackground(Color.white);
         infoPanel.setBorder(borderInfoPanel);
-        infoPanel.add(time);
+        infoPanel.add(timeLabel);
+        infoPanel.add(moneyLabel);
         
         
         Container contentPane = getContentPane();
@@ -153,7 +157,11 @@ public class SimulatorView extends JFrame {
     }
     
     public void updateTime() {
-    	time.setText("The time is: " + displayTime(hour) + ":" + displayTime(minute));
+    	timeLabel.setText("The time is: " + displayTime(hour) + ":" + displayTime(minute));
+    }
+    
+    public void updateMoney(double moneyEarned) {
+    	moneyLabel.setText("Total € earned: " + moneyEarned);
     }
     
     public void setTime(int minute, int hour, int day) {
