@@ -39,6 +39,12 @@ public class SimulatorView extends JFrame {
         this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
+        try { 
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       
         startButton = new JButton("Start");
         startButton.addActionListener(e -> {
         	//Thread runnable aanmaken
@@ -89,7 +95,7 @@ public class SimulatorView extends JFrame {
         // Textlabels
         time = new JLabel("The time is: 00:00");
         
-        // De kleur van het "simulator" gedeelte
+        // De kleur van het "carPark" gedeelte
         this.setBackground(Color.decode("#404040"));
         
         // Border van de graphPanel
