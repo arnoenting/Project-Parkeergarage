@@ -138,6 +138,8 @@ public class Simulator {
         // Update the time.
         simulatorView.updateTime(minute, hour, getDay());
         System.out.println(totalAdHocCar + " " + totalHandicapCar + " " + totalParkingPassCar + " " + totalReservationCar);
+        //update the graph
+        simulatorView.updateGraph(totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar);
     }
     
     private int countCars() {
@@ -276,9 +278,6 @@ public class Simulator {
     	}
     }
     
-    private void updateGraph() {
-    	
-    }
     
     private void carLeavesSpot(Car car){
     	simulatorView.removeCarAt(car.getLocation());
