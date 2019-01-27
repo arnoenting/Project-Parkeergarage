@@ -176,8 +176,8 @@ public class SimulatorView extends JFrame {
     	timeLabel.setText("The time is: " + displayTime(hour) + ":" + displayTime(minute) + " on a: " + day);
     }
     
-    public void updateCarsEntering (int carsPassed) {
-    	carEnteringLabel.setText("The total cars arrived: " + carsPassed);
+    public void updateCarsEntering (int // een int) {
+    	carEnteringLabel.setText("The total cars arrived: " + // een exitCarsLeaving);
     }
     
 	public int getNumberOfFloors() {
