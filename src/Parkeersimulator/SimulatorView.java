@@ -13,6 +13,7 @@ public class SimulatorView extends JFrame {
     private JPanel simulatorPanel;
     private JPanel graphPanel;
     private JPanel infoPanel;
+    private CircleGraph totalCarGraph;
     
     private int numberOfFloors;
     private int numberOfRows;
@@ -33,6 +34,12 @@ public class SimulatorView extends JFrame {
     private int minute;
     private int hour;
     private int day;
+    
+    // Counters voor totale aantal auto's per soort
+    int totalAdHocCar ;
+    int totalHandicapCar ;
+    int totalParkingPassCar ;
+    int totalReservationCar ;
     
     private JLabel moneyLabel;
     
@@ -130,6 +137,7 @@ public class SimulatorView extends JFrame {
         graphPanel = new JPanel();
         simulatorPanel = new JPanel();
         infoPanel = new JPanel();
+        totalCarGraph = new CircleGraph();
         
         // Define the panel to hold the button
         simulatorPanel.setPreferredSize(new Dimension(400, 300));
@@ -154,6 +162,7 @@ public class SimulatorView extends JFrame {
         graphPanel.setSize(200,200);
         graphPanel.setBackground(Color.decode("#4b4b4b"));
         graphPanel.setBorder(borderGraphPanel);
+        graphPanel.add(totalCarGraph);
 
         // Panel for the info about the parking garage
         infoPanel.setSize(200,200);
@@ -184,6 +193,12 @@ public class SimulatorView extends JFrame {
         carParkView.updateView();
     }
     
+    public void updateGraph(int totalAdHocCar, int totalParkingPassCar, int totalHandicapCar, int totalReservationCar ) {
+    	this.totalAdHocCar = totalAdHocCar;
+		this.totalParkingPassCar = totalParkingPassCar;
+		this.totalHandicapCar = totalHandicapCar;
+		this.totalReservationCar = totalReservationCar;
+    }
 
     public void updateMoney(double moneyEarned) {
     	moneyLabel.setText("Total € earned: " + moneyEarned);

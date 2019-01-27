@@ -24,10 +24,10 @@ public class Simulator {
     int weekendArrivals = 170; // average number of arriving cars per hour - idem
     
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    int weekendPassArrivals = 5; // average number of arriving cars per hour
+    int weekendPassArrivals = 500; // average number of arriving cars per hour
     
     int weekDayHandArrivals = 25;
-    int weekendHandArrivals = 10;
+    int weekendHandArrivals = 100;
     
     int weekDayResvArrivals = 50;
     int weekendResvArrivals = 150;
@@ -37,6 +37,12 @@ public class Simulator {
     int exitSpeed = 5; // number of cars that can leave per minute
     
     double moneyEarned = 0.00;
+    
+    // Counters voor totale aantal auto's per soort
+    int totalAdHocCar = 0;
+    int totalHandicapCar = 0;
+    int totalParkingPassCar = 0;
+    int totalReservationCar = 0;
     
     private boolean isRunning = false;
     
@@ -95,8 +101,9 @@ public class Simulator {
         }
         while (day > 6) {
             day -= 7;
+            CarPayment(0, new ParkingPassCar());
+            
         }
-        
     }
     
     
@@ -131,6 +138,9 @@ public class Simulator {
         simulatorView.updateView();	
         // Update the time.
         simulatorView.updateTime(minute, hour, getDay());
+        System.out.println(totalAdHocCar + " " + totalHandicapCar + " " + totalParkingPassCar + " " + totalReservationCar);
+        //update the graph
+        simulatorView.updateGraph(totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar);
     }
     
     public void skipTime(int amount){
@@ -205,7 +215,7 @@ public class Simulator {
                 case "Parkeersimulator.HandicapCar":
                 	car.setIsPaying(true);
                 	car.setHasToPay(true);
-                	moneyEarned += 4;
+                	//CarPayment();
                 	break;
                 case "Parkeersimulator.AdHocCar":
                 	car.setIsPaying(true);
@@ -220,6 +230,25 @@ public class Simulator {
         
         
 	}
+    
+    private void CarPayment(int timeStayed, Car car)
+    {
+    	switch (car.getClass().getName())
+        {
+            case "Parkeersimulator.ParkingPassCar":
+            	moneyEarned += (50 * 75);
+            	break;
+            case "Parkeersimulator.ReservationCar":
+            	moneyEarned += (timeStayed / 60) * 2.50 + 5;
+            	break;
+            case "Parkeersimulator.HandicapCar":
+            	moneyEarned += (4 * (timeStayed / 60));
+            	break;
+            case "Parkeersimulator.AdHocCar":
+            	moneyEarned += (2.5 * (timeStayed / 60));
+            	break;
+        }
+    }
     
     private void carsLeaving() {
         // Let cars leave.
@@ -250,16 +279,19 @@ public class Simulator {
     	case "Parkeersimulator.AdHocCar": 
             for (int i = 0; i < numberOfCars; i++) {
             	entranceCarQueue.addCar(new AdHocCar());
+            	totalAdHocCar ++;
             }
             break;
     	case "Parkeersimulator.ParkingPassCar":
             for (int i = 0; i < numberOfCars; i++) {
             	entranceCarQueue.addCar(new ParkingPassCar());
+            	totalParkingPassCar ++;
             }
             break;
     	case "Parkeersimulator.HandicapCar":
     		for (int i = 0; i < numberOfCars; i++) {
             	entranceCarQueue.addCar(new HandicapCar());
+            	totalHandicapCar ++;
             }
     		break;
     	case "Parkeersimulator.ReservationCar":
@@ -267,10 +299,12 @@ public class Simulator {
     			Car reservationCar = new ReservationCar();
     			moneyEarned += (((reservationCar.getMinutesLeft() / 60) * 2.50) + 5);
             	entranceCarQueue.addCar(reservationCar);
+            	totalReservationCar ++;
             }
     		break;
     	}
     }
+    
     
     private void carLeavesSpot(Car car){
     	simulatorView.removeCarAt(car.getLocation());
