@@ -62,7 +62,7 @@ public class Simulator {
     }
     
     public void pause() {
-    	previousTickPause = tickPause;
+    	if(tickPause < 1000) previousTickPause = tickPause;
     	tickPause = 999999999;
     	isRunning = false;
     }
@@ -256,7 +256,7 @@ public class Simulator {
     }
     
     public void adjustSpeed(int adjustment) {
-    	if(tickPause + adjustment > 0)tickPause += adjustment;
+    	if(tickPause + adjustment > 0 && tickPause + adjustment < 925)tickPause += adjustment;
     	System.out.println("The speed is now: " + tickPause);
     }
 
