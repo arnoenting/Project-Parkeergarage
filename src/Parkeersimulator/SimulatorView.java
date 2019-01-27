@@ -158,14 +158,8 @@ public class SimulatorView extends JFrame {
         carParkView.updateView();
     }
     
-    public void updateTime() {
+    public void updateTime(int minute, int hour, int day) {
     	time.setText("The time is: " + displayTime(hour) + ":" + displayTime(minute));
-    }
-    
-    public void setTime(int minute, int hour, int day) {
-    	this.minute = minute;
-    	this.hour = hour;
-    	this.day = day;
     }
     
 	public int getNumberOfFloors() {

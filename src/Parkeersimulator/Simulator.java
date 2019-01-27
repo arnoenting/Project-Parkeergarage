@@ -46,6 +46,8 @@ public class Simulator {
     double moneyEarned = 0.00;
     
     private boolean isRunning = false;
+    
+    int carsPassed = 0;
 
     public Simulator(SimulatorView simulatorView) {
         entranceCarQueue = new CarQueue();
@@ -88,7 +90,6 @@ public class Simulator {
     private void advanceTime(){
         // Advance the time by one minute.
         minute++;
-        simulatorView.setTime(minute, hour, day);
         while (minute > 59) {
             minute -= 60;
             hour++;
@@ -110,7 +111,7 @@ public class Simulator {
     private void handleEntrance(){
     	carsArriving();
     	carsEntering(entrancePassQueue);
-    	carsEntering(entranceCarQueue);  	
+    	carsEntering(entranceCarQueue);
     }
     
     private void handleExit(){
@@ -124,7 +125,7 @@ public class Simulator {
         // Update the car park view.
         simulatorView.updateView();	
         // Update the time.
-        simulatorView.updateTime();
+        simulatorView.updateTime(minute, hour, day);
     }
     
     private void carsArriving(){
