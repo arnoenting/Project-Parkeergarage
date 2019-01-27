@@ -15,7 +15,7 @@ public class Simulator {
     private int hour = 0;
     private int minute = 0;
     
-    private String[] daysOfTheWeek = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
+    private String[] daysOfTheWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
     private int tickPause = 100;
     private int previousTickPause;
