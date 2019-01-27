@@ -33,6 +33,8 @@ public class SimulatorView extends JFrame {
     private int day;
     
     private JLabel moneyLabel;
+    
+    private JLabel carEnteringLabel;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
@@ -97,6 +99,8 @@ public class SimulatorView extends JFrame {
         // Textlabels
         timeLabel = new JLabel("The time is: 00:00 on a: ");
         moneyLabel = new JLabel("Total money earned thus far: ");
+        carEnteringLabel = new JLabel("Total cars entering: ");
+        
         
         // De kleur van het "carPark" gedeelte
         this.setBackground(Color.decode("#404040"));
@@ -140,6 +144,7 @@ public class SimulatorView extends JFrame {
         infoPanel.setBorder(borderInfoPanel);
         infoPanel.add(timeLabel);
         infoPanel.add(moneyLabel);
+        infoPanel.add(carEnteringLabel);
         
         
         Container contentPane = getContentPane();
@@ -164,11 +169,15 @@ public class SimulatorView extends JFrame {
     
 
     public void updateMoney(double moneyEarned) {
-    	moneyLabel.setText("Total â‚¬ earned: " + moneyEarned);
+    	moneyLabel.setText("Total € earned: " + moneyEarned);
     }
 
     public void updateTime(int minute, int hour, String day) {
     	timeLabel.setText("The time is: " + displayTime(hour) + ":" + displayTime(minute) + " on a: " + day);
+    }
+    
+    public void updateCarsEntering (int carsPassed) {
+    	carEnteringLabel.setText("The total cars arrived: " + carsPassed);
     }
     
 	public int getNumberOfFloors() {
