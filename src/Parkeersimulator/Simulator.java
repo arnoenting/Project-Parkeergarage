@@ -15,7 +15,7 @@ public class Simulator {
     private int hour = 0;
     private int minute = 0;
     
-    private String[] daysOfTheWeek = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
+    private String[] daysOfTheWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
     private int tickPause = 100;
     private int previousTickPause;
@@ -62,7 +62,7 @@ public class Simulator {
     }
     
     public void pause() {
-    	previousTickPause = tickPause;
+    	if(tickPause < 1000) previousTickPause = tickPause;
     	tickPause = 999999999;
     	isRunning = false;
     }
@@ -258,7 +258,7 @@ public class Simulator {
     }
     
     public void adjustSpeed(int adjustment) {
-    	if(tickPause + adjustment > 0)tickPause += adjustment;
+    	if(tickPause + adjustment > 0 && tickPause + adjustment < 925)tickPause += adjustment;
     	System.out.println("The speed is now: " + tickPause);
     }
 

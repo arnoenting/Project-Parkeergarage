@@ -19,10 +19,10 @@ public class SimulatorController {
 		return model.getDay();
 	}
 	public void speedUpSimulation() {
-		model.adjustSpeed(-10);
+		model.adjustSpeed(-25);
 	}
 
 	public void slowDownSimulation() {
-		model.adjustSpeed(10);
+		model.adjustSpeed(25);
 	}
 }
