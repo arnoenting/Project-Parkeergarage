@@ -130,7 +130,7 @@ public class Simulator {
         // Update the car park view.
         simulatorView.updateView();	
         // Update the time.
-        simulatorView.updateTime(minute, hour, day);
+        simulatorView.updateTime(minute, hour, getDay());
     }
     
     private void carsArriving(){
