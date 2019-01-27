@@ -72,6 +72,7 @@ public class Simulator {
     	handleExit();
     	handleMoney();
     	updateViews();
+    	updateCount();
     	// Pause.
         try {
             Thread.sleep(tickPause);
@@ -98,12 +99,18 @@ public class Simulator {
         
     }
     
+    
+    
     public String getDay() {
     	return daysOfTheWeek[day];
     }
     
     private void handleMoney() {
     	simulatorView.updateMoney(moneyEarned);
+    }
+    
+    private void updateCount() {
+    	simulatorView.updateCarsEntering(countCars());
     }
     
     private void handleEntrance(){
@@ -124,6 +131,12 @@ public class Simulator {
         simulatorView.updateView();	
         // Update the time.
         simulatorView.updateTime(minute, hour, getDay());
+    }
+    
+    private int countCars() {
+    	int totalSpots = simulatorView.getNumberOfFloors() * simulatorView.getNumberOfPlaces() * simulatorView.getNumberOfRows();
+    	int totalSpotsTaken = totalSpots - simulatorView.getNumberOfOpenSpots();
+    	return totalSpotsTaken;
     }
     
     private void carsArriving(){
