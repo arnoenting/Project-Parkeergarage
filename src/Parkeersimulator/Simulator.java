@@ -90,8 +90,15 @@ public class Simulator {
     	advanceTime();
     	handleExit();
     	handleMoney();
-    	updateViews();
+    	manualUpdateViews();
     	handleEntrance();
+    }
+    
+    public void skipTime(int amount){
+    	for( int i = 0; i < amount; i++ ) {
+    		manualTick();
+    	}
+    	//updateViews();
     }
 
     private void advanceTime(){
@@ -146,11 +153,8 @@ public class Simulator {
     	simulatorView.updateCarsEntering(countCars());
     }
     
-    public void skipTime(int amount){
-    	for( int i = 0; i < amount; i++ ) {
-    		manualTick();
-    	}
-    	//updateViews();
+    private void manualUpdateViews(){
+    	simulatorView.tick();
     }
     
     
