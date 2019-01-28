@@ -13,6 +13,7 @@ public class SimulatorView extends JFrame {
     private JPanel simulatorPanel;
     private JPanel graphPanel;
     private JPanel infoPanel;
+    private CircleGraph totalCarGraph;
     
     private int numberOfFloors;
     private int numberOfRows;
@@ -21,17 +22,24 @@ public class SimulatorView extends JFrame {
     private Car[][][] cars;
     
     //Buttons hier
-    private JButton startButton;
-    private JButton pauseButton;
+    private JButton playPauseButton;
 
     private JButton fasterButton;
     private JButton slowerButton;
+    
+    private JButton skipHourButton;
+    private JButton skipDayButton;
+    private JButton skipWeekButton;
 
     private JLabel timeLabel;
-    private int minute;
-    private int hour;
-    private int day;
     
+    // Counters voor totale aantal auto's per soort
+    int totalAdHocCar ;
+    int totalHandicapCar ;
+    int totalParkingPassCar ;
+    int totalReservationCar ;
+    
+    //Text labels hier
     private JLabel moneyLabel;
     
     private JLabel carEnteringLabel;
@@ -49,11 +57,12 @@ public class SimulatorView extends JFrame {
             e.printStackTrace();
         }
        
-        startButton = new JButton("Start");
-        startButton.addActionListener(e -> {
+        // Start knop aanmaken
+        playPauseButton = new JButton("Play");
+        playPauseButton.addActionListener(e -> {
         	//Thread runnable aanmaken
         	Runnable runnable = () -> {
-				controller.startSimulation();
+				controller.playPauseSimulation();
         	};
         	
         	//Thread aanmaken met de juiste functie
@@ -61,18 +70,7 @@ public class SimulatorView extends JFrame {
         	
         	thread.start();
 		});
-        startButton.setBounds(10,5,70,20);
-        
-        pauseButton = new JButton("Pause");
-        pauseButton.addActionListener(e -> {
-        	Runnable runnable = () -> {
-        		controller.pauseSimulation();
-        	};
-        	
-        	Thread thread = new Thread(runnable);
-        	 
-        	thread.start();
-        });
+        playPauseButton.setBounds(10,5,70,20);
         
         fasterButton = new JButton("Faster");
         fasterButton.addActionListener(e -> {
@@ -96,10 +94,46 @@ public class SimulatorView extends JFrame {
         	thread.start();
         });
         
+        skipHourButton = new JButton("Skip hour");
+        skipHourButton.addActionListener(e -> {
+        	Runnable runnable = () -> {
+        		controller.skipTimeSimulation(60);
+        	};
+        	
+        	Thread thread = new Thread(runnable);
+        	 
+        	thread.start();
+        });
+        
+        skipDayButton = new JButton("Skip Day");
+        skipDayButton.addActionListener(e -> {
+        	Runnable runnable = () -> {
+        		controller.skipTimeSimulation(1440);
+        	};
+        	
+        	Thread thread = new Thread(runnable);
+        	 
+        	thread.start();
+        });
+        
+        skipWeekButton = new JButton("Skip Week");
+        skipWeekButton.addActionListener(e -> {
+        	Runnable runnable = () -> {
+        		controller.skipTimeSimulation(10080);
+        	};
+        	
+        	Thread thread = new Thread(runnable);
+        	 
+        	thread.start();
+        });
+        
+        
+        
         // Textlabels
-        timeLabel = new JLabel("The time is: 00:00 on a: ");
+        timeLabel = new JLabel("Time: 00:00 Day: Monday");
+        timeLabel.setForeground(Color.white);
         moneyLabel = new JLabel("Total money earned thus far: ");
-        carEnteringLabel = new JLabel("Total cars in queue: ");
+        carEnteringLabel = new JLabel("Total cars parked: ");
         
         
         // De kleur van het "carPark" gedeelte
@@ -115,6 +149,10 @@ public class SimulatorView extends JFrame {
         graphPanel = new JPanel();
         simulatorPanel = new JPanel();
         infoPanel = new JPanel();
+        totalCarGraph = new CircleGraph();
+        
+        // Add general info text to carParkView
+        carParkView.add(timeLabel);
         
         // Define the panel to hold the button
         simulatorPanel.setPreferredSize(new Dimension(400, 300));
@@ -127,22 +165,26 @@ public class SimulatorView extends JFrame {
         // Define the panel to hold the buttons
         buttonPanel.setSize(400,200);
         buttonPanel.setBackground(Color.decode("#4b4b4b"));
-        buttonPanel.add(startButton);
-        buttonPanel.add(pauseButton);
+        buttonPanel.add(playPauseButton);
 
         buttonPanel.add(fasterButton);
         buttonPanel.add(slowerButton);
+        
+        buttonPanel.add(skipHourButton);
+        buttonPanel.add(skipDayButton);
+        buttonPanel.add(skipWeekButton);
         
         // Panel for the Graphs
         graphPanel.setSize(200,200);
         graphPanel.setBackground(Color.decode("#4b4b4b"));
         graphPanel.setBorder(borderGraphPanel);
+        graphPanel.add(totalCarGraph);
 
         // Panel for the info about the parking garage
         infoPanel.setSize(200,200);
         infoPanel.setBackground(Color.white);
         infoPanel.setBorder(borderInfoPanel);
-        infoPanel.add(timeLabel);
+        //infoPanel.add(timeLabel);
         infoPanel.add(moneyLabel);
         infoPanel.add(carEnteringLabel);
         
@@ -159,7 +201,7 @@ public class SimulatorView extends JFrame {
         updateView();
     }
     
-    public void addController(SimulatorController controller) {
+    public void initController(SimulatorController controller) {
     	this.controller = controller;
     }
 
@@ -167,17 +209,31 @@ public class SimulatorView extends JFrame {
         carParkView.updateView();
     }
     
+    public void updateGraph(int totalAdHocCar, int totalParkingPassCar, int totalHandicapCar, int totalReservationCar ) {
+    	this.totalAdHocCar = totalAdHocCar;
+		this.totalParkingPassCar = totalParkingPassCar;
+		this.totalHandicapCar = totalHandicapCar;
+		this.totalReservationCar = totalReservationCar;
+    }
 
     public void updateMoney(double moneyEarned) {
-    	moneyLabel.setText("Total € earned: " + moneyEarned);
+    	moneyLabel.setText("Total ï¿½ earned: " + moneyEarned);
     }
 
     public void updateTime(int minute, int hour, String day) {
-    	timeLabel.setText("The time is: " + displayTime(hour) + ":" + displayTime(minute) + " on a: " + day);
+    	timeLabel.setText("Time: " + displayTime(hour) + ":" + displayTime(minute) + " Day: " + day);
+    }
+    
+    public void updatePlayPauseButton(boolean isRunning) {
+    	playPauseButton.setText("Play");
+    	
+    	if(isRunning) {
+    		playPauseButton.setText("Pause");
+    	}
     }
     
     public void updateCarsEntering (int spotsTaken) {
-    	carEnteringLabel.setText("Total cars in queue: " + spotsTaken);
+    	carEnteringLabel.setText("Total cars in parked: " + spotsTaken);
     }
     
 	public int getNumberOfFloors() {

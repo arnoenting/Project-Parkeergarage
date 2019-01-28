@@ -7,13 +7,14 @@ public class SimulatorController {
 		this.model = model;
 	}
 	
-	public void startSimulation() {
-		model.run();
+	public void playPauseSimulation() {
+		//model.initRun();
+		model.playPause();
 	}
 	
-	public void pauseSimulation() {
+	/*public void pauseSimulation() {
 		model.pause();
-	}
+	}*/
 	
 	public String getDay() {
 		return model.getDay();
@@ -24,5 +25,9 @@ public class SimulatorController {
 
 	public void slowDownSimulation() {
 		model.adjustSpeed("-");
+	}
+	
+	public void skipTimeSimulation(int skipAmount) {
+		model.skipTime(skipAmount);
 	}
 }

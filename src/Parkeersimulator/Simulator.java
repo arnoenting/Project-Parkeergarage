@@ -56,35 +56,41 @@ public class Simulator {
         this.simulatorView = simulatorView;
     }
 
-    public void run() {
-    	if(!isRunning) {
-    		isRunning = true;
-    		if(tickPause > 99999999)tickPause = previousTickPause;
-    		
-			for(int i = 0; i < 999999999; i++) {
-				tick();
-			}
-    	}
+    public void playPause() {
+    	// Zo weet de run functie of hij op pauze moet of juist niet.
+    	isRunning = (!isRunning) ? true : false;
+    	
+    	simulatorView.updatePlayPauseButton(isRunning);
+    	
+		while(isRunning) {
+			tick();
+		}
     }
     
-    public void pause() {
-    	if(tickPause < 1000) previousTickPause = tickPause;
-    	tickPause = 999999999;
-    	isRunning = false;
-    }
+    // Obsolete method replaced by a play & pause method
+    /*public void pause() {
+    	if(isRunning) {isRunning = false;}
+    }*/
 
     private void tick() {
     	advanceTime();
     	handleExit();
     	handleMoney();
     	updateViews();
-    	updateCount();
-    	// Pause.
+    	// Pause between ticks.
         try {
             Thread.sleep(tickPause);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    	handleEntrance();
+    }
+    
+    private void manualTick() {
+    	advanceTime();
+    	handleExit();
+    	handleMoney();
+    	updateViews();
     	handleEntrance();
     }
 
@@ -104,9 +110,7 @@ public class Simulator {
             CarPayment(0, new ParkingPassCar());
             
         }
-    }
-    
-    
+    } 
     
     public String getDay() {
     	return daysOfTheWeek[day];
@@ -116,14 +120,12 @@ public class Simulator {
     	simulatorView.updateMoney(moneyEarned);
     }
     
-    private void updateCount() {
-    	simulatorView.updateCarsEntering(countCars());
-    }
-    
     private void handleEntrance(){
     	carsArriving();
     	carsEntering(entrancePassQueue);
     	carsEntering(entranceCarQueue);
+    	
+    	//if(entranceCarQueue > 10)
     }
     
     private void handleExit(){
@@ -138,8 +140,20 @@ public class Simulator {
         simulatorView.updateView();	
         // Update the time.
         simulatorView.updateTime(minute, hour, getDay());
-        //System.out.println(totalAdHocCar + " " + totalHandicapCar + " " + totalParkingPassCar + " " + totalReservationCar);
+        System.out.println(totalAdHocCar + " " + totalHandicapCar + " " + totalParkingPassCar + " " + totalReservationCar);
+        //update the graph
+        simulatorView.updateGraph(totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar);
+        //update the parked cars
+    	simulatorView.updateCarsEntering(countCars());
     }
+    
+    public void skipTime(int amount){
+    	for( int i = 0; i < amount; i++ ) {
+    		manualTick();
+    	}
+    	//updateViews();
+    }
+    
     
     private int countCars() {
     	int totalSpots = simulatorView.getNumberOfFloors() * simulatorView.getNumberOfPlaces() * simulatorView.getNumberOfRows();
@@ -279,9 +293,6 @@ public class Simulator {
     	}
     }
     
-    private void updateGraph() {
-    	
-    }
     
     private void carLeavesSpot(Car car){
     	simulatorView.removeCarAt(car.getLocation());

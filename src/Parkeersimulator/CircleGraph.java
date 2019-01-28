@@ -1,9 +1,6 @@
 package Parkeersimulator;
 
 import javax.swing.*;
-
-import jdk.management.resource.internal.TotalResourceContext;
-
 import java.awt.*;
 
 
@@ -27,9 +24,9 @@ public class CircleGraph extends JPanel{
 	public void paintComponent(Graphics g) {
 		
 		g.setColor(Color.decode("#bfbfbf"));
-		g.fillRect(0, 0, 100, 100);
+		g.fillRect(0, 0, 1000, 1000);
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 100, 1);
+		g.fillRect(5, 0, 100, 1000);
 		
 		
 		int startAngle = 0;
@@ -51,7 +48,6 @@ public class CircleGraph extends JPanel{
 		int intFourthNumber = totalReservationCar;
 		g.setColor(Color.decode("#28bf29"));
 		g.fillArc(0,0,100,100, startAngle, intFourthNumber);
-		
-		
+	
 	}
 }
