@@ -28,7 +28,9 @@ public class SimulatorView extends JFrame {
     private JButton fasterButton;
     private JButton slowerButton;
     
+    private JButton skipHourButton;
     private JButton skipDayButton;
+    private JButton skipWeekButton;
 
     private JLabel timeLabel;
     private int minute;
@@ -105,10 +107,32 @@ public class SimulatorView extends JFrame {
         	thread.start();
         });
         
-        skipDayButton = new JButton("Skip day");
-        skipDayButton.addActionListener(e -> {
+        skipHourButton = new JButton("Skip hour");
+        skipHourButton.addActionListener(e -> {
         	Runnable runnable = () -> {
         		controller.skipTimeSimulation(60);
+        	};
+        	
+        	Thread thread = new Thread(runnable);
+        	 
+        	thread.start();
+        });
+        
+        skipDayButton = new JButton("Skip Day");
+        skipDayButton.addActionListener(e -> {
+        	Runnable runnable = () -> {
+        		controller.skipTimeSimulation(1440);
+        	};
+        	
+        	Thread thread = new Thread(runnable);
+        	 
+        	thread.start();
+        });
+        
+        skipWeekButton = new JButton("Skip Week");
+        skipWeekButton.addActionListener(e -> {
+        	Runnable runnable = () -> {
+        		controller.skipTimeSimulation(10080);
         	};
         	
         	Thread thread = new Thread(runnable);
@@ -156,7 +180,9 @@ public class SimulatorView extends JFrame {
         buttonPanel.add(fasterButton);
         buttonPanel.add(slowerButton);
         
+        buttonPanel.add(skipHourButton);
         buttonPanel.add(skipDayButton);
+        buttonPanel.add(skipWeekButton);
         
         // Panel for the Graphs
         graphPanel.setSize(200,200);

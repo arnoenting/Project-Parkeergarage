@@ -92,7 +92,6 @@ public class Simulator {
     	handleExit();
     	handleMoney();
     	updateViews();
-    	// Pause.
     	handleEntrance();
     }
 
@@ -151,6 +150,7 @@ public class Simulator {
     	for( int i = 0; i < amount; i++ ) {
     		manualTick();
     	}
+    	//updateViews();
     }
     
     
