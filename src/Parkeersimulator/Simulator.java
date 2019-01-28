@@ -156,7 +156,7 @@ public class Simulator {
     	simulatorView.tick();
     }
     
-    
+    // All the spots taken minus all the open spots
     private int countCars() {
     	int totalSpots = simulatorView.getNumberOfFloors() * simulatorView.getNumberOfPlaces() * simulatorView.getNumberOfRows();
     	int totalSpotsTaken = totalSpots - simulatorView.getNumberOfOpenSpots();
