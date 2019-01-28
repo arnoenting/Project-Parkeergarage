@@ -12,6 +12,6 @@ public class Main {
 		SimulatorController controller = new SimulatorController(model);
 		
 		//Voeg de controller toe aan de view
-		view.addController(controller);
+		view.initController(controller);
 	}
 }

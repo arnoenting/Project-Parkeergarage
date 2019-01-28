@@ -31,9 +31,6 @@ public class SimulatorView extends JFrame {
     private JButton skipDayButton;
 
     private JLabel timeLabel;
-    private int minute;
-    private int hour;
-    private int day;
     
     // Counters voor totale aantal auto's per soort
     int totalAdHocCar ;
@@ -185,7 +182,7 @@ public class SimulatorView extends JFrame {
         updateView();
     }
     
-    public void addController(SimulatorController controller) {
+    public void initController(SimulatorController controller) {
     	this.controller = controller;
     }
 
@@ -201,7 +198,7 @@ public class SimulatorView extends JFrame {
     }
 
     public void updateMoney(double moneyEarned) {
-    	moneyLabel.setText("Total € earned: " + moneyEarned);
+    	moneyLabel.setText("Total ï¿½ earned: " + moneyEarned);
     }
 
     public void updateTime(int minute, int hour, String day) {
