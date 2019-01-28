@@ -148,6 +148,8 @@ public class Simulator {
         simulatorView.updateGraph(totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar);
         //update the parked cars
     	simulatorView.updateCarsEntering(countCars());
+    	//update speed
+    	simulatorView.updateSpeed(tickPause);
     }
     
     private void manualUpdateViews(){

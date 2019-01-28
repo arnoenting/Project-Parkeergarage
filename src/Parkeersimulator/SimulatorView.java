@@ -15,8 +15,6 @@ public class SimulatorView extends JFrame {
     private JPanel infoPanel;
     private CircleGraph totalCarGraph;
     
-    private Thread thread;
-    
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
@@ -34,7 +32,7 @@ public class SimulatorView extends JFrame {
     private JButton skipWeekButton;
 
     private JLabel timeLabel;
-    
+        
     // Counters voor totale aantal auto's per soort
     int totalAdHocCar ;
     int totalHandicapCar ;
@@ -43,8 +41,15 @@ public class SimulatorView extends JFrame {
     
     //Text labels hier
     private JLabel moneyLabel;
-    
     private JLabel carEnteringLabel;
+    private JLabel speedLabel; 
+    
+    private JLabel LegendaAdHocCar;
+    private JLabel LegendaHandicapCar;
+    private JLabel LegendaParkingPasCar;
+    private JLabel LegendaReservationCar;
+    
+
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
@@ -68,7 +73,7 @@ public class SimulatorView extends JFrame {
         	};
         	
         	//Thread aanmaken met de juiste functie
-        	thread = new Thread(runnable);
+        	Thread thread = new Thread(runnable);
         	
         	thread.start();
 		});
@@ -80,7 +85,7 @@ public class SimulatorView extends JFrame {
         		controller.speedUpSimulation();
         	};
         	
-        	thread = new Thread(runnable);
+        	Thread thread = new Thread(runnable);
         	 
         	thread.start();
         });
@@ -91,7 +96,7 @@ public class SimulatorView extends JFrame {
         		controller.slowDownSimulation();
         	};
         	
-        	thread = new Thread(runnable);
+        	Thread thread = new Thread(runnable);
         	 
         	thread.start();
         });
@@ -101,8 +106,8 @@ public class SimulatorView extends JFrame {
         	Runnable runnable = () -> {
         		controller.skipTimeSimulation(60);
         	};
-
-        	thread = new Thread(runnable);
+        	
+        	Thread thread = new Thread(runnable);
         	 
         	thread.start();
         });
@@ -113,7 +118,7 @@ public class SimulatorView extends JFrame {
         		controller.skipTimeSimulation(1440);
         	};
         	
-        	thread = new Thread(runnable);
+        	Thread thread = new Thread(runnable);
         	 
         	thread.start();
         });
@@ -124,7 +129,7 @@ public class SimulatorView extends JFrame {
         		controller.skipTimeSimulation(10080);
         	};
         	
-        	thread = new Thread(runnable);
+        	Thread thread = new Thread(runnable);
         	 
         	thread.start();
         });
@@ -134,8 +139,19 @@ public class SimulatorView extends JFrame {
         // Textlabels
         timeLabel = new JLabel("Time: 00:00 Day: Monday");
         timeLabel.setForeground(Color.white);
+        LegendaAdHocCar = new JLabel("AdHocCar: ");
+        LegendaAdHocCar.setForeground(Color.white);
+        LegendaAdHocCar.setAlignmentX(0);
+        LegendaAdHocCar.setAlignmentY(0);
+        LegendaHandicapCar = new JLabel("HandicapCar: ");
+        LegendaHandicapCar.setForeground(Color.white);
+        LegendaParkingPasCar = new JLabel("ParkingPasCar: ");
+        LegendaParkingPasCar.setForeground(Color.white);
+        LegendaReservationCar = new JLabel("ReservationCar: ");
+        LegendaReservationCar.setForeground(Color.white);
         moneyLabel = new JLabel("Total money earned thus far: ");
         carEnteringLabel = new JLabel("Total cars parked: ");
+        speedLabel = new JLabel("The speed is: ");
         
         
         // De kleur van het "carPark" gedeelte
@@ -155,6 +171,10 @@ public class SimulatorView extends JFrame {
         
         // Add general info text to carParkView
         carParkView.add(timeLabel);
+        carParkView.add(LegendaAdHocCar);
+        carParkView.add(LegendaHandicapCar);
+        carParkView.add(LegendaParkingPasCar);
+        carParkView.add(LegendaReservationCar);
         
         // Define the panel to hold the button
         simulatorPanel.setPreferredSize(new Dimension(400, 300));
@@ -189,6 +209,7 @@ public class SimulatorView extends JFrame {
         //infoPanel.add(timeLabel);
         infoPanel.add(moneyLabel);
         infoPanel.add(carEnteringLabel);
+        infoPanel.add(speedLabel);
         
         
         Container contentPane = getContentPane();
@@ -235,7 +256,11 @@ public class SimulatorView extends JFrame {
     }
     
     public void updateCarsEntering (int spotsTaken) {
-    	carEnteringLabel.setText("Total cars in parked: " + spotsTaken);
+    	carEnteringLabel.setText("Total cars parked: " + spotsTaken);
+    }
+    
+    public void updateSpeed(int speedUpAndDown) {
+    	speedLabel.setText("The speed is: " + speedUpAndDown);
     }
     
 	public int getNumberOfFloors() {
@@ -308,23 +333,22 @@ public class SimulatorView extends JFrame {
     public Location getFirstFreeLocationCarType (Car car)
     {
     	Location freeLocation = null;
-    	if(car != null) {
-	    	switch (car.getClass().getName())
-	        {
-	            case "Parkeersimulator.ParkingPassCar":
-	            	freeLocation = getFirstFreeLocationSpecified(0, 0, 0, 1, 5, 29, 0);
-	            	break;
-	            case "Parkeersimulator.ReservationCar":
-	            	freeLocation = getFirstFreeLocationSpecified(0, getNumberOfFloors()-1, 2, getNumberOfRows()-1, 0, getNumberOfPlaces()-1, 0);
-	            	break;
-	            case "Parkeersimulator.HandicapCar":
-	            	freeLocation = getFirstFreeLocationSpecified(0, 0, 0, 1, 0, 4,0);
-	            	break;
-	            case "Parkeersimulator.AdHocCar":
-	            	freeLocation = getFirstFreeLocationSpecified(0, getNumberOfFloors()-1, 2, getNumberOfRows()-1, 0, getNumberOfPlaces()-1, 0);
-	            	break;
-	        }
-    	}
+    	switch (car.getClass().getName())
+        {
+            case "Parkeersimulator.ParkingPassCar":
+            	freeLocation = getFirstFreeLocationSpecified(0, 0, 0, 1, 5, 29, 0);
+            	break;
+            case "Parkeersimulator.ReservationCar":
+            	freeLocation = getFirstFreeLocationSpecified(0, getNumberOfFloors()-1, 2, getNumberOfRows()-1, 0, getNumberOfPlaces()-1, 0);
+            	break;
+            case "Parkeersimulator.HandicapCar":
+            	freeLocation = getFirstFreeLocationSpecified(0, 0, 0, 1, 0, 4,0);
+            	break;
+            case "Parkeersimulator.AdHocCar":
+            	freeLocation = getFirstFreeLocationSpecified(0, getNumberOfFloors()-1, 2, getNumberOfRows()-1, 0, getNumberOfPlaces()-1, 0);
+            	break;
+        }
+    	
     	return freeLocation;
     }
     
