@@ -206,10 +206,11 @@ public class Simulator {
     }
 
     private void carsPaying(){
-    // Let cars pay.
-	int i=0;
-	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
-        Car car = paymentCarQueue.removeCar();
+    	// Let cars pay.
+		int i=0;
+		while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
+	    	System.out.println("payment queue size: " + paymentCarQueue.carsInQueue());
+	        Car car = paymentCarQueue.removeCar();
         	CarPayment(car.getMinutesStayed(), car);
         	car.setIsPaying(true);
         	car.setHasToPay(true);
@@ -443,16 +444,16 @@ public class Simulator {
 	        	modifier = 0;
 	        	break;
 	        case 20:
-	        	modifier = .5;
+	        	modifier = 1.5;
 	        	break;
 	        case 21:
-	        	modifier = 1;
+	        	modifier = 3;
 	        	break;
 	        case 22:
-	        	modifier = 2;
+	        	modifier = 4;
 	        	break;
 	        case 23:
-	        	modifier = 3;
+	        	modifier = 5;
 	        	break; 
 	        }
     	}
