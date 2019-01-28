@@ -57,6 +57,7 @@ public class SimulatorView extends JFrame {
             e.printStackTrace();
         }
        
+        // Start knop aanmaken
         startButton = new JButton("Start");
         startButton.addActionListener(e -> {
         	//Thread runnable aanmaken

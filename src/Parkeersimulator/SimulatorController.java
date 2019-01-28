@@ -8,6 +8,7 @@ public class SimulatorController {
 	}
 	
 	public void startSimulation() {
+		//model.initRun();
 		model.run();
 	}
 	

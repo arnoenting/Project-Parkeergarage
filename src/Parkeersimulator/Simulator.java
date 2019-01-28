@@ -57,20 +57,15 @@ public class Simulator {
     }
 
     public void run() {
-    	if(!isRunning) {
-    		isRunning = true;
-    		if(tickPause > 99999999)tickPause = previousTickPause;
-    		
-			for(int i = 0; i < 999999999; i++) {
-				tick();
-			}
-    	}
+    	if(!isRunning) isRunning = true;
+    	
+		while(isRunning) {
+			tick();
+		}
     }
     
     public void pause() {
-    	if(tickPause < 1000) previousTickPause = tickPause;
-    	tickPause = 999999999;
-    	isRunning = false;
+    	if(isRunning) {isRunning = false;}
     }
 
     private void tick() {
