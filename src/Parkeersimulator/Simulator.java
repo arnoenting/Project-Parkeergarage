@@ -17,8 +17,7 @@ public class Simulator {
     
     private String[] daysOfTheWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
-    private int tickPause = 100;
-    private int previousTickPause;
+    private int tickPause = 100; // time between ticks (speed of the simulation)
 
     int weekDayArrivals= 85; // average number of arriving cars per hour - handicap & resv
     int weekendArrivals = 170; // average number of arriving cars per hour - idem
