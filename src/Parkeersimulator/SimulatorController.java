@@ -20,11 +20,11 @@ public class SimulatorController {
 		return model.getDay();
 	}
 	public void speedUpSimulation() {
-		model.adjustSpeed(-25);
+		model.adjustSpeed("+");
 	}
 
 	public void slowDownSimulation() {
-		model.adjustSpeed(25);
+		model.adjustSpeed("-");
 	}
 	
 	public void skipTimeSimulation(int skipAmount) {
