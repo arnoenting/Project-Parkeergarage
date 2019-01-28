@@ -7,9 +7,10 @@ public class ReservationCar extends Car {
 	private Color COLOR = Color.decode("#CDEDA3");
     private int stayMinutes;
 	
-    public ReservationCar() {
+    public ReservationCar(double hourModifier) {
     	Random random = new Random();
-    	stayMinutes = (int) (15 + random.nextFloat() * 3 * 60);
+    	stayMinutes = (int) (15 + random.nextFloat() * 3 * 60 /*+ (hourModifier * 60)*/);
+    	System.out.println(stayMinutes);
         this.setMinutesLeft(stayMinutes);
         this.setHasToPay(false);
     }
