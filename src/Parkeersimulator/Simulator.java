@@ -56,24 +56,28 @@ public class Simulator {
         this.simulatorView = simulatorView;
     }
 
-    public void run() {
-    	if(!isRunning) isRunning = true;
+    public void playPause() {
+    	// Zo weet de run functie of hij op pauze moet of juist niet.
+    	isRunning = (!isRunning) ? true : false;
+    	
+    	simulatorView.updatePlayPauseButton(isRunning);
     	
 		while(isRunning) {
 			tick();
 		}
     }
     
-    public void pause() {
+    // Obsolete method replaced by a play & pause method
+    /*public void pause() {
     	if(isRunning) {isRunning = false;}
-    }
+    }*/
 
     private void tick() {
     	advanceTime();
     	handleExit();
     	handleMoney();
     	updateViews();
-    	// Pause.
+    	// Pause between ticks.
         try {
             Thread.sleep(tickPause);
         } catch (InterruptedException e) {
@@ -120,6 +124,8 @@ public class Simulator {
     	carsArriving();
     	carsEntering(entrancePassQueue);
     	carsEntering(entranceCarQueue);
+    	
+    	//if(entranceCarQueue > 10)
     }
     
     private void handleExit(){
