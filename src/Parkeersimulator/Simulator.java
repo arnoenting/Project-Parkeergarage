@@ -78,13 +78,21 @@ public class Simulator {
     	handleExit();
     	handleMoney();
     	updateViews();
-    	updateCount();
     	// Pause.
         try {
             Thread.sleep(tickPause);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    	handleEntrance();
+    }
+    
+    private void manualTick() {
+    	advanceTime();
+    	handleExit();
+    	handleMoney();
+    	updateViews();
+    	// Pause.
     	handleEntrance();
     }
 
@@ -104,9 +112,7 @@ public class Simulator {
             CarPayment(0, new ParkingPassCar());
             
         }
-    }
-    
-    
+    } 
     
     public String getDay() {
     	return daysOfTheWeek[day];
@@ -114,10 +120,6 @@ public class Simulator {
     
     private void handleMoney() {
     	simulatorView.updateMoney(moneyEarned);
-    }
-    
-    private void updateCount() {
-    	simulatorView.updateCarsEntering(countCars());
     }
     
     private void handleEntrance(){
@@ -141,11 +143,13 @@ public class Simulator {
         System.out.println(totalAdHocCar + " " + totalHandicapCar + " " + totalParkingPassCar + " " + totalReservationCar);
         //update the graph
         simulatorView.updateGraph(totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar);
+        //update the parked cars
+    	simulatorView.updateCarsEntering(countCars());
     }
     
     public void skipTime(int amount){
     	for( int i = 0; i < amount; i++ ) {
-    		tick();
+    		manualTick();
     	}
     }
     
