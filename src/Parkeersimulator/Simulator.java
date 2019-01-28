@@ -257,7 +257,7 @@ public class Simulator {
                 ? weekDay
                 : weekend;
         
-        //averageNumberOfCarsPerHour *= stayLeaveModifier(false);
+        averageNumberOfCarsPerHour *= stayLeaveModifier(false);
         
         // Calculate the number of cars that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
@@ -270,26 +270,27 @@ public class Simulator {
     	switch(car.getClass().getName()) {
     	case "Parkeersimulator.AdHocCar": 
             for (int i = 0; i < numberOfCars; i++) {
-            	entranceCarQueue.addCar(car);
+            	entranceCarQueue.addCar(new AdHocCar(stayLeaveModifier(true)));
             	totalAdHocCar ++;
             }
             break;
     	case "Parkeersimulator.ParkingPassCar":
             for (int i = 0; i < numberOfCars; i++) {
-            	entranceCarQueue.addCar(car);
+            	entranceCarQueue.addCar(new ParkingPassCar(stayLeaveModifier(true)));
             	totalParkingPassCar ++;
             }
             break;
     	case "Parkeersimulator.HandicapCar":
     		for (int i = 0; i < numberOfCars; i++) {
-            	entranceCarQueue.addCar(car);
+            	entranceCarQueue.addCar(new HandicapCar(stayLeaveModifier(true)));
             	totalHandicapCar ++;
             }
     		break;
     	case "Parkeersimulator.ReservationCar":
     		for (int i = 0; i < numberOfCars; i++) {
-    			moneyEarned += (((car.getMinutesLeft() / 60) * 2.50) + 5);
-            	entranceCarQueue.addCar(car);
+    			ReservationCar reservationCar = new ReservationCar(stayLeaveModifier(true));
+    			moneyEarned += (((reservationCar.getMinutesLeft() / 60) * 2.50) + 5);
+            	entranceCarQueue.addCar(reservationCar);
             	totalReservationCar ++;
             }
     		break;

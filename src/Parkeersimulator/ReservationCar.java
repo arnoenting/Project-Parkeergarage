@@ -10,7 +10,6 @@ public class ReservationCar extends Car {
     public ReservationCar(double hourModifier) {
     	Random random = new Random();
     	stayMinutes = (int) (15 + random.nextFloat() * 3 * 60 /*+ (hourModifier * 60)*/);
-    	System.out.println(stayMinutes);
         this.setMinutesLeft(stayMinutes);
         this.setHasToPay(false);
     }
