@@ -15,6 +15,8 @@ public class SimulatorView extends JFrame {
     private JPanel infoPanel;
     private CircleGraph totalCarGraph;
     
+    private Thread thread;
+    
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
@@ -66,7 +68,7 @@ public class SimulatorView extends JFrame {
         	};
         	
         	//Thread aanmaken met de juiste functie
-        	Thread thread = new Thread(runnable);
+        	thread = new Thread(runnable);
         	
         	thread.start();
 		});
@@ -78,7 +80,7 @@ public class SimulatorView extends JFrame {
         		controller.speedUpSimulation();
         	};
         	
-        	Thread thread = new Thread(runnable);
+        	thread = new Thread(runnable);
         	 
         	thread.start();
         });
@@ -89,7 +91,7 @@ public class SimulatorView extends JFrame {
         		controller.slowDownSimulation();
         	};
         	
-        	Thread thread = new Thread(runnable);
+        	thread = new Thread(runnable);
         	 
         	thread.start();
         });
@@ -99,8 +101,8 @@ public class SimulatorView extends JFrame {
         	Runnable runnable = () -> {
         		controller.skipTimeSimulation(60);
         	};
-        	
-        	Thread thread = new Thread(runnable);
+
+        	thread = new Thread(runnable);
         	 
         	thread.start();
         });
@@ -111,7 +113,7 @@ public class SimulatorView extends JFrame {
         		controller.skipTimeSimulation(1440);
         	};
         	
-        	Thread thread = new Thread(runnable);
+        	thread = new Thread(runnable);
         	 
         	thread.start();
         });
@@ -122,7 +124,7 @@ public class SimulatorView extends JFrame {
         		controller.skipTimeSimulation(10080);
         	};
         	
-        	Thread thread = new Thread(runnable);
+        	thread = new Thread(runnable);
         	 
         	thread.start();
         });
@@ -306,22 +308,23 @@ public class SimulatorView extends JFrame {
     public Location getFirstFreeLocationCarType (Car car)
     {
     	Location freeLocation = null;
-    	switch (car.getClass().getName())
-        {
-            case "Parkeersimulator.ParkingPassCar":
-            	freeLocation = getFirstFreeLocationSpecified(0, 0, 0, 1, 5, 29, 0);
-            	break;
-            case "Parkeersimulator.ReservationCar":
-            	freeLocation = getFirstFreeLocationSpecified(0, getNumberOfFloors()-1, 2, getNumberOfRows()-1, 0, getNumberOfPlaces()-1, 0);
-            	break;
-            case "Parkeersimulator.HandicapCar":
-            	freeLocation = getFirstFreeLocationSpecified(0, 0, 0, 1, 0, 4,0);
-            	break;
-            case "Parkeersimulator.AdHocCar":
-            	freeLocation = getFirstFreeLocationSpecified(0, getNumberOfFloors()-1, 2, getNumberOfRows()-1, 0, getNumberOfPlaces()-1, 0);
-            	break;
-        }
-    	
+    	if(car != null) {
+	    	switch (car.getClass().getName())
+	        {
+	            case "Parkeersimulator.ParkingPassCar":
+	            	freeLocation = getFirstFreeLocationSpecified(0, 0, 0, 1, 5, 29, 0);
+	            	break;
+	            case "Parkeersimulator.ReservationCar":
+	            	freeLocation = getFirstFreeLocationSpecified(0, getNumberOfFloors()-1, 2, getNumberOfRows()-1, 0, getNumberOfPlaces()-1, 0);
+	            	break;
+	            case "Parkeersimulator.HandicapCar":
+	            	freeLocation = getFirstFreeLocationSpecified(0, 0, 0, 1, 0, 4,0);
+	            	break;
+	            case "Parkeersimulator.AdHocCar":
+	            	freeLocation = getFirstFreeLocationSpecified(0, getNumberOfFloors()-1, 2, getNumberOfRows()-1, 0, getNumberOfPlaces()-1, 0);
+	            	break;
+	        }
+    	}
     	return freeLocation;
     }
     

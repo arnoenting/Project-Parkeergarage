@@ -17,14 +17,13 @@ public class Simulator {
     
     private String[] daysOfTheWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
-    private int tickPause = 100;
-    private int previousTickPause;
+    private int tickPause = 100; // time between ticks (speed of the simulation)
 
     int weekDayArrivals= 85; // average number of arriving cars per hour - handicap & resv
     int weekendArrivals = 170; // average number of arriving cars per hour - idem
     
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    int weekendPassArrivals = 500; // average number of arriving cars per hour
+    int weekendPassArrivals = 35; // average number of arriving cars per hour
     
     int weekDayHandArrivals = 25;
     int weekendHandArrivals = 100;
@@ -90,8 +89,15 @@ public class Simulator {
     	advanceTime();
     	handleExit();
     	handleMoney();
-    	updateViews();
+    	manualUpdateViews();
     	handleEntrance();
+    }
+    
+    public void skipTime(int amount){
+    	for( int i = 0; i < amount; i++ ) {
+    		manualTick();
+    	}
+    	//updateViews();
     }
 
     private void advanceTime(){
@@ -107,7 +113,7 @@ public class Simulator {
         }
         while (day > 6) {
             day -= 7;
-            CarPayment(0, new ParkingPassCar());
+            CarPayment(0, new ParkingPassCar(stayLeaveModifier(true)));
             
         }
     } 
@@ -140,18 +146,14 @@ public class Simulator {
         simulatorView.updateView();	
         // Update the time.
         simulatorView.updateTime(minute, hour, getDay());
-        System.out.println(totalAdHocCar + " " + totalHandicapCar + " " + totalParkingPassCar + " " + totalReservationCar);
         //update the graph
         simulatorView.updateGraph(totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar);
         //update the parked cars
     	simulatorView.updateCarsEntering(countCars());
     }
     
-    public void skipTime(int amount){
-    	for( int i = 0; i < amount; i++ ) {
-    		manualTick();
-    	}
-    	//updateViews();
+    private void manualUpdateViews(){
+    	simulatorView.tick();
     }
     
     // All the spots taken minus all the open spots
@@ -163,13 +165,13 @@ public class Simulator {
     
     private void carsArriving(){
     	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals);
-        addArrivingCars(numberOfCars, new AdHocCar());    	
+        addArrivingCars(numberOfCars, new AdHocCar(stayLeaveModifier(true)));    	
     	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
-        addArrivingCars(numberOfCars, new ParkingPassCar()); 
+        addArrivingCars(numberOfCars, new ParkingPassCar(stayLeaveModifier(true))); 
         numberOfCars=getNumberOfCars(weekDayHandArrivals, weekendHandArrivals);
-        addArrivingCars(numberOfCars, new HandicapCar());
+        addArrivingCars(numberOfCars, new HandicapCar(stayLeaveModifier(true)));
         numberOfCars=getNumberOfCars(weekDayResvArrivals, weekendResvArrivals);
-        addArrivingCars(numberOfCars, new ReservationCar());
+        addArrivingCars(numberOfCars, new ReservationCar(stayLeaveModifier(true)));
     }
 
     private void carsEntering(CarQueue queue){
@@ -254,7 +256,9 @@ public class Simulator {
         int averageNumberOfCarsPerHour = day < 5
                 ? weekDay
                 : weekend;
-
+        
+        //averageNumberOfCarsPerHour *= stayLeaveModifier(false);
+        
         // Calculate the number of cars that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
         double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
@@ -266,27 +270,26 @@ public class Simulator {
     	switch(car.getClass().getName()) {
     	case "Parkeersimulator.AdHocCar": 
             for (int i = 0; i < numberOfCars; i++) {
-            	entranceCarQueue.addCar(new AdHocCar());
+            	entranceCarQueue.addCar(car);
             	totalAdHocCar ++;
             }
             break;
     	case "Parkeersimulator.ParkingPassCar":
             for (int i = 0; i < numberOfCars; i++) {
-            	entranceCarQueue.addCar(new ParkingPassCar());
+            	entranceCarQueue.addCar(car);
             	totalParkingPassCar ++;
             }
             break;
     	case "Parkeersimulator.HandicapCar":
     		for (int i = 0; i < numberOfCars; i++) {
-            	entranceCarQueue.addCar(new HandicapCar());
+            	entranceCarQueue.addCar(car);
             	totalHandicapCar ++;
             }
     		break;
     	case "Parkeersimulator.ReservationCar":
     		for (int i = 0; i < numberOfCars; i++) {
-    			Car reservationCar = new ReservationCar();
-    			moneyEarned += (((reservationCar.getMinutesLeft() / 60) * 2.50) + 5);
-            	entranceCarQueue.addCar(reservationCar);
+    			moneyEarned += (((car.getMinutesLeft() / 60) * 2.50) + 5);
+            	entranceCarQueue.addCar(car);
             	totalReservationCar ++;
             }
     		break;
@@ -369,6 +372,169 @@ public class Simulator {
     		break;
     	}
     	System.out.println("The speed is now: " + tickPause);
+    }
+    
+    public double stayLeaveModifier(boolean isArriving)
+    {
+    	double modifier = 0;
+    	if (isArriving)
+    	{
+    		switch (hour)
+	        {
+	        case 0:
+	        	modifier = 4;
+	        	break;
+	        case 1:
+	        	modifier = 4;
+	        	break;
+	        case 2:
+	        	modifier = 4;
+	        	break;
+	        case 3:
+	        	modifier = 4;
+	        	break;
+	        case 4:
+	        	modifier = 4;
+	        	break;
+	        case 5:
+	        	modifier = 3;
+	        	break;
+	        case 6:
+	        	modifier = 2;
+	        	break;
+	        case 7:
+	        	modifier = 1;
+	        	break;
+	        case 8:
+	        	modifier = 0;
+	        	break;
+	        case 9:
+	        	modifier = 0;
+	        	break;
+	        case 10:
+	        	modifier = 0;
+	        	break;
+	        case 11:
+	        	modifier = 0;
+	        	break;
+	        case 12:
+	        	modifier = 0;
+	        	break;
+	        case 13:
+	        	modifier = 0;
+	        	break;
+	        case 14:
+	        	modifier = 0;
+	        	break;
+	        case 15:
+	        	modifier = 0;
+	        	break;
+	        case 16:
+	        	modifier = 0;
+	        	break;
+	        case 17:
+	        	modifier = 0;
+	        	break;
+	        case 18:
+	        	modifier = 0;
+	        	break;
+	        case 19:
+	        	modifier = 0;
+	        	break;
+	        case 20:
+	        	modifier = .5;
+	        	break;
+	        case 21:
+	        	modifier = 1;
+	        	break;
+	        case 22:
+	        	modifier = 2;
+	        	break;
+	        case 23:
+	        	modifier = 3;
+	        	break; 
+	        }
+    	}
+    	else
+    	{
+	    	switch (hour)
+	        {
+	        case 0:
+	        	modifier = 0.4;
+	        	break;
+	        case 1:
+	        	modifier = 0.2;
+	        	break;
+	        case 2:
+	        	modifier = 0.05;
+	        	break;
+	        case 3:
+	        	modifier = 0.05;
+	        	break;
+	        case 4:
+	        	modifier = 0.2;
+	        	break;
+	        case 5:
+	        	modifier = 0.4;
+	        	break;
+	        case 6:
+	        	modifier = 0.7;
+	        	break;
+	        case 7:
+	        	modifier = 0.9;
+	        	break;
+	        case 8:
+	        	modifier = 1;
+	        	break;
+	        case 9:
+	        	modifier = 1;
+	        	break;
+	        case 10:
+	        	modifier = 1.1;
+	        	break;
+	        case 11:
+	        	modifier = 1.1;
+	        	break;
+	        case 12:
+	        	modifier = 1.1;
+	        	break;
+	        case 13:
+	        	modifier = 1.2;
+	        	break;
+	        case 14:
+	        	modifier = 1.2;
+	        	break;
+	        case 15:
+	        	modifier = 1.0;
+	        	break;
+	        case 16:
+	        	modifier = 1.0;
+	        	break;
+	        case 17:
+	        	modifier = 1.0;
+	        	break;
+	        case 18:
+	        	modifier = 1.2;
+	        	break;
+	        case 19:
+	        	modifier = 1.2;
+	        	break;
+	        case 20:
+	        	modifier = 1.2;
+	        	break;
+	        case 21:
+	        	modifier = 1;
+	        	break;
+	        case 22:
+	        	modifier = 0.8;
+	        	break;
+	        case 23:
+	        	modifier = 0.6;
+	        	break; 
+	        	
+	        }
+    	}
+    	return modifier;
     }
 
 }
