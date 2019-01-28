@@ -17,14 +17,13 @@ public class Simulator {
     
     private String[] daysOfTheWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
-    private int tickPause = 100;
-    private int previousTickPause;
+    private int tickPause = 100; // time between ticks (speed of the simulation)
 
     int weekDayArrivals= 85; // average number of arriving cars per hour - handicap & resv
     int weekendArrivals = 170; // average number of arriving cars per hour - idem
     
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    int weekendPassArrivals = 500; // average number of arriving cars per hour
+    int weekendPassArrivals = 35; // average number of arriving cars per hour
     
     int weekDayHandArrivals = 25;
     int weekendHandArrivals = 100;
@@ -90,8 +89,15 @@ public class Simulator {
     	advanceTime();
     	handleExit();
     	handleMoney();
-    	updateViews();
+    	manualUpdateViews();
     	handleEntrance();
+    }
+    
+    public void skipTime(int amount){
+    	for( int i = 0; i < amount; i++ ) {
+    		manualTick();
+    	}
+    	//updateViews();
     }
 
     private void advanceTime(){
@@ -146,11 +152,8 @@ public class Simulator {
     	simulatorView.updateCarsEntering(countCars());
     }
     
-    public void skipTime(int amount){
-    	for( int i = 0; i < amount; i++ ) {
-    		manualTick();
-    	}
-    	//updateViews();
+    private void manualUpdateViews(){
+    	simulatorView.tick();
     }
     
     
