@@ -24,7 +24,7 @@ public class Simulator {
     int weekendArrivals = 170; // average number of arriving cars per hour - idem
     
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    int weekendPassArrivals = 500; // average number of arriving cars per hour
+    int weekendPassArrivals = 35; // average number of arriving cars per hour
     
     int weekDayHandArrivals = 25;
     int weekendHandArrivals = 100;
@@ -140,7 +140,6 @@ public class Simulator {
         simulatorView.updateView();	
         // Update the time.
         simulatorView.updateTime(minute, hour, getDay());
-        System.out.println(totalAdHocCar + " " + totalHandicapCar + " " + totalParkingPassCar + " " + totalReservationCar);
         //update the graph
         simulatorView.updateGraph(totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar);
         //update the parked cars
