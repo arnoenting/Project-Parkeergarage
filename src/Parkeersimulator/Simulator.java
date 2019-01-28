@@ -97,7 +97,6 @@ public class Simulator {
     	for( int i = 0; i < amount; i++ ) {
     		manualTick();
     	}
-    	//updateViews();
     }
 
     private void advanceTime(){
@@ -114,7 +113,6 @@ public class Simulator {
         while (day > 6) {
             day -= 7;
             CarPayment(0, new ParkingPassCar(stayLeaveModifier(true)));
-            
         }
     } 
     
@@ -143,7 +141,7 @@ public class Simulator {
     private void updateViews(){
     	simulatorView.tick();
         // Update the car park view.
-        simulatorView.updateView();	
+        simulatorView.updateView();
         // Update the time.
         simulatorView.updateTime(minute, hour, getDay());
         //update the graph
@@ -267,6 +265,7 @@ public class Simulator {
     
     private void addArrivingCars(int numberOfCars, Car car){
         // Add the cars to the back of the queue.
+    	System.out.println(car.getClass().getName());
     	switch(car.getClass().getName()) {
     	case "Parkeersimulator.AdHocCar": 
             for (int i = 0; i < numberOfCars; i++) {
