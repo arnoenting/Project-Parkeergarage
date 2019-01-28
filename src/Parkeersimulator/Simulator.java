@@ -138,7 +138,7 @@ public class Simulator {
         simulatorView.updateView();	
         // Update the time.
         simulatorView.updateTime(minute, hour, getDay());
-        System.out.println(totalAdHocCar + " " + totalHandicapCar + " " + totalParkingPassCar + " " + totalReservationCar);
+        //System.out.println(totalAdHocCar + " " + totalHandicapCar + " " + totalParkingPassCar + " " + totalReservationCar);
     }
     
     private int countCars() {
@@ -194,26 +194,9 @@ public class Simulator {
 	int i=0;
 	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
         Car car = paymentCarQueue.removeCar();
-        //Handling payment through checking what kind of car it is and checking the time they stayed TODO quality check
-        	
-        	//Test code om te laten zien wat voor auto betaald
-        	switch (car.getClass().getName())
-            {
-                case "Parkeersimulator.ParkingPassCar":
-                	break;
-                case "Parkeersimulator.ReservationCar":
-                	break;
-                case "Parkeersimulator.HandicapCar":
-                	car.setIsPaying(true);
-                	car.setHasToPay(true);
-                	//CarPayment();
-                	break;
-                case "Parkeersimulator.AdHocCar":
-                	car.setIsPaying(true);
-                	car.setHasToPay(true);
-                	moneyEarned += 2.5;
-                	break;
-            }
+        	CarPayment(car.getMinutesStayed(), car);
+        	car.setIsPaying(true);
+        	car.setHasToPay(true);
         	carLeavesSpot(car);
             i++;
         	//System.out.println(moneyEarned);
@@ -305,8 +288,75 @@ public class Simulator {
         exitCarQueue.addCar(car);
     }
     
-    public void adjustSpeed(int adjustment) {
-    	if(tickPause + adjustment > 0 && tickPause + adjustment < 925)tickPause += adjustment;
+    public void adjustSpeed(String adjustment) {
+    	switch(adjustment)
+    	{
+    	case "-":
+    		switch(tickPause)
+			{
+			case 400:
+				tickPause = 400;
+				break;
+			case 200:
+				tickPause = 400;
+				break;
+			case 100:
+				tickPause = 200;
+				break;
+			case 50:
+				tickPause = 100;
+				break;
+			case 25:
+				tickPause = 50;
+				break;
+			case 12:
+				tickPause = 25;
+				break;
+			case 6:
+				tickPause = 12;
+				break;
+			case 3:
+				tickPause = 6;
+				break;
+			case 1:
+				tickPause = 3;
+				break;
+    		}
+    		break;
+    	case "+":
+			System.out.println("speed going up");
+			switch(tickPause)
+			{
+			case 400:
+				tickPause = 200;
+				break;
+			case 200:
+				tickPause = 100;
+				break;
+			case 100:
+				tickPause = 50;
+				break;
+			case 50:
+				tickPause = 25;
+				break;
+			case 25:
+				tickPause = 12;
+				break;
+			case 12:
+				tickPause = 6;
+				break;
+			case 6:
+				tickPause = 3;
+				break;
+			case 3:
+				tickPause = 1;
+				break;
+			case 1:
+				tickPause = 1;
+				break;
+    		}
+    		break;
+    	}
     	System.out.println("The speed is now: " + tickPause);
     }
 
