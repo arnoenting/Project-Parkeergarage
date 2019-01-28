@@ -26,7 +26,7 @@ public class SimulatorController {
 		model.adjustSpeed(25);
 	}
 	
-	public void skipTimeSimulation() {
-		model.skipTime(1);
+	public void skipTimeSimulation(int hourAmount) {
+		model.skipTime(hourAmount);
 	}
 }

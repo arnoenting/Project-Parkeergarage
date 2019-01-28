@@ -108,7 +108,7 @@ public class SimulatorView extends JFrame {
         skipDayButton = new JButton("Skip day");
         skipDayButton.addActionListener(e -> {
         	Runnable runnable = () -> {
-        		controller.skipTimeSimulation();
+        		controller.skipTimeSimulation(60);
         	};
         	
         	Thread thread = new Thread(runnable);
