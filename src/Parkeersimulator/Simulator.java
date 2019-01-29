@@ -83,6 +83,7 @@ public class Simulator {
             e.printStackTrace();
         }
     	handleEntrance();
+    	System.out.println(entranceCarQueue.carsInQueue() + " cars in queue");
     }
     
     private void manualTick() {
@@ -129,7 +130,18 @@ public class Simulator {
     	carsEntering(entrancePassQueue);
     	carsEntering(entranceCarQueue);
     	
-    	//if(entranceCarQueue > 10)
+    	// If the queue is 10 or longer there's a 1 in 3 chance of someone not entering the queue.
+    	if(entranceCarQueue.carsInQueue() >= 10) {
+    		double i = Math.random();
+    		
+    		if(i < 0.33) {
+    			// A car has passed.
+    			carsPassed++;
+    			
+    			// Because the total amount of cars visiting the garage will be put into the queue it makes sense to remove a car when a car decides not to enter.
+    			entranceCarQueue.removeCar();
+    		}
+    	}
     }
     
     private void handleExit(){
@@ -150,6 +162,8 @@ public class Simulator {
     	simulatorView.updateCarsEntering(countCars());
     	//update speed
     	simulatorView.updateSpeed(tickPause);
+    	// Queue info
+    	simulatorView.updateCarQueue(entranceCarQueue, carsPassed);
     }
     
     private void manualUpdateViews(){
@@ -268,7 +282,6 @@ public class Simulator {
     
     private void addArrivingCars(int numberOfCars, Car car){
         // Add the cars to the back of the queue.
-    	System.out.println(car.getClass().getName());
     	switch(car.getClass().getName()) {
     	case "Parkeersimulator.AdHocCar": 
             for (int i = 0; i < numberOfCars; i++) {
