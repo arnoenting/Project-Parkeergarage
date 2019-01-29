@@ -83,7 +83,6 @@ public class Simulator {
             e.printStackTrace();
         }
     	handleEntrance();
-    	System.out.println(entranceCarQueue.carsInQueue() + " cars in queue");
     }
     
     private void manualTick() {
@@ -398,10 +397,10 @@ public class Simulator {
     		switch (hour)
 	        {
 	        case 0:
-	        	modifier = 4;
+	        	modifier = 6;
 	        	break;
 	        case 1:
-	        	modifier = 4;
+	        	modifier = 5;
 	        	break;
 	        case 2:
 	        	modifier = 4;
@@ -458,16 +457,16 @@ public class Simulator {
 	        	modifier = 0;
 	        	break;
 	        case 20:
-	        	modifier = 1.5;
+	        	modifier = 9;
 	        	break;
 	        case 21:
-	        	modifier = 3;
+	        	modifier = 8;
 	        	break;
 	        case 22:
-	        	modifier = 4;
+	        	modifier = 7;
 	        	break;
 	        case 23:
-	        	modifier = 5;
+	        	modifier = 7;
 	        	break; 
 	        }
     	}
@@ -476,28 +475,28 @@ public class Simulator {
 	    	switch (hour)
 	        {
 	        case 0:
-	        	modifier = 0.4;
+	        	modifier = 0.2;
 	        	break;
 	        case 1:
-	        	modifier = 0.2;
+	        	modifier = 0.1;
 	        	break;
 	        case 2:
-	        	modifier = 0.05;
+	        	modifier = 0.01;
 	        	break;
 	        case 3:
-	        	modifier = 0.05;
+	        	modifier = 0.01;
 	        	break;
 	        case 4:
-	        	modifier = 0.2;
+	        	modifier = 0.1;
 	        	break;
 	        case 5:
-	        	modifier = 0.4;
+	        	modifier = 0.2;
 	        	break;
 	        case 6:
-	        	modifier = 0.7;
+	        	modifier = 0.4;
 	        	break;
 	        case 7:
-	        	modifier = 0.9;
+	        	modifier = 0.7;
 	        	break;
 	        case 8:
 	        	modifier = 1;
@@ -542,10 +541,10 @@ public class Simulator {
 	        	modifier = 1;
 	        	break;
 	        case 22:
-	        	modifier = 0.8;
+	        	modifier = 0.6;
 	        	break;
 	        case 23:
-	        	modifier = 0.6;
+	        	modifier = 0.2;
 	        	break; 
 	        	
 	        }

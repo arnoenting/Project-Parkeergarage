@@ -1,10 +1,12 @@
 package Parkeersimulator;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 
 import java.awt.*;
-import java.io.UnsupportedEncodingException;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class SimulatorView extends JFrame {
 	private SimulatorController controller;
@@ -143,18 +145,18 @@ public class SimulatorView extends JFrame {
         timeLabel = new JLabel("Time: 00:00 Day: Monday");
         timeLabel.setForeground(Color.white);
         
-        LegendaAdHocCar = new JLabel("AdHocCar: ");
+        LegendaAdHocCar = new JLabel("AdHocCar:       ");
         LegendaAdHocCar.setForeground(Color.white);
         LegendaAdHocCar.setAlignmentX(0);
         LegendaAdHocCar.setAlignmentY(0);
         
-        LegendaHandicapCar = new JLabel("HandicapCar: ");
+        LegendaHandicapCar = new JLabel("HandicapCar:       ");
         LegendaHandicapCar.setForeground(Color.white);
         
-        LegendaParkingPasCar = new JLabel("ParkingPasCar: ");
+        LegendaParkingPasCar = new JLabel("ParkingPasCar:        ");
         LegendaParkingPasCar.setForeground(Color.white);
         
-        LegendaReservationCar = new JLabel("ReservationCar: ");
+        LegendaReservationCar = new JLabel("ReservationCar:        ");
         LegendaReservationCar.setForeground(Color.white);
         
         moneyLabel = new JLabel("Total money earned thus far: ");
@@ -183,6 +185,7 @@ public class SimulatorView extends JFrame {
         simulatorPanel = new JPanel();
         infoPanel = new JPanel();
         totalCarGraph = new CircleGraph();
+       
         
         //Add stats that will be above the simulator to the carParkViewStats;
         carParkViewStatsR1.setBackground(Color.decode("#4b4b4b"));
@@ -196,7 +199,7 @@ public class SimulatorView extends JFrame {
         carParkViewStats.setLayout(new BoxLayout(carParkViewStats,BoxLayout.Y_AXIS));
         carParkViewStats.setBackground(Color.decode("#4b4b4b"));
         carParkViewStats.add(carParkViewStatsR1);
-        carParkViewStats.add(carParkViewStatsR2);
+        //carParkViewStats.add(carParkViewStatsR2);
         // Add general info text to carParkView
         carParkView.add(carParkViewStats);
         
@@ -221,7 +224,8 @@ public class SimulatorView extends JFrame {
         buttonPanel.add(skipWeekButton);
         
         // Panel for the Graphs
-        graphPanel.setPreferredSize(new Dimension(200, 200));
+
+        graphPanel.setSize(500,500);
         graphPanel.setBackground(Color.decode("#4b4b4b"));
         graphPanel.setBorder(borderGraphPanel);
         graphPanel.add(totalCarGraph);
@@ -234,7 +238,6 @@ public class SimulatorView extends JFrame {
         infoPanel.add(moneyLabel);
         infoPanel.add(carEnteringLabel);
         infoPanel.add(speedLabel);
-        
         
         Container contentPane = getContentPane();
         contentPane.setBackground(Color.blue);
@@ -464,13 +467,21 @@ public class SimulatorView extends JFrame {
     private class CarParkView extends JPanel {
         
         private Dimension size;
-        private Image carParkImage;    
-    
+        private BufferedImage carParkBuffer = new BufferedImage(800, 500, BufferedImage.TYPE_INT_ARGB);    
+        private BufferedImage lagenda;
         /**
          * Constructor for objects of class CarPark
          */
         public CarParkView() {
             size = new Dimension(0, 0); 
+            
+            try {
+            	lagenda = ImageIO.read(getClass().getResourceAsStream("/lagenda.png"));
+            }
+            catch (IOException e)
+            {
+            	e.printStackTrace();
+            }
         }
     
         /**
@@ -485,20 +496,27 @@ public class SimulatorView extends JFrame {
          * internal image to screen.
          */
         public void paintComponent(Graphics g) {
-        	g.setColor(Color.decode("#db1c1c"));
-        	g.fillRect(100, 100, 1500, 1500);
         	
-            if (carParkImage == null) {
+        	
+        	
+            if (carParkBuffer == null) {
                 return;
             }
     
             Dimension currentSize = getSize();
             if (size.equals(currentSize)) {
-                g.drawImage(carParkImage, 0, 0, null);
+            	g.setColor(Color.decode("#4b4b4b"));
+            	g.fillRect(0, 0, 800, 250);
+                g.drawImage(lagenda, 400 - lagenda.getWidth()/2, 25, null);
+                g.drawImage(carParkBuffer, 0, 0, null);
+                
             }
             else {
                 // Rescale the previous image.
-                g.drawImage(carParkImage, 0, 0, currentSize.width, currentSize.height, null);
+            	g.setColor(Color.decode("#4b4b4b"));
+            	g.fillRect(0, 0, currentSize.width, currentSize.height);
+                g.drawImage(lagenda, 400 - lagenda.getWidth()/2, 25,currentSize.width,currentSize.height, null);
+                g.drawImage(carParkBuffer, 0, 0, currentSize.width, currentSize.height, null);
             }
         }
     
@@ -506,9 +524,9 @@ public class SimulatorView extends JFrame {
             // Create a new car park image if the size has changed.
             if (!size.equals(getSize())) {
                 size = getSize();
-                carParkImage = createImage(size.width, size.height);
+                carParkBuffer = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
             }
-            Graphics graphics = carParkImage.getGraphics();
+            Graphics graphics = carParkBuffer.getGraphics();
     		for(int floor = 0; floor < getNumberOfFloors(); floor++){
     			for(int row = 0; row < getNumberOfRows(); row++){
     				for(int place = 0; place < getNumberOfPlaces(); place++){

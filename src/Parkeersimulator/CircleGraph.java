@@ -2,6 +2,7 @@ package Parkeersimulator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 
 public class CircleGraph extends JPanel{
@@ -9,6 +10,7 @@ public class CircleGraph extends JPanel{
 	int totalParkingPassCar;
 	int totalHandicapCar;
 	int totalReservationCar;
+	private BufferedImage circleBuffer = new BufferedImage(250, 250, BufferedImage.TYPE_INT_ARGB);;
 	
 	public CircleGraph() {
 		
@@ -19,15 +21,18 @@ public class CircleGraph extends JPanel{
 		this.totalParkingPassCar = totalParkingPassCar;
 		this.totalHandicapCar = totalHandicapCar;
 		this.totalReservationCar = totalReservationCar;
+		
+		
 	}
 	
 	public void paintComponent(Graphics g) {
+		
 		
 		g.setColor(Color.decode("#bfbfbf"));
 		g.fillRect(0, 0, 400, 400);
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 50, 400, 400);
-		
+		g.drawImage(circleBuffer, 0, 0, null);
 		
 		int startAngle = 0;
 		int intNumber = totalAdHocCar;
@@ -49,5 +54,10 @@ public class CircleGraph extends JPanel{
 		g.setColor(Color.decode("#28bf29"));
 		//g.fillArc(0,0,100,100, startAngle, intFourthNumber);
 	
+	}
+	
+	public void updateGraph()
+	{
+		repaint();
 	}
 }
