@@ -130,12 +130,15 @@ public class Simulator {
     	carsEntering(entrancePassQueue);
     	carsEntering(entranceCarQueue);
     	
-    	// Als de rij langer is dan 10 auto's dan is er een 1 op 3 kans dat iemand doorrijdt.
+    	// If the queue is 10 or longer there's a 1 in 3 chance of someone not entering the queue.
     	if(entranceCarQueue.carsInQueue() >= 10) {
     		double i = Math.random();
     		
     		if(i < 0.33) {
+    			// A car has passed.
     			carsPassed++;
+    			
+    			// Because the total amount of cars visiting the garage will be put into the queue it makes sense to remove a car when a car decides not to enter.
     			entranceCarQueue.removeCar();
     		}
     	}
