@@ -11,6 +11,9 @@ public class SimulatorView extends JFrame {
     private CarParkView carParkView;
     private JPanel buttonPanel;
     private JPanel simulatorPanel;
+    private JPanel carParkViewStats;
+    private JPanel carParkViewStatsR1;
+    private JPanel carParkViewStatsR2;
     private JPanel graphPanel;
     private JPanel infoPanel;
     private CircleGraph totalCarGraph;
@@ -30,8 +33,6 @@ public class SimulatorView extends JFrame {
     private JButton skipHourButton;
     private JButton skipDayButton;
     private JButton skipWeekButton;
-
-    private JLabel timeLabel;
         
     // Counters voor totale aantal auto's per soort
     int totalAdHocCar ;
@@ -43,11 +44,12 @@ public class SimulatorView extends JFrame {
     private JLabel moneyLabel;
     private JLabel carEnteringLabel;
     private JLabel speedLabel; 
-    
+    private JLabel timeLabel;
     private JLabel LegendaAdHocCar;
     private JLabel LegendaHandicapCar;
     private JLabel LegendaParkingPasCar;
     private JLabel LegendaReservationCar;
+    private JLabel carQueueLabel;
     
 
 
@@ -139,19 +141,28 @@ public class SimulatorView extends JFrame {
         // Textlabels
         timeLabel = new JLabel("Time: 00:00 Day: Monday");
         timeLabel.setForeground(Color.white);
+        
         LegendaAdHocCar = new JLabel("AdHocCar: ");
         LegendaAdHocCar.setForeground(Color.white);
         LegendaAdHocCar.setAlignmentX(0);
         LegendaAdHocCar.setAlignmentY(0);
+        
         LegendaHandicapCar = new JLabel("HandicapCar: ");
         LegendaHandicapCar.setForeground(Color.white);
+        
         LegendaParkingPasCar = new JLabel("ParkingPasCar: ");
         LegendaParkingPasCar.setForeground(Color.white);
+        
         LegendaReservationCar = new JLabel("ReservationCar: ");
         LegendaReservationCar.setForeground(Color.white);
+        
         moneyLabel = new JLabel("Total money earned thus far: ");
+        
         carEnteringLabel = new JLabel("Total cars parked: ");
+        
         speedLabel = new JLabel("The speed is: ");
+        
+        carQueueLabel = new JLabel("The queue counts 0 cars, 0 cars have passed the garage.");
         
         
         // De kleur van het "carPark" gedeelte
@@ -163,18 +174,30 @@ public class SimulatorView extends JFrame {
         Border borderInfoPanel = BorderFactory.createMatteBorder(6, 6, 6, 4, Color.decode("#5f5f5f")); 
         
         carParkView = new CarParkView();    
+        carParkViewStats = new JPanel();
+        carParkViewStatsR1 = new JPanel();
+        carParkViewStatsR2 = new JPanel();
         buttonPanel = new JPanel();
         graphPanel = new JPanel();
         simulatorPanel = new JPanel();
         infoPanel = new JPanel();
         totalCarGraph = new CircleGraph();
         
+        //Add stats that will be above the simulator to the carParkViewStats;
+        carParkViewStatsR1.setBackground(Color.decode("#4b4b4b"));
+        carParkViewStatsR1.add(timeLabel);
+        carParkViewStatsR2.setBackground(Color.decode("#4b4b4b"));
+        carParkViewStatsR2.add(LegendaAdHocCar);
+        carParkViewStatsR2.add(LegendaHandicapCar);
+        carParkViewStatsR2.add(LegendaParkingPasCar);
+        carParkViewStatsR2.add(LegendaReservationCar);
+        
+        carParkViewStats.setLayout(new BoxLayout(carParkViewStats,BoxLayout.Y_AXIS));
+        carParkViewStats.setBackground(Color.decode("#4b4b4b"));
+        carParkViewStats.add(carParkViewStatsR1);
+        carParkViewStats.add(carParkViewStatsR2);
         // Add general info text to carParkView
-        carParkView.add(timeLabel);
-        carParkView.add(LegendaAdHocCar);
-        carParkView.add(LegendaHandicapCar);
-        carParkView.add(LegendaParkingPasCar);
-        carParkView.add(LegendaReservationCar);
+        carParkView.add(carParkViewStats);
         
         // Define the panel to hold the button
         simulatorPanel.setPreferredSize(new Dimension(400, 300));
@@ -206,7 +229,7 @@ public class SimulatorView extends JFrame {
         infoPanel.setSize(200,200);
         infoPanel.setBackground(Color.white);
         infoPanel.setBorder(borderInfoPanel);
-        //infoPanel.add(timeLabel);
+        infoPanel.add(carQueueLabel);
         infoPanel.add(moneyLabel);
         infoPanel.add(carEnteringLabel);
         infoPanel.add(speedLabel);
@@ -240,11 +263,15 @@ public class SimulatorView extends JFrame {
     }
 
     public void updateMoney(double moneyEarned) {
-    	moneyLabel.setText("Total � earned: " + moneyEarned);
+    	moneyLabel.setText("Total € earned: " + moneyEarned);
     }
 
     public void updateTime(int minute, int hour, String day) {
     	timeLabel.setText("Time: " + displayTime(hour) + ":" + displayTime(minute) + " Day: " + day);
+    }
+    
+    public void updateCarQueue(CarQueue queue, int carsPassed) {
+    	carQueueLabel.setText("The queue counts " + queue.carsInQueue() + " cars, " + carsPassed + " cars have passed the garage.");
     }
     
     public void updatePlayPauseButton(boolean isRunning) {
@@ -457,6 +484,9 @@ public class SimulatorView extends JFrame {
          * internal image to screen.
          */
         public void paintComponent(Graphics g) {
+        	g.setColor(Color.decode("#db1c1c"));
+        	g.fillRect(100, 100, 1500, 1500);
+        	
             if (carParkImage == null) {
                 return;
             }
