@@ -223,7 +223,7 @@ public class SimulatorView extends JFrame {
         buttonPanel.add(skipWeekButton);
         
         // Panel for the Graphs
-        graphPanel.setSize(200,200);
+        graphPanel.setSize(500,500);
         graphPanel.setBackground(Color.decode("#4b4b4b"));
         graphPanel.setBorder(borderGraphPanel);
         graphPanel.add(totalCarGraph);
@@ -511,6 +511,8 @@ public class SimulatorView extends JFrame {
             }
             else {
                 // Rescale the previous image.
+            	g.setColor(Color.decode("#4b4b4b"));
+            	g.fillRect(0, 0, currentSize.width, currentSize.height);
                 g.drawImage(lagenda, 400 - lagenda.getWidth()/2, 25,currentSize.width,currentSize.height, null);
                 g.drawImage(carParkBuffer, 0, 0, currentSize.width, currentSize.height, null);
             }
