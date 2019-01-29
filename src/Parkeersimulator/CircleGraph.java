@@ -24,30 +24,30 @@ public class CircleGraph extends JPanel{
 	public void paintComponent(Graphics g) {
 		
 		g.setColor(Color.decode("#bfbfbf"));
-		g.fillRect(0, 0, 1000, 1000);
+		g.fillRect(0, 0, 400, 400);
 		g.setColor(Color.BLACK);
-		g.fillRect(5, 0, 100, 1000);
+		g.fillRect(0, 50, 400, 400);
 		
 		
 		int startAngle = 0;
 		int intNumber = totalAdHocCar;
 		g.setColor(Color.decode("#F28E37"));
-		g.fillArc(0,0,100,100, startAngle, intNumber);
+		//g.fillArc(0,0,100,100, startAngle, intNumber);
 		
 		startAngle += intNumber;
 		int intSecondNumber = totalParkingPassCar;
 		g.setColor(Color.decode("#73D2DE"));
-		g.fillArc(0,0,100,100, startAngle, intSecondNumber);
+		//g.fillArc(0,0,100,100, startAngle, intSecondNumber);
 		
 		startAngle += intSecondNumber;
 		int intThirdNumber = totalHandicapCar;
 		g.setColor(Color.decode("#EFD843"));
-		g.fillArc(0,0,100,100, startAngle, intThirdNumber);	
+		//g.fillArc(0,0,100,100, startAngle, intThirdNumber);	
 		
 		startAngle += intThirdNumber;
 		int intFourthNumber = totalReservationCar;
 		g.setColor(Color.decode("#28bf29"));
-		g.fillArc(0,0,100,100, startAngle, intFourthNumber);
+		//g.fillArc(0,0,100,100, startAngle, intFourthNumber);
 	
 	}
 }
