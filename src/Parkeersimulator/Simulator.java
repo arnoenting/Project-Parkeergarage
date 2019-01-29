@@ -130,6 +130,7 @@ public class Simulator {
     	carsEntering(entrancePassQueue);
     	carsEntering(entranceCarQueue);
     	
+    	// Als de rij langer is dan 10 auto's dan is er een 1 op 3 kans dat iemand doorrijdt.
     	if(entranceCarQueue.carsInQueue() >= 10) {
     		double i = Math.random();
     		
