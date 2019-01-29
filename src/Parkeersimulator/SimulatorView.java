@@ -11,6 +11,9 @@ public class SimulatorView extends JFrame {
     private CarParkView carParkView;
     private JPanel buttonPanel;
     private JPanel simulatorPanel;
+    private JPanel carParkViewStats;
+    private JPanel carParkViewStatsR1;
+    private JPanel carParkViewStatsR2;
     private JPanel graphPanel;
     private JPanel infoPanel;
     private CircleGraph totalCarGraph;
@@ -171,18 +174,30 @@ public class SimulatorView extends JFrame {
         Border borderInfoPanel = BorderFactory.createMatteBorder(6, 6, 6, 4, Color.decode("#5f5f5f")); 
         
         carParkView = new CarParkView();    
+        carParkViewStats = new JPanel();
+        carParkViewStatsR1 = new JPanel();
+        carParkViewStatsR2 = new JPanel();
         buttonPanel = new JPanel();
         graphPanel = new JPanel();
         simulatorPanel = new JPanel();
         infoPanel = new JPanel();
         totalCarGraph = new CircleGraph();
         
+        //Add stats that will be above the simulator to the carParkViewStats;
+        carParkViewStatsR1.setBackground(Color.decode("#4b4b4b"));
+        carParkViewStatsR1.add(timeLabel);
+        carParkViewStatsR2.setBackground(Color.decode("#4b4b4b"));
+        carParkViewStatsR2.add(LegendaAdHocCar);
+        carParkViewStatsR2.add(LegendaHandicapCar);
+        carParkViewStatsR2.add(LegendaParkingPasCar);
+        carParkViewStatsR2.add(LegendaReservationCar);
+        
+        carParkViewStats.setLayout(new BoxLayout(carParkViewStats,BoxLayout.Y_AXIS));
+        carParkViewStats.setBackground(Color.decode("#4b4b4b"));
+        carParkViewStats.add(carParkViewStatsR1);
+        carParkViewStats.add(carParkViewStatsR2);
         // Add general info text to carParkView
-        carParkView.add(timeLabel);
-        carParkView.add(LegendaAdHocCar);
-        carParkView.add(LegendaHandicapCar);
-        carParkView.add(LegendaParkingPasCar);
-        carParkView.add(LegendaReservationCar);
+        carParkView.add(carParkViewStats);
         
         // Define the panel to hold the button
         simulatorPanel.setPreferredSize(new Dimension(400, 300));
@@ -248,7 +263,7 @@ public class SimulatorView extends JFrame {
     }
 
     public void updateMoney(double moneyEarned) {
-    	moneyLabel.setText("Total � earned: " + moneyEarned);
+    	moneyLabel.setText("Total € earned: " + moneyEarned);
     }
 
     public void updateTime(int minute, int hour, String day) {
@@ -469,6 +484,9 @@ public class SimulatorView extends JFrame {
          * internal image to screen.
          */
         public void paintComponent(Graphics g) {
+        	g.setColor(Color.decode("#db1c1c"));
+        	g.fillRect(100, 100, 1500, 1500);
+        	
             if (carParkImage == null) {
                 return;
             }
