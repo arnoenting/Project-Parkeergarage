@@ -17,6 +17,7 @@ public class SimulatorView extends JFrame {
     private JPanel graphPanel;
     private JPanel infoPanel;
     private CircleGraph totalCarGraph;
+    private BarChart barChart;
     
     private int numberOfFloors;
     private int numberOfRows;
@@ -220,7 +221,7 @@ public class SimulatorView extends JFrame {
         buttonPanel.add(skipWeekButton);
         
         // Panel for the Graphs
-        graphPanel.setSize(200,200);
+        graphPanel.setPreferredSize(new Dimension(200, 200));
         graphPanel.setBackground(Color.decode("#4b4b4b"));
         graphPanel.setBorder(borderGraphPanel);
         graphPanel.add(totalCarGraph);
