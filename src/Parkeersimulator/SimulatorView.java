@@ -182,6 +182,7 @@ public class SimulatorView extends JFrame {
         simulatorPanel = new JPanel();
         infoPanel = new JPanel();
         totalCarGraph = new CircleGraph();
+       
         
         //Add stats that will be above the simulator to the carParkViewStats;
         carParkViewStatsR1.setBackground(Color.decode("#4b4b4b"));
@@ -233,7 +234,6 @@ public class SimulatorView extends JFrame {
         infoPanel.add(moneyLabel);
         infoPanel.add(carEnteringLabel);
         infoPanel.add(speedLabel);
-        
         
         Container contentPane = getContentPane();
         contentPane.setBackground(Color.blue);
