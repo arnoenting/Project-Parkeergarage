@@ -83,7 +83,6 @@ public class Simulator {
             e.printStackTrace();
         }
     	handleEntrance();
-    	System.out.println(entranceCarQueue.carsInQueue() + " cars in queue");
     }
     
     private void manualTick() {
