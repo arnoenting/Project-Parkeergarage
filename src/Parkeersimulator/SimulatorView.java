@@ -193,15 +193,6 @@ public class SimulatorView extends JFrame {
         barChart = new BarGraph();
        
         
-        //Add stats that will be above the simulator to the carParkViewStats;
-        carParkViewStatsR1.setBackground(Color.decode("#4b4b4b"));
-        carParkViewStatsR1.add(timeLabel);
-        carParkViewStatsR2.setBackground(Color.decode("#4b4b4b"));
-        carParkViewStatsR2.add(LegendaAdHocCar);
-        carParkViewStatsR2.add(LegendaHandicapCar);
-        carParkViewStatsR2.add(LegendaParkingPasCar);
-        carParkViewStatsR2.add(LegendaReservationCar);
-        
         carParkViewStats.setLayout(new BoxLayout(carParkViewStats,BoxLayout.Y_AXIS));
         carParkViewStats.setBackground(Color.decode("#4b4b4b"));
         carParkViewStats.add(carParkViewStatsR1);
@@ -210,6 +201,7 @@ public class SimulatorView extends JFrame {
         carParkView.add(carParkViewStats);
         
         // Define the panel to hold the button
+
         simulatorPanel.setSize(400, 300);
         simulatorPanel.setBackground(Color.decode("#4b4b4b"));
         simulatorPanel.setLayout(new BoxLayout(simulatorPanel,BoxLayout.Y_AXIS));
@@ -231,11 +223,13 @@ public class SimulatorView extends JFrame {
         
         // Panel for the Graphs
 
-        graphPanel.setSize(500,500);
+		//>>>>>>> parent of 4ec501d... Beetje gefuck met circleGraph, werkt uiteindelijk niet
+        graphPanel.setSize(200,200);
         graphPanel.setBackground(Color.decode("#4b4b4b"));
         graphPanel.setBorder(borderGraphPanel);
         graphPanel.add(totalCarGraph);
         graphPanel.add(barChart);
+
 
         // Panel for the info about the parking garage
         infoPanel.setSize(200,200);
@@ -522,8 +516,6 @@ public class SimulatorView extends JFrame {
             }
             else {
                 // Rescale the previous image.
-            	g.setColor(Color.decode("#4b4b4b"));
-            	g.fillRect(0, 0, currentSize.width, currentSize.height);
                 g.drawImage(lagenda, 400 - lagenda.getWidth()/2, 25,currentSize.width,currentSize.height, null);
                 g.drawImage(carParkBuffer, 0, 0, currentSize.width, currentSize.height, null);
             }
