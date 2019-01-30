@@ -31,6 +31,9 @@ public class SimulatorView extends JFrame {
 	private JPanel infoPanel;
 	private JPanel buttonPanel;
 	
+	private JPanel leftInfoPanel;
+	private JPanel rightInfoPanel;
+	
 	private JPanel circleGraphPanel;
 	private JPanel lineGraphPanel;
 	private JPanel barGraphPanel;
@@ -201,33 +204,57 @@ public class SimulatorView extends JFrame {
         circleGraphPanel = new JPanel();
         lineGraphPanel = new JPanel();
         
+        leftInfoPanel = new JPanel();
+        rightInfoPanel = new JPanel();
+        
+        
         mainPanel.setBackground(Color.decode("#4b4b4b"));
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
         mainPanel.setPreferredSize(new Dimension(1280, 800));
 
-        leftPanel.setBackground(Color.blue);
+        leftPanel.setBackground(Color.decode("#4b4b4b"));
         leftPanel.setMaximumSize(new Dimension(840, 800));
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
         
-        rightPanel.setBackground(Color.red);
+        rightPanel.setBackground(Color.decode("#4b4b4b"));
         rightPanel.setMaximumSize(new Dimension(440, 800));
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
         
-        legendaPanel.setBackground(Color.orange);
-        legendaPanel.setMaximumSize(new Dimension(840, 30));
+        legendaPanel.setBackground(Color.darkGray);
+        legendaPanel.setMaximumSize(new Dimension(840, 50));
+        legendaPanel.add(timeLabel);
         
-        carParkView.setMaximumSize(new Dimension(840, 440));
+        carParkView.setMaximumSize(new Dimension(840, 420));
         
-        infoPanel.setBackground(Color.green);
+        leftInfoPanel.setBackground(Color.red);
+        leftInfoPanel.setPreferredSize(new Dimension(410, 170));
+        leftInfoPanel.add(moneyLabel);
+        leftInfoPanel.add(carEnteringLabel);
+        leftInfoPanel.add(carQueueLabel);
+        
+        
+        rightInfoPanel.setBackground(Color.blue);
+        rightInfoPanel.setPreferredSize(new Dimension(410, 170));
+        //rightInfoPanel.add();
+        
+        infoPanel.setBackground(Color.white);
         infoPanel.setMaximumSize(new Dimension(840, 180));
+        infoPanel.setLayout(new FlowLayout());
+        infoPanel.add(leftInfoPanel);
+        infoPanel.add(rightInfoPanel);
         
-        buttonPanel.setBackground(Color.yellow);
+        buttonPanel.setBackground(Color.decode("#4b4b4b"));
         buttonPanel.setMaximumSize(new Dimension(840, 150));
+        buttonPanel.add(playPauseButton);
+        buttonPanel.add(fasterButton);
+        buttonPanel.add(slowerButton);
+        buttonPanel.add(skipHourButton);
+        buttonPanel.add(skipDayButton);
+        buttonPanel.add(skipWeekButton);
+        
         
         circleGraphPanel.setBackground(Color.CYAN);
         circleGraphPanel.setMaximumSize(new Dimension(440, 265));
-        
-        //lineGraphPanel
         
         
         mainPanel.add(leftPanel);
@@ -237,6 +264,7 @@ public class SimulatorView extends JFrame {
         leftPanel.add(carParkView);
         leftPanel.add(infoPanel);
         leftPanel.add(buttonPanel);
+        
         
         rightPanel.add(circleGraphPanel);
         
@@ -470,13 +498,14 @@ public class SimulatorView extends JFrame {
     private class CarParkView extends JPanel {
         
         private Dimension size;
-        private BufferedImage carParkBuffer = new BufferedImage(840, 500, BufferedImage.TYPE_INT_ARGB);    
+        private BufferedImage carParkBuffer = new BufferedImage(840, 500, BufferedImage.TYPE_INT_RGB);    
         private BufferedImage lagenda;
         /**
          * Constructor for objects of class CarPark
          */
         public CarParkView() {
             size = new Dimension(0, 0); 
+            
             
             try {
             	lagenda = ImageIO.read(getClass().getResourceAsStream("/lagenda.png"));
@@ -505,8 +534,8 @@ public class SimulatorView extends JFrame {
     
             Dimension currentSize = getSize();
             if (size.equals(currentSize)) {
-            	/*g.setColor(Color.decode("#4b4b4b"));
-            	g.fillRect(0, 0, 800, 250);*/
+            	//g.setColor(Color.decode("#4b4b4b"));
+            	//g.fillRect(0, 0, 800, 250);
                 //g.drawImage(lagenda, 400 - lagenda.getWidth()/2, 25, null);
                 g.drawImage(carParkBuffer, 0, 0, null);
                 
@@ -524,7 +553,7 @@ public class SimulatorView extends JFrame {
             // Create a new car park image if the size has changed.
             if (!size.equals(getSize())) {
                 size = getSize();
-                carParkBuffer = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
+                carParkBuffer = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
             }
             Graphics graphics = carParkBuffer.getGraphics();
     		for(int floor = 0; floor < getNumberOfFloors(); floor++){
