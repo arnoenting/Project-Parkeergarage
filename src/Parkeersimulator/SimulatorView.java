@@ -221,10 +221,11 @@ public class SimulatorView extends JFrame {
         buttonPanel.add(skipWeekButton);
         
         // Panel for the Graphs
-        graphPanel.setSize(200,200);
+        graphPanel.setSize(800,800);
         graphPanel.setBackground(Color.decode("#4b4b4b"));
         graphPanel.setBorder(borderGraphPanel);
         graphPanel.add(totalCarGraph);
+
 
         // Panel for the info about the parking garage
         infoPanel.setSize(200,200);
