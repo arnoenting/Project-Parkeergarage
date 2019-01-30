@@ -3,15 +3,15 @@ package Parkeersimulator;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import org.jfree.*;
 
 public class SimulatorView extends JFrame {
 	private SimulatorController controller;
-    private CarParkView carParkView;
+    /*private CarParkView carParkView;
     private JPanel buttonPanel;
     private JPanel simulatorPanel;
     private JPanel carParkViewStats;
@@ -20,7 +20,17 @@ public class SimulatorView extends JFrame {
     private JPanel graphPanel;
     private JPanel infoPanel;
     private CircleGraph totalCarGraph;
-    private BarChart barChart;
+    private BarChart barChart;*/
+	
+	private JPanel mainPanel;
+	private JPanel leftPanel;
+	private JPanel rightPanel;
+	
+	private JPanel legendaPanel;
+	private CarParkView carParkView;
+	private JPanel infoPanel;
+	private JPanel buttonPanel;
+	
     
     private int numberOfFloors;
     private int numberOfRows;
@@ -56,12 +66,8 @@ public class SimulatorView extends JFrame {
     private JLabel carQueueLabel;
     
 
+
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
-        super("title");
-        //setLayout(new FlowLayout());
-		//this.setPreferredSize(new Dimension(1280,800));
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
@@ -173,89 +179,51 @@ public class SimulatorView extends JFrame {
         carQueueLabel = new JLabel("The queue counts 0 cars, 0 cars have passed the garage.");
         
         
-        // De kleur van het "carPark" gedeelte
-        //this.setBackground(Color.decode("#101010"));
-        
         // Border van de graphPanel
-        Border borderGraphPanel = BorderFactory.createMatteBorder(0, 2, 0, 0, Color.decode("#5f5f5f"));
+        //Border borderGraphPanel = BorderFactory.createMatteBorder(0, 2, 0, 0, Color.decode("#5f5f5f"));
         
-        Border borderInfoPanel = BorderFactory.createMatteBorder(6, 6, 6, 4, Color.decode("#5f5f5f")); 
+        //Border borderInfoPanel = BorderFactory.createMatteBorder(6, 6, 6, 4, Color.decode("#5f5f5f")); 
         
-        carParkView = new CarParkView();    
-        carParkViewStats = new JPanel();
-        carParkViewStatsR1 = new JPanel();
-        carParkViewStatsR2 = new JPanel();
-        buttonPanel = new JPanel();
-        graphPanel = new JPanel();
-        simulatorPanel = new JPanel();
+        mainPanel = new JPanel();
+        leftPanel = new JPanel();
+        rightPanel = new JPanel();
+        
+        legendaPanel = new JPanel();
+        carParkView = new CarParkView();
         infoPanel = new JPanel();
-        totalCarGraph = new CircleGraph();
-        barChart = new BarChart();
-       
-        
-        //Add stats that will be above the simulator to the carParkViewStats;
-        carParkViewStatsR1.setBackground(Color.decode("#4b4b4b"));
-        carParkViewStatsR1.add(timeLabel);
-        carParkViewStatsR2.setBackground(Color.decode("#4b4b4b"));
-        carParkViewStatsR2.add(LegendaAdHocCar);
-        carParkViewStatsR2.add(LegendaHandicapCar);
-        carParkViewStatsR2.add(LegendaParkingPasCar);
-        carParkViewStatsR2.add(LegendaReservationCar);
-        
-        carParkViewStats.setLayout(new BoxLayout(carParkViewStats,BoxLayout.Y_AXIS));
-        carParkViewStats.setBackground(Color.decode("#4b4b4b"));
-        carParkViewStats.add(carParkViewStatsR1);
-        //carParkViewStats.add(carParkViewStatsR2);
-        // Add general info text to carParkView
-        carParkView.add(carParkViewStats);
-        
-        // Define the panel to hold the button
-        simulatorPanel.setPreferredSize(new Dimension(400, 300));
-        simulatorPanel.setBackground(Color.decode("#4b4b4b"));
-        simulatorPanel.setLayout(new BoxLayout(simulatorPanel,BoxLayout.Y_AXIS));
-        simulatorPanel.add(carParkView);
-        simulatorPanel.add(infoPanel);
-        simulatorPanel.add(buttonPanel);
-        
-        // Define the panel to hold the buttons
-        buttonPanel.setSize(400,200);
-        buttonPanel.setBackground(Color.decode("#4b4b4b"));
-        buttonPanel.add(playPauseButton);
+        buttonPanel = new JPanel();
 
-        buttonPanel.add(fasterButton);
-        buttonPanel.add(slowerButton);
-        
-        buttonPanel.add(skipHourButton);
-        buttonPanel.add(skipDayButton);
-        buttonPanel.add(skipWeekButton);
-        
-        // Panel for the Graphs
+        mainPanel.setBackground(Color.decode("#4b4b4b"));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+        mainPanel.setSize(1290, 810);
 
-        graphPanel.setSize(500,500);
-        graphPanel.setBackground(Color.decode("#4b4b4b"));
-        graphPanel.setBorder(borderGraphPanel);
-        graphPanel.add(totalCarGraph);
-        graphPanel.add(barChart);
-
-        // Panel for the info about the parking garage
-        infoPanel.setSize(200,200);
-        infoPanel.setBackground(Color.white);
-        infoPanel.setBorder(borderInfoPanel);
-        infoPanel.add(carQueueLabel);
-        infoPanel.add(moneyLabel);
-        infoPanel.add(carEnteringLabel);
-        infoPanel.add(speedLabel);
+        leftPanel.setBackground(Color.blue);
+        leftPanel.setSize(840, 800);
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        
+        rightPanel.setBackground(Color.red);
+        rightPanel.setSize(440, 800);
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        
+        legendaPanel.setBackground(Color.orange);
+        legendaPanel.setSize(840, 50);
+        
+        
+        
+        mainPanel.add(leftPanel);
+        mainPanel.add(rightPanel);
+        leftPanel.add(legendaPanel);
+        
         
         Container contentPane = getContentPane();
-        contentPane.setBackground(Color.blue);
-        contentPane.setLayout(new BoxLayout(contentPane,BoxLayout.X_AXIS));
-        contentPane.setPreferredSize(new Dimension(1280,800));
-        contentPane.add(simulatorPanel);
-        contentPane.add(graphPanel);
-
+        contentPane.add(mainPanel);
+        //contentPane.setBackground(Color.blue);
+        //contentPane.setLayout(new BoxLayout(contentPane,BoxLayout.X_AXIS));
+        //contentPane.setPreferredSize(new Dimension(1280,800));
+        
         pack();
-        setLocationRelativeTo(null);
         setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         updateView();
     }
@@ -476,7 +444,7 @@ public class SimulatorView extends JFrame {
     private class CarParkView extends JPanel {
         
         private Dimension size;
-        private BufferedImage carParkBuffer = new BufferedImage(800, 500, BufferedImage.TYPE_INT_ARGB);    
+        private BufferedImage carParkBuffer = new BufferedImage(840, 500, BufferedImage.TYPE_INT_ARGB);    
         private BufferedImage lagenda;
         /**
          * Constructor for objects of class CarPark
@@ -497,7 +465,7 @@ public class SimulatorView extends JFrame {
          * Overridden. Tell the GUI manager how big we would like to be.
          */
         public Dimension getPreferredSize() {
-            return new Dimension(880, 250);
+            return new Dimension(840, 250);
         }
     
         /**
@@ -505,26 +473,23 @@ public class SimulatorView extends JFrame {
          * internal image to screen.
          */
         public void paintComponent(Graphics g) {
-        	
-        	
-        	
             if (carParkBuffer == null) {
                 return;
             }
     
             Dimension currentSize = getSize();
             if (size.equals(currentSize)) {
-            	g.setColor(Color.decode("#4b4b4b"));
-            	g.fillRect(0, 0, 800, 250);
-                g.drawImage(lagenda, 400 - lagenda.getWidth()/2, 25, null);
+            	/*g.setColor(Color.decode("#4b4b4b"));
+            	g.fillRect(0, 0, 800, 250);*/
+                //g.drawImage(lagenda, 400 - lagenda.getWidth()/2, 25, null);
                 g.drawImage(carParkBuffer, 0, 0, null);
                 
             }
             else {
                 // Rescale the previous image.
-            	g.setColor(Color.decode("#4b4b4b"));
-            	g.fillRect(0, 0, currentSize.width, currentSize.height);
-                g.drawImage(lagenda, 400 - lagenda.getWidth()/2, 25,currentSize.width,currentSize.height, null);
+            	//g.setColor(Color.decode("#4b4b4b"));
+            	//g.fillRect(0, 0, currentSize.width, currentSize.height);
+                //g.drawImage(lagenda, 400 - lagenda.getWidth()/2, 25,currentSize.width,currentSize.height, null);
                 g.drawImage(carParkBuffer, 0, 0, currentSize.width, currentSize.height, null);
             }
         }
