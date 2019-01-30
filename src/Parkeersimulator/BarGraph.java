@@ -47,9 +47,9 @@ public class BarGraph extends JPanel {
 			friday.setBounds(133, 85, 30, 10);
 			saturday.setBounds(160, 150, 30, 10);
 			sunday.setBounds(190, 150, 3000, 10);
-			highestLabel.setBounds(225, 5, 100, 10);
-			highestLabel2.setBounds(225, 42, 100, 10);
-			highestLabel3.setBounds(225, 75, 100, 10);
+			highestLabel.setBounds(225, 85, 100, 10);
+			highestLabel2.setBounds(225, 85, 100, 10);
+			highestLabel3.setBounds(225, 85, 100, 10);
 			
 			
 		}
@@ -57,7 +57,17 @@ public class BarGraph extends JPanel {
 		public void paintComponent(Graphics g) {
 			g.setColor(Color.gray); // background
 			g.fillRect(0,0,440,265); 
-
+			g.setColor(Color.black);
+			g.drawString("mon", 90, 180);
+			g.drawString("tue", 145, 180);
+			g.drawString("wed", 190, 180);
+			g.drawString("thu", 240, 180);
+			g.drawString("fri", 295, 180);
+			g.drawString("sat", 340, 180);
+			g.drawString("sun", 390, 180);
+			
+			g.fillRect(60, 200, 450, 1);
+			g.fillRect(60, 200, 1, -400);
 
 			g.setColor(Color.pink);
 			
