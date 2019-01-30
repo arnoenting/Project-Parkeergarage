@@ -7,7 +7,6 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import org.jfree.*;
 
 public class SimulatorView extends JFrame {
 	private SimulatorController controller;
@@ -20,9 +19,7 @@ public class SimulatorView extends JFrame {
     private JPanel graphPanel;
     private JPanel infoPanel;
     private CircleGraph totalCarGraph;
-<<<<<<< HEAD
     private BarGraph barChart;
-=======
     private BarChart barChart;*/
 	
 	private JPanel mainPanel;
@@ -37,8 +34,8 @@ public class SimulatorView extends JFrame {
 	private JPanel circleGraphPanel;
 	private JPanel lineGraphPanel;
 	private JPanel barGraphPanel;
-	
->>>>>>> michaelshit
+
+    private BarGraph barGraph;
     
     private int numberOfFloors;
     private int numberOfRows;
@@ -199,38 +196,11 @@ public class SimulatorView extends JFrame {
         legendaPanel = new JPanel();
         carParkView = new CarParkView();
         infoPanel = new JPanel();
-<<<<<<< HEAD
-        totalCarGraph = new CircleGraph();
-        barChart = new BarGraph();
-       
-        
-        carParkViewStats.setLayout(new BoxLayout(carParkViewStats,BoxLayout.Y_AXIS));
-        carParkViewStats.setBackground(Color.decode("#4b4b4b"));
-        carParkViewStats.add(carParkViewStatsR1);
-        //carParkViewStats.add(carParkViewStatsR2);
-        // Add general info text to carParkView
-        carParkView.add(carParkViewStats);
-        
-        // Define the panel to hold the button
-
-        simulatorPanel.setSize(400, 300);
-        simulatorPanel.setBackground(Color.decode("#4b4b4b"));
-        simulatorPanel.setLayout(new BoxLayout(simulatorPanel,BoxLayout.Y_AXIS));
-        simulatorPanel.add(carParkView);
-        simulatorPanel.add(infoPanel);
-        simulatorPanel.add(buttonPanel);
-        
-        // Define the panel to hold the buttons
-        buttonPanel.setSize(400,200);
-        buttonPanel.setBackground(Color.decode("#4b4b4b"));
-        buttonPanel.add(playPauseButton);
-=======
         buttonPanel = new JPanel();
         
         circleGraphPanel = new JPanel();
         lineGraphPanel = new JPanel();
->>>>>>> michaelshit
-
+        
         mainPanel.setBackground(Color.decode("#4b4b4b"));
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
         mainPanel.setPreferredSize(new Dimension(1280, 800));
@@ -270,26 +240,6 @@ public class SimulatorView extends JFrame {
         
         rightPanel.add(circleGraphPanel);
         
-<<<<<<< HEAD
-        // Panel for the Graphs
-		//parent of 4ec501d... Beetje gefuck met circleGraph, werkt uiteindelijk niet
-
-        graphPanel.setSize(200,200);
-        graphPanel.setBackground(Color.decode("#4b4b4b"));
-        graphPanel.setBorder(borderGraphPanel);
-        graphPanel.add(totalCarGraph);
-        graphPanel.add(barChart);
-
-        // Panel for the info about the parking garage
-        infoPanel.setSize(200,200);
-        infoPanel.setBackground(Color.white);
-        infoPanel.setBorder(borderInfoPanel);
-        infoPanel.add(carQueueLabel);
-        infoPanel.add(moneyLabel);
-        infoPanel.add(carEnteringLabel);
-        infoPanel.add(speedLabel);
-=======
->>>>>>> michaelshit
         
         Container contentPane = getContentPane();
         contentPane.add(mainPanel);
@@ -563,13 +513,9 @@ public class SimulatorView extends JFrame {
             }
             else {
                 // Rescale the previous image.
-<<<<<<< HEAD
-                g.drawImage(lagenda, 400 - lagenda.getWidth()/2, 25,currentSize.width,currentSize.height, null);
-=======
             	//g.setColor(Color.decode("#4b4b4b"));
             	//g.fillRect(0, 0, currentSize.width, currentSize.height);
                 //g.drawImage(lagenda, 400 - lagenda.getWidth()/2, 25,currentSize.width,currentSize.height, null);
->>>>>>> michaelshit
                 g.drawImage(carParkBuffer, 0, 0, currentSize.width, currentSize.height, null);
             }
         }
