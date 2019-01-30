@@ -19,7 +19,7 @@ public class BarGraph extends JPanel {
 			g.setColor(Color.gray); // background
 			g.fillRect(0,0,440,265); 
 			
-			g.setColor(Color.BLUE); // background graph
+			g.setColor(Color.white); // background graph
 			g.fillRect(20, 20, 410, 195);
 			
 			g.setColor(Color.pink);
@@ -39,7 +39,6 @@ public class BarGraph extends JPanel {
 		
 		public void setData(double moneyEarnedPerDay, int currentDay)
 		{
-			System.out.println("Dit word aangeroepen");
 			this.moneyEarnedPerDay = moneyEarnedPerDay;
 			this.currentDay = currentDay;
 		}

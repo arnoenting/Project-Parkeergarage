@@ -43,8 +43,9 @@ public class Simulator {
     int totalHandicapCar = 0;
     int totalParkingPassCar = 0;
     int totalReservationCar = 0;
+    int totalCars = 0;
     
-    private boolean isRunning = true;
+    private boolean isRunning = false;
     
     int carsPassed = 0;
 
@@ -158,14 +159,13 @@ public class Simulator {
         // Update the time.
         simulatorView.updateTime(minute, hour, getDay());
         //update the graph
-        simulatorView.updateGraph(day ,moneyEarnedPerDay, totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar);
+        simulatorView.updateGraph(day ,moneyEarnedPerDay, totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar, totalCars);
         //update the parked cars
     	simulatorView.updateCarsEntering(countCars());
     	//update speed
     	simulatorView.updateSpeed(tickPause);
     	// Queue info
     	simulatorView.updateCarQueue(entranceCarQueue, carsPassed);
-    	System.out.println("test");
     }
     
     private void manualUpdateViews(){
@@ -202,6 +202,7 @@ public class Simulator {
             if (freeLocation != null)
             {
 	            simulatorView.setCarAt(freeLocation, car);
+	            totalCars++;
             }
         }
     }
@@ -225,7 +226,6 @@ public class Simulator {
     	// Let cars pay.
 		int i=0;
 		while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
-	    	System.out.println("payment queue size: " + paymentCarQueue.carsInQueue());
 	        Car car = paymentCarQueue.removeCar();
         	CarPayment(car.getMinutesStayed(), car);
         	car.setIsPaying(true);
