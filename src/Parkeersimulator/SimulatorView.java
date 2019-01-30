@@ -193,15 +193,6 @@ public class SimulatorView extends JFrame {
         barChart = new BarChart();
        
         
-        //Add stats that will be above the simulator to the carParkViewStats;
-        carParkViewStatsR1.setBackground(Color.decode("#4b4b4b"));
-        carParkViewStatsR1.add(timeLabel);
-        carParkViewStatsR2.setBackground(Color.decode("#4b4b4b"));
-        carParkViewStatsR2.add(LegendaAdHocCar);
-        carParkViewStatsR2.add(LegendaHandicapCar);
-        carParkViewStatsR2.add(LegendaParkingPasCar);
-        carParkViewStatsR2.add(LegendaReservationCar);
-        
         carParkViewStats.setLayout(new BoxLayout(carParkViewStats,BoxLayout.Y_AXIS));
         carParkViewStats.setBackground(Color.decode("#4b4b4b"));
         carParkViewStats.add(carParkViewStatsR1);
@@ -210,7 +201,7 @@ public class SimulatorView extends JFrame {
         carParkView.add(carParkViewStats);
         
         // Define the panel to hold the button
-        simulatorPanel.setPreferredSize(new Dimension(400, 300));
+        simulatorPanel.setSize(new Dimension(400, 300));
         simulatorPanel.setBackground(Color.decode("#4b4b4b"));
         simulatorPanel.setLayout(new BoxLayout(simulatorPanel,BoxLayout.Y_AXIS));
         simulatorPanel.add(carParkView);
@@ -231,7 +222,7 @@ public class SimulatorView extends JFrame {
         
         // Panel for the Graphs
 
-        graphPanel.setSize(500,500);
+        graphPanel.setSize(200,200);
         graphPanel.setBackground(Color.decode("#4b4b4b"));
         graphPanel.setBorder(borderGraphPanel);
         graphPanel.add(totalCarGraph);
