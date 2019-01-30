@@ -66,8 +66,9 @@ public class BarGraph extends JPanel {
 			g.drawString("sat", 340, 180);
 			g.drawString("sun", 390, 180);
 			
-			g.fillRect(60, 200, 450, 1);
-			g.fillRect(60, 200, 1, -400);
+			g.fillRect(60, 30, 2, 170);
+			g.setColor(Color.pink);
+			g.fillRect(60, 200, 370, 2);
 
 			g.setColor(Color.pink);
 			
