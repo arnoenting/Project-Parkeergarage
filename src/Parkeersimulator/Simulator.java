@@ -36,6 +36,7 @@ public class Simulator {
     int exitSpeed = 5; // number of cars that can leave per minute
     
     double moneyEarned = 0.00;
+    double moneyEarnedPerDay = 0.00;
     
     // Counters voor totale aantal auto's per soort
     int totalAdHocCar = 0;
@@ -108,6 +109,7 @@ public class Simulator {
         }
         while (hour > 23) {
             hour -= 24;
+            moneyEarnedPerDay = 0;
             day++;
         }
         while (day > 6) {
@@ -241,15 +243,19 @@ public class Simulator {
         {
             case "Parkeersimulator.ParkingPassCar":
             	moneyEarned += (50 * 75);
+            	moneyEarnedPerDay += (50 * 75);
             	break;
             case "Parkeersimulator.ReservationCar":
             	moneyEarned += (timeStayed / 60) * 2.50 + 5;
+            	moneyEarnedPerDay += (timeStayed / 60) * 2.50 + 5;
             	break;
             case "Parkeersimulator.HandicapCar":
             	moneyEarned += (4 * (timeStayed / 60));
+            	moneyEarnedPerDay += (4 * (timeStayed / 60));
             	break;
             case "Parkeersimulator.AdHocCar":
             	moneyEarned += (2.5 * (timeStayed / 60));
+            	moneyEarnedPerDay += (2.5 * (timeStayed / 60));
             	break;
         }
     }
@@ -550,6 +556,11 @@ public class Simulator {
 	        }
     	}
     	return modifier;
+    }
+    
+    public double getProfitPerDay()
+    {
+    	return moneyEarnedPerDay;
     }
 
 }

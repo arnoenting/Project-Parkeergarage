@@ -3,12 +3,12 @@ package Parkeersimulator;
 import java.awt.*;
 import javax.swing.*;
 
-public class BarGraph extends JFrame {
+public class BarGraph extends JPanel {
 
 		public BarGraph() {
-			setName("Graph");
+			/*setName("Graph");
 			setSize(440, 265);
-			setVisible(true);
+			setVisible(true);*/
 			
 		}
 		// x vanaf links, y vanaf boven, breedte, hoogte
@@ -17,21 +17,17 @@ public class BarGraph extends JFrame {
 			g.fillRect(0,0,440,265); 
 			
 			g.setColor(Color.BLUE); // background graph
-			g.fillRect(20, 50, 400, 195);
-			
-			g.setColor(Color.yellow);
-			g.fillRect(30, 95, 50, 150);
+			g.fillRect(20, 20, 410, 195);
 			
 			g.setColor(Color.pink);
-			g.fillRect(90, 95, 50, 150);
 			
-			g.setColor(Color.orange);
-			g.fillRect(360, 95, 50, 150);
+			for (int i = 0; i < 7; i++) {
+				
+			
+			g.fillRect(80+50*i, 80, 40, 150);
+			
+			}
 		}
 		
-		public static void main(String[] args) {
-			BarGraph barGraph = new BarGraph();
-			barGraph.paint(null);
-		}
 		
 }
