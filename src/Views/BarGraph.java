@@ -1,4 +1,4 @@
-package Parkeersimulator;
+package Views;
 
 import java.awt.*;
 import javax.swing.*;

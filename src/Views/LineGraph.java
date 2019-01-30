@@ -1,4 +1,4 @@
-package Parkeersimulator;
+package Views;
 
 public class LineGraph {
 

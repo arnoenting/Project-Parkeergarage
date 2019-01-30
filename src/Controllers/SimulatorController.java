@@ -1,4 +1,6 @@
-package Parkeersimulator;
+package Controllers;
+
+import Models.Simulator;
 
 public class SimulatorController {
 	Simulator model;

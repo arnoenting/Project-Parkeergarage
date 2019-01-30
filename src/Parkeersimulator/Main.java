@@ -4,6 +4,10 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
+import Controllers.SimulatorController;
+import Models.Simulator;
+import Views.SimulatorView;
+
 public class Main {
 	public static void main(String[] args) {
 		//Maak de view aan

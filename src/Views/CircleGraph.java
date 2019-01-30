@@ -1,4 +1,4 @@
-package Parkeersimulator;
+package Views;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ public class CircleGraph extends JPanel{
 	private int totalCars;
 	
 	public CircleGraph() {
-		
+		setLayout(null);
 	}
 	
 	public void setData(int totalAdHocCar, int totalParkingPassCar, int totalHandicapCar, int totalReservationCar, int totalCars) {
@@ -35,26 +35,29 @@ public class CircleGraph extends JPanel{
 		g.fillArc(130, 25, 180, 180, 360, 360);
 		//System.out.println(totalCars + " is totalcars" + totalAdHocCar + " is total adhoc");
 		
+		g.drawString("Totaal soorten auto's geparkeerd over de hele simulatie", 10, 10);
+		
+		
 		if (totalCars != 0) {
 			int startAngle = 0;
 		    double partje1 = (double)totalAdHocCar/(double)totalCars * 360;
 			g.setColor(Color.decode("#F28E37"));
-			g.fillArc(130,25,180,180, startAngle,(int) partje1);
+			g.fillArc(129,25,182,182, startAngle,(int) partje1);
 
 			startAngle += partje1;
 			double partje2 = (double)totalParkingPassCar/(double)totalCars * 360;
 			g.setColor(Color.decode("#73D2DE"));
-			g.fillArc(130,25,180,180, startAngle,(int) partje2);
+			g.fillArc(129,25,182,182, startAngle,(int) partje2);
 
 			startAngle += partje2;
 			double partje3 = (double)totalHandicapCar/(double)totalCars * 360;
 			g.setColor(Color.decode("#EFD843"));
-			g.fillArc(130,25,180,180, startAngle,(int) partje3);	
+			g.fillArc(129,25,182,182, startAngle,(int) partje3);	
 
 			startAngle += partje3;
 			double partje4 = (double)totalReservationCar/(double)totalCars * 360;
 			g.setColor(Color.decode("#28bf29"));
-			g.fillArc(130,25,180,180, startAngle,(int) partje4);
+			g.fillArc(129,25,182,182, startAngle,(int) partje4);
 			
 			
 		}

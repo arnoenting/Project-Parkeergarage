@@ -1,8 +1,14 @@
-package Parkeersimulator;
+package Views;
+
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
+
+import Controllers.SimulatorController;
+import Parkeersimulator.Car;
+import Parkeersimulator.CarQueue;
+import Parkeersimulator.Location;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -241,10 +247,10 @@ public class SimulatorView extends JFrame {
         buttonPanel.add(skipWeekButton);
         
         
-        barGraphPanel.setBackground(Color.CYAN);
+        barGraphPanel.setBackground(Color.gray);
         barGraphPanel.setMaximumSize(new Dimension(440, 265));
         
-        circleGraphPanel.setBackground(Color.CYAN);
+        circleGraphPanel.setBackground(Color.gray);
         circleGraphPanel.setMaximumSize(new Dimension(440, 265));
 
         mainPanel.add(leftPanel);
