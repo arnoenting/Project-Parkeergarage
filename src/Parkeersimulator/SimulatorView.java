@@ -31,6 +31,10 @@ public class SimulatorView extends JFrame {
 	private JPanel infoPanel;
 	private JPanel buttonPanel;
 	
+	private JPanel circleGraphPanel;
+	private JPanel lineGraphPanel;
+	private JPanel barGraphPanel;
+	
     
     private int numberOfFloors;
     private int numberOfRows;
@@ -192,27 +196,48 @@ public class SimulatorView extends JFrame {
         carParkView = new CarParkView();
         infoPanel = new JPanel();
         buttonPanel = new JPanel();
+        
+        circleGraphPanel = new JPanel();
+        lineGraphPanel = new JPanel();
 
         mainPanel.setBackground(Color.decode("#4b4b4b"));
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
-        mainPanel.setSize(1290, 810);
+        mainPanel.setPreferredSize(new Dimension(1280, 800));
 
         leftPanel.setBackground(Color.blue);
-        leftPanel.setSize(840, 800);
+        leftPanel.setMaximumSize(new Dimension(840, 800));
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
         
         rightPanel.setBackground(Color.red);
-        rightPanel.setSize(440, 800);
+        rightPanel.setMaximumSize(new Dimension(440, 800));
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
         
         legendaPanel.setBackground(Color.orange);
-        legendaPanel.setSize(840, 50);
+        legendaPanel.setMaximumSize(new Dimension(840, 30));
         
+        carParkView.setMaximumSize(new Dimension(840, 440));
+        
+        infoPanel.setBackground(Color.green);
+        infoPanel.setMaximumSize(new Dimension(840, 180));
+        
+        buttonPanel.setBackground(Color.yellow);
+        buttonPanel.setMaximumSize(new Dimension(840, 150));
+        
+        circleGraphPanel.setBackground(Color.CYAN);
+        circleGraphPanel.setMaximumSize(new Dimension(440, 265));
+        
+        //lineGraphPanel
         
         
         mainPanel.add(leftPanel);
         mainPanel.add(rightPanel);
+        
         leftPanel.add(legendaPanel);
+        leftPanel.add(carParkView);
+        leftPanel.add(infoPanel);
+        leftPanel.add(buttonPanel);
+        
+        rightPanel.add(circleGraphPanel);
         
         
         Container contentPane = getContentPane();
