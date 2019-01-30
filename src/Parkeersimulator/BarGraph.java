@@ -20,13 +20,25 @@ public class BarGraph extends JPanel {
 			g.fillRect(20, 50, 400, 195);
 			
 			g.setColor(Color.yellow);
-			g.fillRect(30, 95, 50, 150);
+			g.fillRect(30, 95, 40, 150);
 			
 			g.setColor(Color.pink);
-			g.fillRect(90, 95, 50, 150);
+			g.fillRect(80, 95, 40, 150);
+			
+			g.setColor(Color.pink);
+			g.fillRect(130, 95, 40, 150);
+			
+			g.setColor(Color.pink);
+			g.fillRect(220, 95, 40, 150);
+			
+			g.setColor(Color.pink);
+			g.fillRect(270, 95, 40, 150);
+			
+			g.setColor(Color.pink);
+			g.fillRect(320, 95, 40, 150);
 			
 			g.setColor(Color.orange);
-			g.fillRect(360, 95, 50, 150);
+			g.fillRect(370, 95, 40, 150);
 		}
 		
 		
