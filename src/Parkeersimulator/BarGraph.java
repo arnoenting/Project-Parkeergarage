@@ -3,12 +3,12 @@ package Parkeersimulator;
 import java.awt.*;
 import javax.swing.*;
 
-public class BarGraph extends JFrame {
+public class BarGraph extends JPanel {
 
 		public BarGraph() {
-			setName("Graph");
+			/*setName("Graph");
 			setSize(440, 265);
-			setVisible(true);
+			setVisible(true);*/
 			
 		}
 		// x vanaf links, y vanaf boven, breedte, hoogte
@@ -29,9 +29,5 @@ public class BarGraph extends JFrame {
 			g.fillRect(360, 95, 50, 150);
 		}
 		
-		public static void main(String[] args) {
-			BarGraph barGraph = new BarGraph();
-			barGraph.paint(null);
-		}
 		
 }

@@ -10,17 +10,6 @@ import java.io.IOException;
 
 public class SimulatorView extends JFrame {
 	private SimulatorController controller;
-    /*private CarParkView carParkView;
-    private JPanel buttonPanel;
-    private JPanel simulatorPanel;
-    private JPanel carParkViewStats;
-    private JPanel carParkViewStatsR1;
-    private JPanel carParkViewStatsR2;
-    private JPanel graphPanel;
-    private JPanel infoPanel;
-    private CircleGraph totalCarGraph;
-    private BarGraph barChart;
-    private BarChart barChart;*/
 	
 	private JPanel mainPanel;
 	private JPanel leftPanel;
@@ -33,9 +22,7 @@ public class SimulatorView extends JFrame {
 	
 	private JPanel circleGraphPanel;
 	private JPanel lineGraphPanel;
-	private JPanel barGraphPanel;
-
-    private BarGraph barGraph;
+	private BarGraph barGraphPanel;
     
     private int numberOfFloors;
     private int numberOfRows;
@@ -200,6 +187,7 @@ public class SimulatorView extends JFrame {
         
         circleGraphPanel = new JPanel();
         lineGraphPanel = new JPanel();
+        barGraphPanel = new BarGraph();
         
         mainPanel.setBackground(Color.decode("#4b4b4b"));
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
@@ -224,8 +212,8 @@ public class SimulatorView extends JFrame {
         buttonPanel.setBackground(Color.yellow);
         buttonPanel.setMaximumSize(new Dimension(840, 150));
         
-        circleGraphPanel.setBackground(Color.CYAN);
-        circleGraphPanel.setMaximumSize(new Dimension(440, 265));
+        barGraphPanel.setBackground(Color.CYAN);
+        barGraphPanel.setMaximumSize(new Dimension(440, 265));
         
         //lineGraphPanel
         
@@ -238,7 +226,7 @@ public class SimulatorView extends JFrame {
         leftPanel.add(infoPanel);
         leftPanel.add(buttonPanel);
         
-        rightPanel.add(circleGraphPanel);
+        rightPanel.add(barGraphPanel);
         
         
         Container contentPane = getContentPane();
