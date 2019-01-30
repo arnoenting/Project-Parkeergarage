@@ -37,7 +37,7 @@ public class CircleGraph extends JPanel{
 		
 		g.drawString("Totaal soorten auto's geparkeerd over de hele simulatie", 60, 20); // The title of the graph
 		
-		// The legend
+		// The legend with all the different type of cars
 		g.setColor(Color.decode("#F28E37"));
 		g.fillRect(300,80,10,10);
 		g.setColor(Color.white);

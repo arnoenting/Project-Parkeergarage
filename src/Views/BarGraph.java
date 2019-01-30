@@ -17,6 +17,7 @@ public class BarGraph extends JPanel {
 		private double total;
 		private double highestEarningDay;
 		
+		/*
 		private JLabel monday = new JLabel("mon");
 		private JLabel tuesday = new JLabel("tue");
 		private JLabel wednesday = new JLabel("wed");
@@ -28,8 +29,10 @@ public class BarGraph extends JPanel {
 		private JLabel highestLabel = new JLabel("");
 		private JLabel highestLabel2 = new JLabel("");
 		private JLabel highestLabel3 = new JLabel("");
+		*/
 		
 		public BarGraph() {
+			/*
 			add(monday);
 			add(tuesday);
 			add(wednesday);
@@ -50,24 +53,30 @@ public class BarGraph extends JPanel {
 			highestLabel.setBounds(225, 85, 100, 10);
 			highestLabel2.setBounds(225, 85, 100, 10);
 			highestLabel3.setBounds(225, 85, 100, 10);
-			
+			*/
 			
 		}
 		// x vanaf links, y vanaf boven, breedte, hoogte
 		public void paintComponent(Graphics g) {
 			g.setColor(Color.gray); // background
 			g.fillRect(0,0,440,265); 
-			g.setColor(Color.black);
-			g.drawString("mon", 90, 180);
-			g.drawString("tue", 145, 180);
-			g.drawString("wed", 190, 180);
-			g.drawString("thu", 240, 180);
-			g.drawString("fri", 295, 180);
-			g.drawString("sat", 340, 180);
-			g.drawString("sun", 390, 180);
+			g.setColor(Color.white);
 			
+			
+			g.drawString("De titel van deze graph", 60, 20); // The title of the graph
+			
+			// legend of BarGraph, all the days of the week
+			g.drawString("mon", 90, 230);
+			g.drawString("tue", 145, 230);
+			g.drawString("wed", 190, 230);
+			g.drawString("thu", 240, 230);
+			g.drawString("fri", 295, 230);
+			g.drawString("sat", 340, 230);
+			g.drawString("sun", 390, 230);
+			
+			// The X-as and the Y-as
+			g.setColor(Color.BLACK);
 			g.fillRect(60, 30, 2, 170);
-			g.setColor(Color.pink);
 			g.fillRect(60, 200, 370, 2);
 
 			g.setColor(Color.pink);
