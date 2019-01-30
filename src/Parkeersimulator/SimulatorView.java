@@ -20,7 +20,7 @@ public class SimulatorView extends JFrame {
     private JPanel graphPanel;
     private JPanel infoPanel;
     private CircleGraph totalCarGraph;
-    private BarChart barChart;
+    private BarGraph barChart;
     
     private int numberOfFloors;
     private int numberOfRows;
@@ -190,7 +190,7 @@ public class SimulatorView extends JFrame {
         simulatorPanel = new JPanel();
         infoPanel = new JPanel();
         totalCarGraph = new CircleGraph();
-        barChart = new BarChart();
+        barChart = new BarGraph();
        
         
         //Add stats that will be above the simulator to the carParkViewStats;
@@ -210,7 +210,7 @@ public class SimulatorView extends JFrame {
         carParkView.add(carParkViewStats);
         
         // Define the panel to hold the button
-        simulatorPanel.setPreferredSize(new Dimension(400, 300));
+        simulatorPanel.setSize(400, 300);
         simulatorPanel.setBackground(Color.decode("#4b4b4b"));
         simulatorPanel.setLayout(new BoxLayout(simulatorPanel,BoxLayout.Y_AXIS));
         simulatorPanel.add(carParkView);
