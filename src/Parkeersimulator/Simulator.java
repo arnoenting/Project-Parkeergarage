@@ -44,7 +44,7 @@ public class Simulator {
     int totalParkingPassCar = 0;
     int totalReservationCar = 0;
     
-    private boolean isRunning = false;
+    private boolean isRunning = true;
     
     int carsPassed = 0;
 
@@ -158,13 +158,14 @@ public class Simulator {
         // Update the time.
         simulatorView.updateTime(minute, hour, getDay());
         //update the graph
-        simulatorView.updateGraph(totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar);
+        simulatorView.updateGraph(day ,moneyEarnedPerDay, totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar);
         //update the parked cars
     	simulatorView.updateCarsEntering(countCars());
     	//update speed
     	simulatorView.updateSpeed(tickPause);
     	// Queue info
     	simulatorView.updateCarQueue(entranceCarQueue, carsPassed);
+    	System.out.println("test");
     }
     
     private void manualUpdateViews(){

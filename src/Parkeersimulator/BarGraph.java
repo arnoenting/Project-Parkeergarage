@@ -4,7 +4,10 @@ import java.awt.*;
 import javax.swing.*;
 
 public class BarGraph extends JPanel {
-
+		
+		private double moneyEarnedPerDay;
+		private int currentDay;
+		
 		public BarGraph() {
 			/*setName("Graph");
 			setSize(440, 265);
@@ -24,9 +27,21 @@ public class BarGraph extends JPanel {
 			for (int i = 0; i < 7; i++) {
 				
 			
-			g.fillRect(80+50*i, 80, 40, 150);
+			g.fillRect(80+50*i, 80 - (int)moneyEarnedPerDay, 40, 150);
 			
 			}
+		}
+		
+		public void calculateBars()
+		{
+			
+		}
+		
+		public void setData(double moneyEarnedPerDay, int currentDay)
+		{
+			System.out.println("Dit word aangeroepen");
+			this.moneyEarnedPerDay = moneyEarnedPerDay;
+			this.currentDay = currentDay;
 		}
 		
 		

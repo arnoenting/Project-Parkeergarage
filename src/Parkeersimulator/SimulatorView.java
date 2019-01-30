@@ -282,11 +282,13 @@ public class SimulatorView extends JFrame {
         carParkView.updateView();
     }
     
-    public void updateGraph(int totalAdHocCar, int totalParkingPassCar, int totalHandicapCar, int totalReservationCar ) {
+    public void updateGraph(int day, double moneyEarnedPerDay, int totalAdHocCar, int totalParkingPassCar, int totalHandicapCar, int totalReservationCar ) {
     	this.totalAdHocCar = totalAdHocCar;
 		this.totalParkingPassCar = totalParkingPassCar;
 		this.totalHandicapCar = totalHandicapCar;
 		this.totalReservationCar = totalReservationCar;
+		System.out.println("dit word aangeroepen, sws");
+		barGraphPanel.setData(moneyEarnedPerDay, day);
     }
 
     public void updateMoney(double moneyEarned) {
