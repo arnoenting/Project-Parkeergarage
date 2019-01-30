@@ -44,7 +44,7 @@ public class Simulator {
     int totalParkingPassCar = 0;
     int totalReservationCar = 0;
     
-    private boolean isRunning = true;
+    private boolean isRunning = false;
     
     int carsPassed = 0;
 
