@@ -3,6 +3,7 @@ package Parkeersimulator;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -56,6 +57,11 @@ public class SimulatorView extends JFrame {
     
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
+        super("title");
+        //setLayout(new FlowLayout());
+		//this.setPreferredSize(new Dimension(1280,800));
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
@@ -248,6 +254,7 @@ public class SimulatorView extends JFrame {
         contentPane.add(graphPanel);
 
         pack();
+        setLocationRelativeTo(null);
         setVisible(true);
 
         updateView();
