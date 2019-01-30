@@ -222,14 +222,13 @@ public class SimulatorView extends JFrame {
         buttonPanel.add(skipWeekButton);
         
         // Panel for the Graphs
+		//parent of 4ec501d... Beetje gefuck met circleGraph, werkt uiteindelijk niet
 
-		//>>>>>>> parent of 4ec501d... Beetje gefuck met circleGraph, werkt uiteindelijk niet
         graphPanel.setSize(200,200);
         graphPanel.setBackground(Color.decode("#4b4b4b"));
         graphPanel.setBorder(borderGraphPanel);
         graphPanel.add(totalCarGraph);
         graphPanel.add(barChart);
-
 
         // Panel for the info about the parking garage
         infoPanel.setSize(200,200);
