@@ -23,7 +23,7 @@ public class SimulatorView extends JFrame {
 	private JPanel leftInfoPanel;
 	private JPanel rightInfoPanel;
 	
-	private JPanel circleGraphPanel;
+	private CircleGraph circleGraphPanel;
 	private JPanel lineGraphPanel;
 	private BarGraph barGraphPanel;
     
@@ -188,7 +188,7 @@ public class SimulatorView extends JFrame {
         infoPanel = new JPanel();
         buttonPanel = new JPanel();
         
-        circleGraphPanel = new JPanel();
+        circleGraphPanel = new CircleGraph();
         lineGraphPanel = new JPanel();
         barGraphPanel = new BarGraph();
         
@@ -244,7 +244,9 @@ public class SimulatorView extends JFrame {
         barGraphPanel.setBackground(Color.CYAN);
         barGraphPanel.setMaximumSize(new Dimension(440, 265));
         
-        
+        circleGraphPanel.setBackground(Color.CYAN);
+        circleGraphPanel.setMaximumSize(new Dimension(440, 265));
+
         mainPanel.add(leftPanel);
         mainPanel.add(rightPanel);
         
@@ -254,6 +256,7 @@ public class SimulatorView extends JFrame {
         leftPanel.add(buttonPanel);
         
         rightPanel.add(barGraphPanel);
+        rightPanel.add(circleGraphPanel);
         
         
         Container contentPane = getContentPane();
@@ -277,12 +280,9 @@ public class SimulatorView extends JFrame {
         carParkView.updateView();
     }
     
-    public void updateGraph(int day, double moneyEarnedPerDay, double moneyEarnedPerWeek, int totalAdHocCar, int totalParkingPassCar, int totalHandicapCar, int totalReservationCar ) {
-    	this.totalAdHocCar = totalAdHocCar;
-		this.totalParkingPassCar = totalParkingPassCar;
-		this.totalHandicapCar = totalHandicapCar;
-		this.totalReservationCar = totalReservationCar;
-		barGraphPanel.setData(moneyEarnedPerDay, moneyEarnedPerWeek, day);
+    public void updateGraph(int day, double moneyEarnedPerDay, double moneyEarnedPerWeek, int totalAdHocCar, int totalParkingPassCar, int totalHandicapCar, int totalReservationCar, int totalCars ) {
+   	circleGraphPanel.setData(totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar, totalCars);
+		barGraphPanel.setData(moneyEarnedPerDay,moneyEarnedPerWeek, day);
     }
 
     public void updateMoney(double moneyEarned) {

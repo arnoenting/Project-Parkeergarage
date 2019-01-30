@@ -57,7 +57,8 @@ public class BarGraph extends JPanel {
 		public void paintComponent(Graphics g) {
 			g.setColor(Color.gray); // background
 			g.fillRect(0,0,440,265); 
-			
+
+
 			g.setColor(Color.pink);
 			
 			for (int i = 0; i < 7; i++) 
