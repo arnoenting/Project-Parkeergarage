@@ -253,12 +253,7 @@ public class SimulatorView extends JFrame {
         leftPanel.add(infoPanel);
         leftPanel.add(buttonPanel);
         
-<<<<<<< HEAD
-        
-        rightPanel.add(circleGraphPanel);
-=======
         rightPanel.add(barGraphPanel);
->>>>>>> 8c3cdd4e30f9a1fe049de7374e98f587a6431c32
         
         
         Container contentPane = getContentPane();
