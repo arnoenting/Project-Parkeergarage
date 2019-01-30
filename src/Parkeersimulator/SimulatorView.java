@@ -3,6 +3,7 @@ package Parkeersimulator;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -55,8 +56,12 @@ public class SimulatorView extends JFrame {
     private JLabel carQueueLabel;
     
 
-
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
+        super("title");
+        //setLayout(new FlowLayout());
+		//this.setPreferredSize(new Dimension(1280,800));
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
@@ -169,7 +174,7 @@ public class SimulatorView extends JFrame {
         
         
         // De kleur van het "carPark" gedeelte
-        this.setBackground(Color.decode("#404040"));
+        //this.setBackground(Color.decode("#101010"));
         
         // Border van de graphPanel
         Border borderGraphPanel = BorderFactory.createMatteBorder(0, 2, 0, 0, Color.decode("#5f5f5f"));
@@ -185,6 +190,7 @@ public class SimulatorView extends JFrame {
         simulatorPanel = new JPanel();
         infoPanel = new JPanel();
         totalCarGraph = new CircleGraph();
+        barChart = new BarChart();
        
         
         //Add stats that will be above the simulator to the carParkViewStats;
@@ -229,6 +235,7 @@ public class SimulatorView extends JFrame {
         graphPanel.setBackground(Color.decode("#4b4b4b"));
         graphPanel.setBorder(borderGraphPanel);
         graphPanel.add(totalCarGraph);
+        graphPanel.add(barChart);
 
         // Panel for the info about the parking garage
         infoPanel.setSize(200,200);
@@ -245,7 +252,9 @@ public class SimulatorView extends JFrame {
         contentPane.setPreferredSize(new Dimension(1280,800));
         contentPane.add(simulatorPanel);
         contentPane.add(graphPanel);
+
         pack();
+        setLocationRelativeTo(null);
         setVisible(true);
 
         updateView();

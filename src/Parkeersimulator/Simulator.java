@@ -475,19 +475,19 @@ public class Simulator {
 	    	switch (hour)
 	        {
 	        case 0:
-	        	modifier = 0.2;
+	        	modifier = 0.3;
 	        	break;
 	        case 1:
-	        	modifier = 0.1;
+	        	modifier = 0.2;
 	        	break;
 	        case 2:
-	        	modifier = 0.01;
+	        	modifier = 0.2;
 	        	break;
 	        case 3:
-	        	modifier = 0.01;
+	        	modifier = 0.2;
 	        	break;
 	        case 4:
-	        	modifier = 0.1;
+	        	modifier = 0.2;
 	        	break;
 	        case 5:
 	        	modifier = 0.2;
