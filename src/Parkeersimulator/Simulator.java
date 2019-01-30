@@ -37,6 +37,7 @@ public class Simulator {
     
     double moneyEarned = 0.00;
     double moneyEarnedPerDay = 0.00;
+    double moneyEarnedPerWeek = 0.00;
     
     // Counters voor totale aantal auto's per soort
     int totalAdHocCar = 0;
@@ -44,7 +45,7 @@ public class Simulator {
     int totalParkingPassCar = 0;
     int totalReservationCar = 0;
     
-    private boolean isRunning = true;
+    private boolean isRunning = false;
     
     int carsPassed = 0;
 
@@ -115,6 +116,7 @@ public class Simulator {
         while (day > 6) {
             day -= 7;
             CarPayment(0, new ParkingPassCar(stayLeaveModifier(true)));
+            moneyEarnedPerWeek = 0;
         }
     } 
     
@@ -158,14 +160,13 @@ public class Simulator {
         // Update the time.
         simulatorView.updateTime(minute, hour, getDay());
         //update the graph
-        simulatorView.updateGraph(day ,moneyEarnedPerDay, totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar);
+        simulatorView.updateGraph(day ,moneyEarnedPerDay, moneyEarnedPerWeek, totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar);
         //update the parked cars
     	simulatorView.updateCarsEntering(countCars());
     	//update speed
     	simulatorView.updateSpeed(tickPause);
     	// Queue info
     	simulatorView.updateCarQueue(entranceCarQueue, carsPassed);
-    	System.out.println("test");
     }
     
     private void manualUpdateViews(){
@@ -245,18 +246,22 @@ public class Simulator {
             case "Parkeersimulator.ParkingPassCar":
             	moneyEarned += (50 * 75);
             	moneyEarnedPerDay += (50 * 75);
+            	moneyEarnedPerWeek += (50 * 75);
             	break;
             case "Parkeersimulator.ReservationCar":
             	moneyEarned += (timeStayed / 60) * 2.50 + 5;
             	moneyEarnedPerDay += (timeStayed / 60) * 2.50 + 5;
+            	moneyEarnedPerWeek += (timeStayed / 60) * 2.50 + 5;
             	break;
             case "Parkeersimulator.HandicapCar":
             	moneyEarned += (4 * (timeStayed / 60));
             	moneyEarnedPerDay += (4 * (timeStayed / 60));
+            	moneyEarnedPerWeek += (4 * (timeStayed / 60));
             	break;
             case "Parkeersimulator.AdHocCar":
             	moneyEarned += (2.5 * (timeStayed / 60));
             	moneyEarnedPerDay += (2.5 * (timeStayed / 60));
+            	moneyEarnedPerWeek += (2.5 * (timeStayed / 60));
             	break;
         }
     }
