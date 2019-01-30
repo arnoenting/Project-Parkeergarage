@@ -20,7 +20,7 @@ public class SimulatorView extends JFrame {
     private JPanel graphPanel;
     private JPanel infoPanel;
     private CircleGraph totalCarGraph;
-    private BarGraph barChart;
+    private BarGraph barGraph;
     
     private int numberOfFloors;
     private int numberOfRows;
@@ -190,7 +190,7 @@ public class SimulatorView extends JFrame {
         simulatorPanel = new JPanel();
         infoPanel = new JPanel();
         totalCarGraph = new CircleGraph();
-        barChart = new BarGraph();
+        //barGraph = new BarGraph();
        
         
         carParkViewStats.setLayout(new BoxLayout(carParkViewStats,BoxLayout.Y_AXIS));
@@ -228,7 +228,7 @@ public class SimulatorView extends JFrame {
         graphPanel.setBackground(Color.decode("#4b4b4b"));
         graphPanel.setBorder(borderGraphPanel);
         graphPanel.add(totalCarGraph);
-        graphPanel.add(barChart);
+        //graphPanel.add(barChart);
 
         // Panel for the info about the parking garage
         infoPanel.setSize(200,200);
