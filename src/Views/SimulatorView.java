@@ -286,9 +286,9 @@ public class SimulatorView extends JFrame {
         carParkView.updateView();
     }
     
-    public void updateGraph(int day, double moneyEarnedPerDay, int totalAdHocCar, int totalParkingPassCar, int totalHandicapCar, int totalReservationCar, int totalCars ) {
-    	circleGraphPanel.setData(totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar, totalCars);
-		barGraphPanel.setData(moneyEarnedPerDay, day);
+    public void updateGraph(int day, double moneyEarnedPerDay, double moneyEarnedPerWeek, int totalAdHocCar, int totalParkingPassCar, int totalHandicapCar, int totalReservationCar, int totalCars ) {
+   	circleGraphPanel.setData(totalAdHocCar, totalParkingPassCar, totalHandicapCar, totalReservationCar, totalCars);
+		barGraphPanel.setData(moneyEarnedPerDay,moneyEarnedPerWeek, day);
     }
 
     public void updateMoney(double moneyEarned) {
