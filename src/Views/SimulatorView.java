@@ -224,14 +224,14 @@ public class SimulatorView extends JFrame {
         
         carParkView.setMaximumSize(new Dimension(840, 420));
         
-        leftInfoPanel.setBackground(Color.red);
+        leftInfoPanel.setBackground(Color.white);
         leftInfoPanel.setPreferredSize(new Dimension(410, 170));
         leftInfoPanel.add(moneyLabel);
         leftInfoPanel.add(carEnteringLabel);
         leftInfoPanel.add(carQueueLabel);
         
         
-        rightInfoPanel.setBackground(Color.blue);
+        rightInfoPanel.setBackground(Color.white);
         rightInfoPanel.setPreferredSize(new Dimension(410, 170));
         //rightInfoPanel.add();
         
