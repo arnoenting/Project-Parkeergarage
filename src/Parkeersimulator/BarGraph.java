@@ -17,39 +17,8 @@ public class BarGraph extends JPanel {
 		private double total;
 		private double highestEarningDay;
 		
-		private JLabel monday = new JLabel("mon");
-		private JLabel tuesday = new JLabel("tue");
-		private JLabel wednesday = new JLabel("wed");
-		private JLabel thursday = new JLabel("thu");
-		private JLabel friday = new JLabel("fri");
-		private JLabel saturday = new JLabel("sat");
-		private JLabel sunday = new JLabel("sun");
-		
-		private JLabel highestLabel = new JLabel("");
-		private JLabel highestLabel2 = new JLabel("");
-		private JLabel highestLabel3 = new JLabel("");
 		
 		public BarGraph() {
-			add(monday);
-			add(tuesday);
-			add(wednesday);
-			add(thursday);
-			add(friday);
-			add(saturday);
-			add(sunday);
-			add(highestLabel);
-			add(highestLabel2);
-			add(highestLabel3);
-			monday.setBounds(10, 150, 30, 100);
-			tuesday.setBounds(80, 150, 30, 10);
-			wednesday.setBounds(140, 150, 30, 10);
-			thursday.setBounds(210, 150, 30, 10);
-			friday.setBounds(133, 85, 30, 10);
-			saturday.setBounds(160, 150, 30, 10);
-			sunday.setBounds(190, 150, 3000, 10);
-			highestLabel.setBounds(225, 85, 100, 10);
-			highestLabel2.setBounds(225, 85, 100, 10);
-			highestLabel3.setBounds(225, 85, 100, 10);
 			
 			
 		}
