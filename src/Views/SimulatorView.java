@@ -65,6 +65,7 @@ public class SimulatorView extends JFrame {
     private JLabel LegendaParkingPasCar;
     private JLabel LegendaReservationCar;
     private JLabel carQueueLabel;
+    private JLabel carsPassedLabel;
     
 
 
@@ -171,13 +172,15 @@ public class SimulatorView extends JFrame {
         LegendaReservationCar = new JLabel("ReservationCar:        ");
         LegendaReservationCar.setForeground(Color.white);
         
-        moneyLabel = new JLabel("Total money earned thus far: ");
+        moneyLabel = new JLabel("Money earned: € 0.0",  SwingConstants.LEFT);
         
-        carEnteringLabel = new JLabel("Total cars parked: ");
+        carEnteringLabel = new JLabel("Cars parked: 0", SwingConstants.LEFT);
         
-        speedLabel = new JLabel("The speed is: ");
+        speedLabel = new JLabel("The speed is: 100", SwingConstants.LEFT);
         
-        carQueueLabel = new JLabel("The queue counts 0 cars, 0 cars have passed the garage.");
+        carQueueLabel = new JLabel("The queue counts: 0 cars", SwingConstants.LEFT);
+        
+        carsPassedLabel = new JLabel("Cars passed because of a long queue: 0", SwingConstants.LEFT);
         
         
         // Border van de graphPanel
@@ -220,18 +223,22 @@ public class SimulatorView extends JFrame {
         
         carParkView.setMaximumSize(new Dimension(840, 420));
         
-        leftInfoPanel.setBackground(Color.red);
+        leftInfoPanel.setBackground(Color.white);
         leftInfoPanel.setPreferredSize(new Dimension(410, 170));
+        leftInfoPanel.setLayout(new GridLayout(0, 1));
         leftInfoPanel.add(moneyLabel);
         leftInfoPanel.add(carEnteringLabel);
         leftInfoPanel.add(carQueueLabel);
+        leftInfoPanel.add(carsPassedLabel);
+        leftInfoPanel.add(speedLabel);
         
         
-        rightInfoPanel.setBackground(Color.blue);
+        rightInfoPanel.setBackground(Color.white);
         rightInfoPanel.setPreferredSize(new Dimension(410, 170));
+        rightInfoPanel.setLayout(new GridLayout(0, 1));
         //rightInfoPanel.add();
         
-        infoPanel.setBackground(Color.white);
+        infoPanel.setBackground(Color.gray);
         infoPanel.setMaximumSize(new Dimension(840, 180));
         infoPanel.setLayout(new FlowLayout());
         infoPanel.add(leftInfoPanel);
@@ -292,7 +299,7 @@ public class SimulatorView extends JFrame {
     }
 
     public void updateMoney(double moneyEarned) {
-    	moneyLabel.setText("Total € earned: " + moneyEarned);
+    	moneyLabel.setText("Money earned: € " + moneyEarned);
     }
 
     public void updateTime(int minute, int hour, String day) {
@@ -300,7 +307,8 @@ public class SimulatorView extends JFrame {
     }
     
     public void updateCarQueue(CarQueue queue, int carsPassed) {
-    	carQueueLabel.setText("The queue counts " + queue.carsInQueue() + " cars, " + carsPassed + " cars have passed the garage.");
+    	carQueueLabel.setText("The queue counts " + queue.carsInQueue() + " cars, ");
+    	carsPassedLabel.setText("Cars passed because of a long queue: " + carsPassed);
     }
     
     public void updatePlayPauseButton(boolean isRunning) {
@@ -312,7 +320,7 @@ public class SimulatorView extends JFrame {
     }
     
     public void updateCarsEntering (int spotsTaken) {
-    	carEnteringLabel.setText("Total cars parked: " + spotsTaken);
+    	carEnteringLabel.setText("Cars parked: " + spotsTaken);
     }
     
     public void updateSpeed(int speedUpAndDown) {
