@@ -12,7 +12,7 @@ public class CircleGraph extends JPanel{
 	private int totalCars;
 	
 	public CircleGraph() {
-		setLayout(null);
+		//setLayout(null);
 	}
 	
 	public void setData(int totalAdHocCar, int totalParkingPassCar, int totalHandicapCar, int totalReservationCar, int totalCars) {
@@ -28,36 +28,61 @@ public class CircleGraph extends JPanel{
 	
 	public void paintComponent(Graphics g) {
 		
-		g.setColor(Color.gray); // background
+		g.setColor(Color.decode("#4b4b4b")); // background
 		g.fillRect(0,0,440,265); 
 		
-		g.setColor(Color.white);
-		g.fillArc(130, 25, 180, 180, 360, 360);
-		//System.out.println(totalCars + " is totalcars" + totalAdHocCar + " is total adhoc");
+		g.setColor(Color.black);
+		g.fillArc(57, 37, 206, 206, 360, 360);
 		
-		g.drawString("Totaal soorten auto's geparkeerd over de hele simulatie", 10, 10);
+		g.setColor(Color.white);
+		g.fillArc(60, 40, 200, 200, 360, 360);
+		//System.out.println(totalCars + " is totalcars" + totalAdHocCar + " is total adhoc");
+
+		g.drawString("Totaal soorten auto's geparkeerd over de hele simulatie", 60, 20); // The title of the graph
+		
+		// The legend with all the different type of cars
+		g.setColor(Color.decode("#F28E37"));
+		g.fillRect(300,80,10,10);
+		g.setColor(Color.white);
+		g.drawString("AdHocCar", 320, 89);
+		
+		g.setColor(Color.decode("#73D2DE"));
+		g.fillRect(300,120,10,10);
+		g.setColor(Color.white);
+		g.drawString("ParkingPassCar", 320, 129);
+		
+		g.setColor(Color.decode("#EFD843"));
+		g.fillRect(300,160,10,10);
+		g.setColor(Color.white);
+		g.drawString("HandicapCar", 320, 169);
+		
+		g.setColor(Color.decode("#28bf29"));
+		g.fillRect(300,200,10,10);
+		g.setColor(Color.white);
+		g.drawString("ReservationCar", 320, 209);
+		
 		
 		
 		if (totalCars != 0) {
 			int startAngle = 0;
 		    double partje1 = (double)totalAdHocCar/(double)totalCars * 360;
 			g.setColor(Color.decode("#F28E37"));
-			g.fillArc(129,25,182,182, startAngle,(int) partje1);
+			g.fillArc(60,40,200,200, startAngle,(int) partje1);
 
 			startAngle += partje1;
 			double partje2 = (double)totalParkingPassCar/(double)totalCars * 360;
 			g.setColor(Color.decode("#73D2DE"));
-			g.fillArc(129,25,182,182, startAngle,(int) partje2);
+			g.fillArc(60,40,200,200, startAngle,(int) partje2);
 
 			startAngle += partje2;
 			double partje3 = (double)totalHandicapCar/(double)totalCars * 360;
 			g.setColor(Color.decode("#EFD843"));
-			g.fillArc(129,25,182,182, startAngle,(int) partje3);	
+			g.fillArc(60,40,200,200, startAngle,(int) partje3);	
 
 			startAngle += partje3;
 			double partje4 = (double)totalReservationCar/(double)totalCars * 360;
 			g.setColor(Color.decode("#28bf29"));
-			g.fillArc(129,25,182,182, startAngle,(int) partje4);
+			g.fillArc(60,40,200,200, startAngle,(int) partje4);
 			
 			
 		}
