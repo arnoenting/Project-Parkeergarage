@@ -28,17 +28,17 @@ public class Simulator {
 
     private int tickPause = 100; // time between ticks (speed of the simulation)
 
-    int weekDayArrivals= 85; // average number of arriving cars per hour - handicap & resv
-    int weekendArrivals = 170; // average number of arriving cars per hour - idem
+    int weekDayArrivals= 55; // average number of arriving cars per hour - handicap & resv
+    int weekendArrivals = 100; // average number of arriving cars per hour - idem
     
-    int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    int weekendPassArrivals = 35; // average number of arriving cars per hour
+    int weekDayPassArrivals= 40; // average number of arriving cars per hour
+    int weekendPassArrivals = 25; // average number of arriving cars per hour
     
     int weekDayHandArrivals = 25;
-    int weekendHandArrivals = 100;
+    int weekendHandArrivals = 40;
     
     int weekDayResvArrivals = 50;
-    int weekendResvArrivals = 150;
+    int weekendResvArrivals = 120;
 
     int enterSpeed = 3; // number of cars that can enter per minute
     int paymentSpeed = 7; // number of cars that can pay per minute
@@ -481,7 +481,7 @@ public class Simulator {
 	        	modifier = 0;
 	        	break;
 	        case 20:
-	        	modifier = 9;
+	        	modifier = 3;
 	        	break;
 	        case 21:
 	        	modifier = 8;
@@ -550,19 +550,46 @@ public class Simulator {
 	        	modifier = 1.0;
 	        	break;
 	        case 17:
-	        	modifier = 1.0;
+	        	if (daysOfTheWeek[day] == "Thursday" ) {
+	        		modifier = 1.8;
+	        	}
+	        	else {
+	        		modifier = 1;
+	        	}
 	        	break;
 	        case 18:
-	        	modifier = 1.2;
+	        	if (daysOfTheWeek[day] == "Thursday") {
+	        		modifier = 1.8;
+	        	}else {
+	        		modifier = 1.2;
+	        	}
 	        	break;
 	        case 19:
-	        	modifier = 1.2;
+	        	// donderdag koop avond extra drukte
+	        	if (daysOfTheWeek[day] == "Thursday" ) {
+	        		modifier = 1.8;
+	        	}else {
+	        		modifier = 1.2;
+	        	}
 	        	break;
 	        case 20:
-	        	modifier = 1.2;
+	        	if (daysOfTheWeek[day] == "Thursday") {
+	        		modifier = 1.8;
+	        	}
+	        	else if(daysOfTheWeek[day] == "Friday" ||daysOfTheWeek[day] == "Saturday"){
+	        		modifier = 1.5;
+	        	}
+	        	else {
+	        		modifier = 1.2;
+	        	}
 	        	break;
 	        case 21:
-	        	modifier = 1;
+	        	if(daysOfTheWeek[day] == "Friday"||daysOfTheWeek[day] == "Saturday"){
+	        		modifier = 1.5;
+	        	}
+	        	else {
+	        		modifier = 1;
+	        	}
 	        	break;
 	        case 22:
 	        	modifier = 0.6;
