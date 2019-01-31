@@ -179,6 +179,8 @@ public class Simulator {
     	simulatorView.updateSpeed(tickPause);
     	// Queue info
     	simulatorView.updateCarQueue(entranceCarQueue, carsPassed);
+    	// Update koopAvondLabel
+    	simulatorView.updateKoopAvond(day);
     }
     
     private void manualUpdateViews(){
