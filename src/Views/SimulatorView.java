@@ -66,6 +66,7 @@ public class SimulatorView extends JFrame {
     private JLabel LegendaReservationCar;
     private JLabel carQueueLabel;
     private JLabel carsPassedLabel;
+    private JLabel koopAvondLabel;
     
 
 
@@ -184,6 +185,8 @@ public class SimulatorView extends JFrame {
         
         carsPassedLabel = new JLabel("Cars passed because of a long queue: 0", SwingConstants.LEFT);
         
+        koopAvondLabel = new JLabel("Stores are open late today: no");
+        
         
         // Border van de graphPanel
         //Border borderGraphPanel = BorderFactory.createMatteBorder(0, 2, 0, 0, Color.decode("#5f5f5f"));
@@ -240,6 +243,7 @@ public class SimulatorView extends JFrame {
         rightInfoPanel.setBackground(Color.white);
         rightInfoPanel.setPreferredSize(new Dimension(410, 170));
         rightInfoPanel.setLayout(new GridLayout(0, 1));
+        rightInfoPanel.add(koopAvondLabel);
         //rightInfoPanel.add();
         
         infoPanel.setBackground(Color.gray);
@@ -320,6 +324,14 @@ public class SimulatorView extends JFrame {
     public void updateCarQueue(CarQueue queue, int carsPassed) {
     	carQueueLabel.setText("The queue counts " + queue.carsInQueue() + " cars, ");
     	carsPassedLabel.setText("Cars passed because of a long queue: " + carsPassed);
+    }
+    
+    public void updateKoopAvond(int day) {
+    	if (day == 3) {
+    		koopAvondLabel.setText("Stores are open late today: yes");
+    	} else {
+    		koopAvondLabel.setText("Stores are open late today: no");
+    	}
     }
     
     public void updatePlayPauseButton(boolean isRunning) {
