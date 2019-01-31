@@ -1,8 +1,14 @@
-package Parkeersimulator;
+package Views;
+
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
+
+import Controllers.SimulatorController;
+import Parkeersimulator.Car;
+import Parkeersimulator.CarQueue;
+import Parkeersimulator.Location;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,7 +21,7 @@ public class SimulatorView extends JFrame {
 	private JPanel leftPanel;
 	private JPanel rightPanel;
 	
-	private JPanel legendaPanel;
+	private LegendPanel legendaPanel;
 	private CarParkView carParkView;
 	private JPanel infoPanel;
 	private JPanel buttonPanel;
@@ -24,7 +30,7 @@ public class SimulatorView extends JFrame {
 	private JPanel rightInfoPanel;
 	
 	private CircleGraph circleGraphPanel;
-	private JPanel lineGraphPanel;
+	private LineGraph lineGraphPanel;
 	private BarGraph barGraphPanel;
     
     private int numberOfFloors;
@@ -151,6 +157,7 @@ public class SimulatorView extends JFrame {
         timeLabel = new JLabel("Time: 00:00 Day: Monday");
         timeLabel.setForeground(Color.white);
         
+        /* dit is oude legenda code??
         LegendaAdHocCar = new JLabel("AdHocCar:       ");
         LegendaAdHocCar.setForeground(Color.white);
         LegendaAdHocCar.setAlignmentX(0);
@@ -164,6 +171,7 @@ public class SimulatorView extends JFrame {
         
         LegendaReservationCar = new JLabel("ReservationCar:        ");
         LegendaReservationCar.setForeground(Color.white);
+        */
         
         moneyLabel = new JLabel("Total money earned thus far: ");
         
@@ -183,13 +191,13 @@ public class SimulatorView extends JFrame {
         leftPanel = new JPanel();
         rightPanel = new JPanel();
         
-        legendaPanel = new JPanel();
+        legendaPanel = new LegendPanel();
         carParkView = new CarParkView();
         infoPanel = new JPanel();
         buttonPanel = new JPanel();
         
         circleGraphPanel = new CircleGraph();
-        lineGraphPanel = new JPanel();
+        lineGraphPanel = new LineGraph();
         barGraphPanel = new BarGraph();
         
         leftInfoPanel = new JPanel();
@@ -203,12 +211,14 @@ public class SimulatorView extends JFrame {
         leftPanel.setBackground(Color.decode("#4b4b4b"));
         leftPanel.setMaximumSize(new Dimension(840, 800));
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        leftPanel.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 2, Color.decode("#5f5f5f"))); 
         
         rightPanel.setBackground(Color.decode("#4b4b4b"));
         rightPanel.setMaximumSize(new Dimension(440, 800));
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        rightPanel.setBorder(BorderFactory.createMatteBorder(4, 2, 4, 4, Color.decode("#5f5f5f"))); 
         
-        legendaPanel.setBackground(Color.darkGray);
+        legendaPanel.setBackground(Color.decode("#4b4b4b"));
         legendaPanel.setMaximumSize(new Dimension(840, 50));
         legendaPanel.add(timeLabel);
         
@@ -241,11 +251,17 @@ public class SimulatorView extends JFrame {
         buttonPanel.add(skipWeekButton);
         
         
-        barGraphPanel.setBackground(Color.CYAN);
+        barGraphPanel.setBackground(Color.gray);
         barGraphPanel.setMaximumSize(new Dimension(440, 265));
+        barGraphPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.decode("#5f5f5f"))); 
         
-        circleGraphPanel.setBackground(Color.CYAN);
+        circleGraphPanel.setBackground(Color.gray);
         circleGraphPanel.setMaximumSize(new Dimension(440, 265));
+        circleGraphPanel.setBorder(BorderFactory.createMatteBorder(2, 0, 2, 0, Color.decode("#5f5f5f"))); 
+        
+        lineGraphPanel.setBackground(Color.gray);
+        lineGraphPanel.setMaximumSize(new Dimension(440, 265));
+        lineGraphPanel.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.decode("#5f5f5f"))); 
 
         mainPanel.add(leftPanel);
         mainPanel.add(rightPanel);
@@ -257,6 +273,7 @@ public class SimulatorView extends JFrame {
         
         rightPanel.add(barGraphPanel);
         rightPanel.add(circleGraphPanel);
+        rightPanel.add(lineGraphPanel);
         
         
         Container contentPane = getContentPane();
@@ -570,6 +587,40 @@ public class SimulatorView extends JFrame {
                     20 - 1,
                     10 - 1); // TODO use dynamic size or constants
         }
+    }
+    
+    private class LegendPanel extends JPanel {
+    	
+    	public void LegendPanel() {
+    		
+    	}
+    	public void paintComponent(Graphics g) {
+    		g.setColor(Color.decode("#4b4b4b")); // background
+    		g.fillRect(0,0,840, 50); 
+
+    		// The legend with all the different type of cars
+    		g.setColor(Color.decode("#F28E37"));
+    		g.fillRect(70,30,10,10);
+    		g.setColor(Color.white);
+    		g.drawString("AdHocCar", 90, 40);
+    		
+    		g.setColor(Color.decode("#73D2DE"));
+    		g.fillRect(270,30,10,10);
+    		g.setColor(Color.white);
+    		g.drawString("ParkingPassCar", 290, 40);
+    		
+    		g.setColor(Color.decode("#EFD843"));
+    		g.fillRect(470,30,10,10);
+    		g.setColor(Color.white);
+    		g.drawString("HandicapCar", 490, 40);
+    		
+    		g.setColor(Color.decode("#28bf29"));
+    		g.fillRect(670,30,10,10);
+    		g.setColor(Color.white);
+    		g.drawString("ReservationCar", 690, 40);
+    		
+    	}
+
     }
 
 }

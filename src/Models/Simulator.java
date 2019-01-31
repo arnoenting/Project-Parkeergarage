@@ -1,8 +1,17 @@
-package Parkeersimulator;
+package Models;
 
 import java.util.*;
 import java.util.Random;
 //import java.util.concurrent.TimeUnit;
+
+import Parkeersimulator.AdHocCar;
+import Parkeersimulator.Car;
+import Parkeersimulator.CarQueue;
+import Parkeersimulator.HandicapCar;
+import Parkeersimulator.Location;
+import Parkeersimulator.ParkingPassCar;
+import Parkeersimulator.ReservationCar;
+import Views.SimulatorView;
 
 public class Simulator {
 	private CarQueue entranceCarQueue;
