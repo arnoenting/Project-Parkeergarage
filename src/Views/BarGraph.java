@@ -30,7 +30,7 @@ public class BarGraph extends JPanel {
 			g.setColor(Color.white);
 			
 			
-			g.drawString("De titel van deze graph", 60, 20); // The title of the graph
+			g.drawString("Wekelijkse winst per dag", 60, 20); // The title of the graph
 			
 			// legend of BarGraph, all the days of the week
 			g.drawString("mon", 90, 230);
