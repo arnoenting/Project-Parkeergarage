@@ -28,7 +28,7 @@ public class CircleGraph extends JPanel{
 	
 	public void paintComponent(Graphics g) {
 		
-		g.setColor(Color.darkGray); // background
+		g.setColor(Color.decode("#4b4b4b")); // background
 		g.fillRect(0,0,440,265); 
 		
 		g.setColor(Color.white);
