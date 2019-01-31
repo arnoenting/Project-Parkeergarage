@@ -179,13 +179,15 @@ public class Simulator {
     	simulatorView.updateSpeed(tickPause);
     	// Queue info
     	simulatorView.updateCarQueue(entranceCarQueue, carsPassed);
+    	// Update koopAvondLabel
+    	simulatorView.updateKoopAvond(day);
     }
     
     private void manualUpdateViews(){
     	simulatorView.tick();
     }
     
-    // All the spots taken minus all the open spots
+    // count all the taken spots
     private int countCars() {
     	int totalSpots = simulatorView.getNumberOfFloors() * simulatorView.getNumberOfPlaces() * simulatorView.getNumberOfRows();
     	int totalSpotsTaken = totalSpots - simulatorView.getNumberOfOpenSpots();

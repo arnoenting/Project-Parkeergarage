@@ -16,6 +16,9 @@ public class BarGraph extends JPanel {
 		private double[] perdayProcent = new double[7];
 		private double total;
 		private double highestEarningDay;
+		
+		private String midLabel ="";
+		private String highLabel ="";
 	
 		public BarGraph() {
 
@@ -27,7 +30,7 @@ public class BarGraph extends JPanel {
 			g.setColor(Color.white);
 			
 			
-			g.drawString("De titel van deze graph", 60, 20); // The title of the graph
+			g.drawString("Wekelijkse winst per dag", 60, 20); // The title of the graph
 			
 			// legend of BarGraph, all the days of the week
 			g.drawString("mon", 90, 230);
@@ -38,17 +41,21 @@ public class BarGraph extends JPanel {
 			g.drawString("sat", 340, 230);
 			g.drawString("sun", 390, 230);
 			
+			g.drawString("0%", 36, 190);
+			g.drawString(midLabel + "%", 36, 134);
+			g.drawString(highLabel + "%", 36, 78);
+			
 			// The X-as and the Y-as
 			g.setColor(Color.BLACK);
 			g.fillRect(60, 30, 2, 170);
 			g.fillRect(60, 200, 370, 2);
 
-			g.setColor(Color.pink);
+			g.setColor(Color.red);
 			
 			for (int i = 0; i < 7; i++) 
 			{
 				//System.out.println("dag: " + i +" = " + (int)perdayProcent[i]*100);
-				g.fillRect(80+50*i, 160 , 40, -(int)(75*perdayProcent[i]/highestEarningDay));
+				g.fillRect(80+50*i, 190 , 40, -(int)(120*perdayProcent[i]/highestEarningDay));
 			}
 		}
 		
@@ -63,6 +70,7 @@ public class BarGraph extends JPanel {
 					earnedPerWeekDay[i]=0;
 				}
 				total = 0;
+				highestEarningDay = 0;
 			}
 			previousDay = currentDay;
 			
@@ -82,6 +90,9 @@ public class BarGraph extends JPanel {
 					highestEarningDay = perdayProcent[i];
 				}
 			}
+			
+			midLabel= "" + Math.round(((highestEarningDay*100) / 2));
+			highLabel = "" + Math.round((highestEarningDay*100));
 		}
 		
 		
