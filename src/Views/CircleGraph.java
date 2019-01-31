@@ -31,10 +31,13 @@ public class CircleGraph extends JPanel{
 		g.setColor(Color.decode("#4b4b4b")); // background
 		g.fillRect(0,0,440,265); 
 		
+		g.setColor(Color.black);
+		g.fillArc(57, 37, 206, 206, 360, 360);
+		
 		g.setColor(Color.white);
 		g.fillArc(60, 40, 200, 200, 360, 360);
 		//System.out.println(totalCars + " is totalcars" + totalAdHocCar + " is total adhoc");
-		
+
 		g.drawString("Totaal soorten auto's geparkeerd over de hele simulatie", 60, 20); // The title of the graph
 		
 		// The legend with all the different type of cars
